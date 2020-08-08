@@ -2,7 +2,7 @@
 
 👨🏻‍💻 Jose Manuel Cerrejon Gonzalez
 
-✉️ cerrejon@soporttec.es
+✉️ jmcerrejon@icloud.com
 
 📍 Huelva, Spain
 
