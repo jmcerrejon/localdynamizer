@@ -3,7 +3,7 @@
 @section('title', 'AdminLTE')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Dashboard</h1>
+    <h1 class="m-0 text-dark">Inicio</h1>
 @stop
 
 @section('content')
@@ -11,7 +11,13 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <p class="mb-0">You are logged in!</p>
+                    <p class="mb-0">¡Bienvenido! 👋</p>
+                    <br>
+                    <p>Este es el panel de administración. Desde aquí podrás ver las estadísticas y acceder a las opciones más importantes de la localidad que gestionas.</p>
+                    <p>Si son varias localidades, puedes cambiar de una a otra desde el menú situado arriba a la derecha. ↗️</p>
+                    <p>Para cualquier problema, no dudes en ponerte en contacto con nosotros.</p>
+                    <br>
+                    <p>El equipo técnico.</p>
                 </div>
             </div>
         </div>
