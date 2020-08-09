@@ -15,7 +15,7 @@ return [
     */
 
     'title' => 'Dinamizador Local',
-    'title_prefix' => '',
+    'title_prefix' => 'Dinamizador Local | ',
     'title_postfix' => '',
 
     /*
