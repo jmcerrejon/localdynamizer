@@ -1,5 +1,7 @@
 # Local Dynamizer Admin Panel
 
+![Local](./screenshots/screenshot_01.png)
+
 👨🏻‍💻 Jose Manuel Cerrejon Gonzalez
 
 ✉️ jmcerrejon@icloud.com
