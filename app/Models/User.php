@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -39,6 +39,11 @@ class User extends Authenticatable
 
     public function locations()
     {
-        return $this->belongsToMany('App\Models\Location');
+        return $this->belongsToMany(\App\Models\Location::class);
+    }
+
+    public function stores() : HasMany
+    {
+        return $this->HasMany(\App\Models\Store::class);
     }
 }
