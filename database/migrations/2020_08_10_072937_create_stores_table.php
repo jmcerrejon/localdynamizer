@@ -29,10 +29,16 @@ class CreateStoresTable extends Migration
             $table->string('public_phone', 15)->nullable();
             $table->string('contact_phone', 15);
             $table->string('whatsapp', 15)->nullable();
-            $table->string('substription_type', 15);
+            $table->string('subscription_type', 15);
             $table->string('logo_path', 191);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
+
+            $table->index(['user_id'], 'users_fk0');
+            $table->index(['payment_method_id'], 'payment_method_fk1');
+
+			$table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
+			$table->foreign('payment_method_id')->references('id')->on('payment_methods')->onUpdate('cascade');
         });
     }
 
