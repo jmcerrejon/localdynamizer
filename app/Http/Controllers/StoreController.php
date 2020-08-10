@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
+    private $store;
+
+    public function __construct(Store $store)
+	{
+		$this->store = $store;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +33,7 @@ class StoreController extends Controller
      */
     public function create()
     {
-        //
+        return view('home');
     }
 
     /**
@@ -83,5 +90,36 @@ class StoreController extends Controller
     public function destroy(Store $store)
     {
         //
+    }
+
+    /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function anyData()
+    {
+        return datatables()->eloquent($this->store->query())
+			->addColumn('active', function (Store $store) {
+                $active = ($store->is_active) ? "label-success": "label-danger";
+                $active_txt = ($store->is_active) ? "Si": "No";
+                return "<span class='label $active'>$active_txt</span>";
+            })
+            ->addColumn('actions', function (Store $store) {
+                return '<div class="btn-group">
+                    <form action="'. route('establecimientos.show', $store->id).'" method="get">
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-default btn-sm" title="Editar">
+                                <i class="fa fa-pen"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="modifyDeleteAction('.$store->id.',\''. $store->name .'\')" title="Eliminar">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>';
+            })
+            ->rawColumns(['actions', 'active', 'visible'])
+            ->toJson();
     }
 }

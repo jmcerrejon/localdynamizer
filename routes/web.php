@@ -11,6 +11,9 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', function() { return view('home'); })->name('home');
+
+    Route::get('stores/datatables', 'StoreController@anyData')->name('stores.datatables');
+
     Route::resources([
 		'establecimientos' => StoreController::class,
 	]);
