@@ -241,6 +241,11 @@ return [
             'url'  => 'home',
             'icon' => 'fas fa-fw fa-home',
         ],
+        [
+            'text' => 'Establecimientos',
+            'url'  => 'establecimientos',
+            'icon' => 'fas fa-fw fa-store',
+        ],
     ],
 
     /*
