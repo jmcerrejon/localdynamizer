@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Store;
 use Illuminate\Http\Request;
+use App\Models\PaymentMethod;
+use App\Http\Requests\StoreRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreController extends Controller
 {
+    private const MAX_RESOLUTION_WIDTH = 1024;
+    private const HAS_SIGNATURE_STAMP = true;
+
     private $store;
 
     public function __construct(Store $store)
@@ -53,32 +59,35 @@ class StoreController extends Controller
      * @param  \App\Models\Store  $store
      * @return \Illuminate\Http\Response
      */
-    public function show(Store $store)
+    public function show($id)
     {
-        //
-    }
+        $store = $this->store->findOrFail($id);
+        $payment_methods = PaymentMethod::get();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Store  $store
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Store $store)
-    {
-        //
+        return view('stores.edit', compact('store', 'payment_methods'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Store  $store
+     * @param  App\Http\Requests\StoreRequest  $request
+     * @param  Integer  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Store $store)
+    public function update(StoreRequest $request, $id)
     {
-        //
+        $validated = $request->validated();
+        $validated['user_id'] = Auth::user()->id;
+        $store = $this->store->findOrFail($id);
+        $file = $request->file('logo_file');
+        
+        // TODO Next task: import intervention image and save the image resized
+
+        $store
+			->fill($validated)
+			->save();
+
+		return redirect()->route('establecimientos.index');
     }
 
     /**
