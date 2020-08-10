@@ -25,7 +25,7 @@ $factory->define(Store::class, function (Faker $faker) {
         'public_phone' => $faker->e164PhoneNumber,
         'contact_phone' => $faker->e164PhoneNumber,
         'whatsapp' => $faker->e164PhoneNumber,
-        'substription_type' => 1,
+        'subscription_type' => 1,
         'logo_path' => $faker->imageUrl(1024, 768),
     ];
 });
