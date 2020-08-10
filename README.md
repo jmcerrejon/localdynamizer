@@ -1,6 +1,10 @@
 # Local Dynamizer Admin Panel
 
+* Site under development at: http://dinamizadorlocal.com
+
 ![Local](./screenshots/screenshot_01.png)
+
+![Local](./screenshots/screenshot_03.png)
 
 👨🏻‍💻 Jose Manuel Cerrejon Gonzalez
 
