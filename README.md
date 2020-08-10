@@ -8,7 +8,7 @@
 
 📍 Huelva, Spain
 
-📚 Copyright ©2020
+📚 Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International Public License ©2020
 
 Dev with ♥️ using [Laravel](https://www.laravel.com)
 
@@ -33,7 +33,7 @@ On **production** environment an extra step is required:
 Install packages:
 
 ```
-sudo apt install -y php7.2-zip php-xml php7.2-gd
+sudo apt install -y php7.3-zip php-xml php7.3-gd
 ```
 
 Change time-zone (Debian):
@@ -50,3 +50,7 @@ Now:
 npm run production
 php artisan config:cache # Run this when update files inside /config 
 ```
+
+### Development
+
+**NOTE:** Due we need to get this project raise up in a snap, TDD will be added in a near future. [Pest](https://pestphp.com/) is already included and ready to use 😉.
