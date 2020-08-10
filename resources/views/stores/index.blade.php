@@ -7,6 +7,30 @@
 @stop
 
 @section('content')
+    @include('layouts.messages')
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Eliminar</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title" id="myModalLabel"></h2>
+                </div>
+                <div class="modal-body">
+                    ¿Desea eliminar <span id="span_name"></span>?
+                </div>
+                <div class="modal-footer">
+                    <form id="delete" action="{{ route('establecimientos.destroy', 1) }}" method="post">
+						@csrf
+						@method('DELETE')
+                        <input type="hidden" id="id" name="id" value="">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-danger">Si</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -66,7 +90,7 @@
         function modifyDeleteAction(item, name) {
             $('#span_name').text(name);
 			$('#id').val(item);
-            $('#delete').attr('action', '{{ url('stores') }}/'+item);
+            $('#delete').attr('action', '{{ url('establecimientos') }}/'+item);
         }
 
 		function newStore() {

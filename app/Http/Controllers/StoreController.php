@@ -84,12 +84,19 @@ class StoreController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Store  $store
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy(Store $store)
+    public function destroy(Request $request)
     {
-        //
+        $store = $this->store->findOrFail($request->id);
+
+		$this->delFile($store->logo_path);
+
+		$store->delete();
+
+        return redirect()->back();
     }
 
     /**
@@ -112,7 +119,7 @@ class StoreController extends Controller
                             <button type="submit" class="btn btn-default btn-sm" title="Editar">
                                 <i class="fa fa-pen"></i>
                             </button>
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="modifyDeleteAction('.$store->id.',\''. $store->name .'\')" title="Eliminar">
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="modifyDeleteAction('.$store->id.',\''. $store->comercial_name .'\')" title="Eliminar">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </div>
