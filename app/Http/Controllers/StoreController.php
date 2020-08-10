@@ -12,9 +12,11 @@ class StoreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Store $stores)
     {
-        return view('stores/index');
+        // Just for test until we get the Datatables
+        $totalStores = $stores->limit(10)->get();
+        return view('stores/index', compact('totalStores'));
     }
 
     /**
