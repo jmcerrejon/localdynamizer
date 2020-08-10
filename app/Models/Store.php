@@ -13,7 +13,7 @@ class Store extends Model
     ];
 
     protected $fillable = [
-        'name', 'active', 'url', 'img_file'
+        'user_id', 'payment_method_id', 'comercial_name', 'business_name', 'is_active', 'contact_name', 'address', 'locality', 'population', 'postal_code', 'email', 'public_phone', 'contact_phone', 'whatsapp', 'website', 'subscription_type', 'logo_path'
     ];
 
 	protected $dates = [
