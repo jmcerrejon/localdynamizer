@@ -30,8 +30,8 @@ class Store extends Model
 		return $this->where('is_active', 1)->get();
 	}
 
-	public function setActiveAttribute($value)
+	public function setIsActiveAttribute($value)
 	{
-		$this->attributes['active'] = ($value === "on") ? 1 : 0;
+		$this->attributes['is_active'] = ($value === "on") ? 1 : 0;
 	}
 }
