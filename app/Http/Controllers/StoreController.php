@@ -17,8 +17,8 @@ class StoreController extends Controller
     private $store;
 
     public function __construct(Store $store)
-	{
-		$this->store = $store;
+    {
+        $this->store = $store;
     }
 
     /**
@@ -60,12 +60,12 @@ class StoreController extends Controller
         // TODO Next task: import intervention image and save the image resized
 
         try {
-        	$this->store->create($validated);
+            $this->store->create($validated);
         } catch (Exception $e) {
             return back()->withError($e->getMessage())->withInput();
         }
 
-		return redirect()->route('establecimientos.index')->with('message', 'Establecimiento guardado.');
+        return redirect()->route('establecimientos.index')->with('message', 'Establecimiento guardado.');
     }
 
     /**
@@ -94,15 +94,17 @@ class StoreController extends Controller
         $validated = $request->validated();
         $validated['user_id'] = Auth::user()->id;
         $store = $this->store->findOrFail($id);
-        $file = $request->file('logo_file');
-        
-        // TODO Next task: import intervention image and save the image resized
+        $validated['logo_path'] = $this->saveResizedImageFile2Disk($request->file('logo_file'), $store['id']);
+
+        if ($validated['logo_path'] !== null) {
+            $this->delFile($store->logo_path);
+        }
 
         $store
-			->fill($validated)
-			->save();
+            ->fill($validated)
+            ->save();
 
-		return redirect()->route('establecimientos.index');
+        return redirect()->route('establecimientos.index');
     }
 
     /**
@@ -110,15 +112,14 @@ class StoreController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
      */
     public function destroy(Request $request)
     {
         $store = $this->store->findOrFail($request->id);
 
-		$this->delFile($store->logo_path);
+        $this->delFile($store->logo_path);
 
-		$store->delete();
+        $store->delete();
 
         return redirect()->back();
     }
@@ -131,7 +132,7 @@ class StoreController extends Controller
     public function anyData()
     {
         return datatables()->eloquent($this->store->query())
-			->addColumn('active', function (Store $store) {
+            ->addColumn('active', function (Store $store) {
                 $active = ($store->is_active) ? "label-success": "label-danger";
                 $active_txt = ($store->is_active) ? "Si": "No";
                 return "<span class='label $active'>$active_txt</span>";
@@ -152,5 +153,21 @@ class StoreController extends Controller
             })
             ->rawColumns(['actions', 'active', 'visible'])
             ->toJson();
+    }
+
+    /**
+     * Save a resized image to disk
+     *
+     * @param  Illuminate\Http\UploadedFile  $file
+     * @param  Integer  $storeId
+     * @return mixed
+     */
+    private function saveResizedImageFile2Disk($file, $storeId)
+    {
+        if (!$file) {
+            return null;
+        }
+
+        return saveImageResized($file, 'images/establecimientos', self::MAX_RESOLUTION_WIDTH, self::HAS_SIGNATURE_STAMP, $storeId)['filePath'];
     }
 }

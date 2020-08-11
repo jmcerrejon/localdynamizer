@@ -12,13 +12,26 @@ class Store extends Model
 		'is_active'	 => 'boolean'
     ];
 
+    protected $appends = [
+		'img_path'
+	];
+
     protected $fillable = [
         'user_id', 'payment_method_id', 'comercial_name', 'business_name', 'is_active', 'contact_name', 'address', 'locality', 'population', 'postal_code', 'email', 'public_phone', 'contact_phone', 'whatsapp', 'website', 'subscription_type', 'logo_path'
     ];
 
 	protected $dates = [
 		'created_at', 'updated_at'
-	];
+    ];
+    
+    public function getImgPathAttribute()
+	{
+        if (strpos($this->logo_path, 'https') !== false) {
+            return $this->logo_path;
+        }
+
+		return config('app.url').'storage/'.$this->logo_path;
+	}
 
     public function user()
     {

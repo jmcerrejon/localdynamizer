@@ -142,9 +142,9 @@
             <div class="form-group">
                 <label for="logo_file" class="col-sm-2 control-label">Imagen/Logo del establecimiento</label>
                 <div class="col-sm-10">
-                    @if (isset($store) && ($store->logo_path))
+                    @if (isset($store) && ($store->img_path))
                     <div class="input-group">
-                        <img width="352" height="288" src="{{ $store->logo_path ?? old('logo_path') }}">
+                        <img width="352" height="288" src="{{ $store->img_path ?? old('img_path') }}">
                     </div>
                     <br>
                     @endif
