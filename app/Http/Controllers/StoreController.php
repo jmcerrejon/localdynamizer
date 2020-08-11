@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
@@ -39,18 +40,32 @@ class StoreController extends Controller
      */
     public function create()
     {
-        return view('home');
+        $payment_methods = PaymentMethod::get();
+
+        return view('stores.edit', compact('payment_methods'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\StoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $validated['user_id'] = Auth::user()->id;
+        $validated['logo_path'] = $request->file('logo_file');
+
+        // TODO Next task: import intervention image and save the image resized
+
+        try {
+        	$this->store->create($validated);
+        } catch (Exception $e) {
+            return back()->withError($e->getMessage())->withInput();
+        }
+
+		return redirect()->route('establecimientos.index')->with('message', 'Establecimiento guardado.');
     }
 
     /**
