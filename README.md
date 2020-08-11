@@ -1,6 +1,8 @@
 # Local Dynamizer Admin Panel
 
-* Site under development at: http://dinamizadorlocal.com
+* Site under development at: http://dinamizadorlocal.com (Ask me for a user if you want to test it).
+
+* ⏰ Estimated hours of work so far: 11 hours.
 
 ![Local](./screenshots/screenshot_01.png)
 
