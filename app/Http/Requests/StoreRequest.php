@@ -36,10 +36,10 @@ class StoreRequest extends FormRequest
             'email' => ['required', 'email', 'max:50'],
             'public_phone' => ['digits_between:9,15'],
             'contact_phone' => ['required', 'digits_between:9,15'],
-            'whatsapp' => ['digits_between:9,15'],
-            'website' => ['url', 'max:100'],
+            'whatsapp' => ['nullable', 'digits_between:9,15'],
+            'website' => ['nullable', 'url', 'max:100'],
             'subscription_type' => ['required', 'numeric'],
-            'logo_file' => ['image', 'dimensions:max_width=2048,max_height=1024'],
+            'logo_file' => ['nullable', 'image', 'dimensions:max_width=2048,max_height=1024'],
         ];
     }
 }
