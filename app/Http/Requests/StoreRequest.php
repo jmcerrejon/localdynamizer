@@ -34,7 +34,7 @@ class StoreRequest extends FormRequest
             'population' => ['max:150'],
             'postal_code' => ['required', 'max:5'],
             'email' => ['required', 'email', 'max:50'],
-            'public_phone' => ['digits_between:9,15'],
+            'public_phone' => ['nullable', 'digits_between:9,15'],
             'contact_phone' => ['required', 'digits_between:9,15'],
             'whatsapp' => ['nullable', 'digits_between:9,15'],
             'website' => ['nullable', 'url', 'max:100'],
