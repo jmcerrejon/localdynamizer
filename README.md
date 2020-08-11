@@ -2,7 +2,7 @@
 
 * Site under development at: http://dinamizadorlocal.com (Ask me for a user if you want to test it).
 
-* ⏰ Estimated hours of work so far: 11 hours.
+* ⏰ Estimated hours of work so far: 13 hours.
 
 ![Local](./screenshots/screenshot_01.png)
 
@@ -24,17 +24,37 @@ Dev with ♥️ using [Laravel](https://www.laravel.com)
 
 ### Install
 
-```
+```bash
 git clone https://github.com/jmcerrejon/localdynamizer.git
 composer update && npm install
-cp .env.example .env
-php artisan migrate:fresh
-php artisan storage:link
+cp .env.example .env # Add your MySQL config
+php artisan key:generate
+php artisan migrate --seed
+php artisan storage:link # If you have a /public_html dir, skip this command and check the next section
 composer dump-autoload
-chown -R www-data:www-data storage
 ```
 
-On **production** environment an extra step is required:
+#### Storage link in /public_html
+
+Maybe our hosting has a *public_html* directory, so we can't use public. Don't worry, try the next:
+
+```bash
+ln -s $PWD/storage/app/public/ $PWD/public_html/storage
+sudo chmod -R 775 storage
+```
+
+#### 403 issues
+
+It's a knighmare. Some tips:
+
+```bash
+chown -R $USER:$(id -gn $USER) storage
+chown -h $USER:$(id -gn $USER) storage
+find * -type d -exec chmod 755 {} \;
+find * -type f -exec chmod 644 {} \;
+```
+
+On **production** environment an extra step maybe is required:
 
 Install packages:
 
