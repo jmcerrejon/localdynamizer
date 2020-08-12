@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Store extends Model
 {
@@ -33,11 +34,6 @@ class Store extends Model
 		return config('app.url').'storage/'.$this->logo_path;
 	}
 
-    public function user()
-    {
-        return $this->belongsTo(\App\Models\User::class);
-    }
-
     public function actives()
 	{
 		return $this->where('is_active', 1)->get();
@@ -46,5 +42,10 @@ class Store extends Model
 	public function setIsActiveAttribute($value)
 	{
 		$this->attributes['is_active'] = ($value === "on") ? 1 : 0;
-	}
+    }
+    
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
 }

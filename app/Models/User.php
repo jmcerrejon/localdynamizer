@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -37,7 +38,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function locations()
+    public function locations() : BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Location::class);
     }
@@ -45,5 +46,9 @@ class User extends Authenticatable
     public function stores() : HasMany
     {
         return $this->HasMany(\App\Models\Store::class);
+    }
+    public function resources() : HasMany
+    {
+        return $this->HasMany(\App\Models\Resource::class);
     }
 }
