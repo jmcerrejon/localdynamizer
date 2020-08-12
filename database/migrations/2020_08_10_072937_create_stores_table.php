@@ -29,7 +29,7 @@ class CreateStoresTable extends Migration
             $table->string('public_phone', 15)->nullable();
             $table->string('contact_phone', 15);
             $table->string('whatsapp', 15)->nullable();
-            $table->string('website', 100)->nullable();
+            $table->string('website', 150)->nullable();
             $table->string('subscription_type', 15);
             $table->string('logo_path', 191)->nullable();
             $table->timestamp('created_at')->useCurrent();
