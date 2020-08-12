@@ -26,10 +26,10 @@ class StoreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Store $stores)
+    public function index()
     {
         // Just for test until we get the Datatables
-        $totalStores = $stores->limit(10)->get();
+        $totalStores = $this->store->limit(10)->get();
         return view('stores/index', compact('totalStores'));
     }
 
