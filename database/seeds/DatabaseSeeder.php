@@ -15,5 +15,9 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(LocationsTableSeeder::class);
         $this->call(StoresTableSeeder::class);
+        $this->call(MimesTableSeeder::class);
+        $this->call(HashtagsTableSeeder::class);
+        $this->call(ResourcesTableSeeder::class);
+        $this->call(HashtagResourcesTableSeeder::class);
     }
 }
