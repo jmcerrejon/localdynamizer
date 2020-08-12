@@ -246,6 +246,11 @@ return [
             'url'  => 'establecimientos',
             'icon' => 'fas fa-fw fa-store',
         ],
+        [
+            'text' => 'Recursos',
+            'url'  => 'recursos',
+            'icon' => 'fas fa-fw fa-palette',
+        ],
     ],
 
     /*
