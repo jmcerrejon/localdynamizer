@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mime;
 use App\Models\Resource;
 use Illuminate\Http\Request;
 
@@ -28,25 +29,10 @@ class ResourceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(REquest $request)
+    public function create()
     {
-        switch ($request->mime) {
-            case 'image':
-                return view('resources.mime.image');
-                break;
-            case 'video':
-                return view('resources.mime.video');
-                break;
-            case 'gif':
-                return view('resources.mime.gif');
-                break;
-            case 'text':
-            default:
-                return view('resources.mime.text');
-                break;
-        }
-        
-        abort(404);
+        $mimes = Mime::get();
+        return view('resources.edit', compact('mimes'));
     }
 
     /**

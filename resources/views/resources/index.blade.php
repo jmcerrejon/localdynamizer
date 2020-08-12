@@ -41,10 +41,7 @@
                 <p class="mb-0">También podrás añadir nuevos recursos a los ya existentes.</p>
                 <br>
                 <div class="box-body table-responsive">
-                    <a type="button" class="btn btn-primary" href="{{ url('recursos') }}/create?mime=text">Nuevo texto</a>
-                    <a type="button" class="btn btn-primary" href="{{ url('recursos') }}/create?mime=image">Nueva imagen</a>
-                    <a type="button" class="btn btn-primary" href="{{ url('recursos') }}/create?mime=video">Nuevo video</a>
-                    <a type="button" class="btn btn-primary" href="{{ url('recursos') }}/create?mime=gif">Nuevo gif</a>
+                    <a type="button" class="btn btn-primary" href="{{ url('recursos') }}/create">Nuevo recurso</a>
                 </div>
             </div>
         </div>
