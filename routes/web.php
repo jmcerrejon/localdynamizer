@@ -16,6 +16,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resources([
 		'establecimientos' => StoreController::class,
+		'recursos' => ResourceController::class,
 	]);
 });
 
