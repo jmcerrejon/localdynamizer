@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Resource extends Model
 {
+    public $fillable = [ 'user_id', 'mime_id', 'body', 'path', 'views', 'downloads' ];
+
     public function user() : BelongsTo
     {
         return $this->belongsTo(\App\Models\User::class);
