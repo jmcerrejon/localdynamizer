@@ -55,9 +55,8 @@ class StoreController extends Controller
     {
         $validated = $request->validated();
         $validated['user_id'] = Auth::user()->id;
-        $validated['logo_path'] = $request->file('logo_file');
-
-        // TODO Next task: import intervention image and save the image resized
+        $validated['logo_path'] =  $this->saveResizedImageFile2Disk($request->file('logo_file'), $validated['user_id']);
+        unset($validated['logo_file']);
 
         try {
             $this->store->create($validated);
@@ -95,6 +94,7 @@ class StoreController extends Controller
         $validated['user_id'] = Auth::user()->id;
         $store = $this->store->findOrFail($id);
         $validated['logo_path'] = $this->saveResizedImageFile2Disk($request->file('logo_file'), $store['id']);
+        unset($validated['logo_file']);
 
         if ($validated['logo_path'] !== null) {
             $this->delFile($store->logo_path);
