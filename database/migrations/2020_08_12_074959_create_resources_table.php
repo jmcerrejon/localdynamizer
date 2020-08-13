@@ -18,9 +18,9 @@ class CreateResourcesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('mime_id');
             $table->text('body');
-            $table->string('path', 191);
-            $table->string('views', 191);
-            $table->string('downloads', 191);
+            $table->string('path', 191)->nullable();
+            $table->string('views', 191)->default(0);
+            $table->string('downloads', 191)->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
 
