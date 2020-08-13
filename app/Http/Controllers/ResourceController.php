@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Mime;
 use App\Models\Resource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ResourceRequest;
 
 class ResourceController extends Controller
 {
@@ -38,12 +41,26 @@ class ResourceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\ResourceRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ResourceRequest $request)
     {
-        dd('store');
+        $validated = $request->validated();
+        $hashtags = $validated['hashtags'];     
+        $validated['user_id'] = Auth::user()->id;
+        // $validated['path'] = $request->file('resource_file'); // TODO Handle resize if image, etc...
+        unset($validated['hashtags'], $validated['resource_file']);
+
+        try {
+            $this->resource->create($validated);
+        } catch (Exception $e) {
+            return back()->withError($e->getMessage())->withInput();
+        }
+
+        // TODO Save hashtags
+
+        return redirect()->route('recursos.index')->with('message', 'Recurso guardado.');
     }
 
     /**
