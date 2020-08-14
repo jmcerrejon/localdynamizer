@@ -42,22 +42,17 @@
                 <br>
                 <div class="box-body table-responsive">
                     <a type="button" class="btn btn-primary" href="{{ url('recursos') }}/create">Nuevo recurso</a>
+                    <table id="main_table" class="table display compact" width="100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Texto</th>
+                                <th>Hashtags</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <p class="mb-0">Por hacer: Listado de recursos con scroll infinito y carga asíncrona. Por ahora
-                    mostramos los recursos generados con Faker.</p>
-                <ul>
-                    @foreach($totalResources as $resource)
-                    <li>{{ $resource->id}} - {{ $resource->path }}</li>
-                    @endforeach
-                </ul>
             </div>
         </div>
     </div>
@@ -65,9 +60,39 @@
 @stop
 
 @section('js')
-<script>
-    function newResource() {
-			window.location = "{{ url('recursos') }}/create?mime=text";
-		}
-</script>
+    <script>
+        $(document).ready( function () {
+            $('#main_table').DataTable({
+                "order": [[ 0, 'asc' ]],
+                "processing": true,
+                "serverSide": false,
+                "lengthChange": false,
+                "pageLength": 5,
+                "ajax": '{!! route('resources.datatables') !!}',
+                "language": {
+                    "url": "{{ url('vendor/dataTables/Spanish.json') }}"
+                },
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'body', name: 'body' },
+                    { data: 'hashtags', name: 'hashtags' },
+                    { data: 'actions', name: 'actions' }
+                ]
+            });
+
+            $('#myModal').on('shown.bs.modal', function () {
+                $('#myInput').focus();
+            })
+        });
+
+        function modifyDeleteAction(item, name) {
+            $('#span_name').text(name);
+            $('#id').val(item);
+            $('#delete').attr('action', '{{ url('establecimientos') }}/'+item);
+        }
+
+        function newResource() {
+            window.location = "{{ url('recursos') }}/create";
+        }
+    </script>
 @stop
