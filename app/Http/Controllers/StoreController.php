@@ -110,12 +110,12 @@ class StoreController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $store = $this->store->findOrFail($request->id);
+        $store = $this->store->findOrFail($id);
 
         $this->delFile($store->logo_path);
 

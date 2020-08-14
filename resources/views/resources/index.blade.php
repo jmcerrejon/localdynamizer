@@ -18,7 +18,7 @@
                 <h2 class="modal-title" id="myModalLabel"></h2>
             </div>
             <div class="modal-body">
-                ¿Desea eliminar <span id="span_name"></span>?
+                ¿Desea eliminar este recurso?
             </div>
             <div class="modal-footer">
                 <form id="delete" action="{{ route('recursos.destroy', 1) }}" method="post">
@@ -85,10 +85,9 @@
             })
         });
 
-        function modifyDeleteAction(item, name) {
-            $('#span_name').text(name);
+        function modifyDeleteAction(item) {
             $('#id').val(item);
-            $('#delete').attr('action', '{{ url('establecimientos') }}/'+item);
+            $('#delete').attr('action', '{{ url('recursos') }}/'+item);
         }
 
         function newResource() {

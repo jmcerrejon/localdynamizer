@@ -3,9 +3,9 @@
 @section('title', 'Recurso Video')
 
 @section('content_header')
-<h1 class="m-0 text-dark">Nuevo recurso</h1>
+<h1 class="m-0 text-dark">Nuevo/Editar recurso</h1>
 
-<p class="mb-0">Crea nuevos recursos para ser usado por todos los dinamizadores. Echa a volar tu
+<p class="mb-0">Crea o edita nuevos recursos para ser usado por todos los dinamizadores. Echa a volar tu
     imaginación creando contenido para redes sociales.</p>
 @stop
 
@@ -25,8 +25,7 @@
             <div class="col-sm-10">
                 <select id="mime_id" name="mime_id" class="form-control">
                     @foreach($mimes as $mime)
-                    <option value="{{ $mime->id }}" @if ((isset($resource)) && ($mime->id ===
-                        $resource->mime_id)) selected @endif>{{ $mime->name }}</option>
+                    <option value="{{ $mime->id }}" @if ((isset($resource)) && ($mime->id ===$resource->mime_id)) selected @endif>{{ $mime->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -53,8 +52,7 @@
                 <br>
                 @endif
                 <div class="input-group">
-                    <input type="file" class="form-control pull-right" title="Dirección del logo" name="resource_file"
-                        value="">
+                    <input type="file" class="form-control pull-right" title="Dirección del logo" name="resource_file" value="">
                 </div>
                 <p class="help-block">Resolución aconsejada máxima para imágenes: 2048x1024 | Máximo 5 Mb. Soportados:
                     jpg, png.
@@ -68,20 +66,17 @@
                 <input type="text" class="form-control" name="hashtags" title="Escribe los hashtags separados por coma"
                     placeholder="Escribe los hashtags separados por coma"
                     value="{{ $resource->hashtags ?? old('hashtags') }}">
-                <p class="help-block">Pon tantos como puedas. Servirán sobretodo para etiquetar y organizar las
-                    búsquedas.</p>
+                <p class="help-block">Pon tantos como puedas. Servirán sobretodo para etiquetar y organizar las búsquedas.</p>
             </div>
         </div>
-</div> <!-- /.box-body -->
-<div class="box-footer">
-    @if (isset($resource))
-    <button type="button" class="btn btn-default"
-        onclick="window.location.href='{{ route('recursos.index') }}'">Volver</button>
-    @endif
-    <button type="submit" class="btn btn-info pull-right" id="submit">Guardar</button>
+        <div class="box-footer">
+            @if (isset($resource))
+            <button type="button" class="btn btn-default" onclick="window.location.href='{{ route('recursos.index') }}'">Volver</button>
+            @endif
+            <button type="submit" class="btn btn-info pull-right" id="submit">Guardar</button>
+        </div>
+    </form>
+    <br>
+    <br>
 </div> <!-- /.box-footer -->
-</form>
-<br>
-<br>
-</div>
 @stop
