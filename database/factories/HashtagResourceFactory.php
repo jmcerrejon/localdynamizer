@@ -8,8 +8,8 @@ use Faker\Generator as Faker;
 use App\Models\HashtagResource;
 
 $factory->define(HashtagResource::class, function (Faker $faker) {
-    $hashtagIds = Hashtag::get()->pluck('id')->toArray();
-    $resourceIds = Resource::get()->pluck('id')->toArray();
+    $hashtagIds = Hashtag::get()->modelKeys();
+    $resourceIds = Resource::get()->modelKeys();
 
     return [
         'hashtag_id' => $hashtagIds[array_rand($hashtagIds, 1)],

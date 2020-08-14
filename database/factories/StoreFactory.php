@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Store::class, function (Faker $faker) {
     $isFemale = $faker->boolean(50);
-    $paymentMethodIds = PaymentMethod::get()->pluck('id')->toArray();
+    $paymentMethodIds = PaymentMethod::get()->modelKeys();
 
     return [
         'user_id' => 1,

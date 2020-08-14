@@ -8,8 +8,7 @@ use App\Models\Resource;
 use Faker\Generator as Faker;
 
 $factory->define(Resource::class, function (Faker $faker) {
-    $hashtagIds = Hashtag::get()->pluck('id')->toArray();
-    $mimeIds = Mime::get()->pluck('id')->toArray();
+    $mimeIds = Mime::get()->modelKeys();
 
     return [
         'user_id' => 1,
