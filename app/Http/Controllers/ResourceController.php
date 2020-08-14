@@ -94,23 +94,24 @@ class ResourceController extends Controller
         $validated['user_id'] = Auth::user()->id;
         $resource = $this->resource->findOrFail($id);
         if ($request->has('resource_file')) {
-            if ($validated['path'] !== null) {
-                $this->delFile($resource->path);
-            }
+            $oldResourceFilePath = $resource['path'];
             $validated['path'] = $this->saveFile($request->file('resource_file'));
         }
         unset($validated['resource_file']);
 
         try {
+            $resource
+                ->fill($validated)
+                ->save();
             $hashtagIds = $this->saveHashtags($hashtags);
             $resource->hashtags()->sync($hashtagIds);
+
+            if ($validated['path'] !== null) {
+                $this->delFile($oldResourceFilePath);
+            }
         } catch (Exception $e) {
             return back()->withError($e->getMessage())->withInput();
         }
-
-        $resource
-            ->fill($validated)
-            ->save();
 
         return redirect()->route('recursos.index');
     }
@@ -183,8 +184,10 @@ class ResourceController extends Controller
         $tmpFileName .= "_{$signature}";
 
         $fileName = strtolower("{$tmpFileName}.{$extension}");
+        // We don't need save the public/ string 
+        $savedPath = str_replace('public/', '', $file->storeAs("public/resources/$mime", $fileName));
 
-        return $file->storeAs("public/resources/$mime", $fileName);
+        return $savedPath;
     }
 
     /**

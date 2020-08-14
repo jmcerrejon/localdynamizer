@@ -47,7 +47,7 @@
             <div class="col-sm-10">
                 @if (isset($resource) && ($resource->path))
                 <div class="input-group">
-                    <img width="352" height="288" src="{{ $resource->path ?? old('path') }}">
+                    <img width="352" height="288" src="{{ asset($resource->path) ?? old('path') }}">
                 </div>
                 <br>
                 @endif
