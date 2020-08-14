@@ -55,13 +55,12 @@ class ResourceController extends Controller
 
         try {
             $resourceCreated = $this->resource->create($validated);
+            $hashtagIds = $this->saveHashtags($hashtags);
+            // For the many to many relationship, we attach hashTagIds to $resourceCreated to fill the table hashtag_resource.
+            $resourceCreated->hashtags()->attach($hashtagIds);
         } catch (Exception $e) {
             return back()->withError($e->getMessage())->withInput();
         }
-
-        $hashtagIds = $this->saveHashtags($hashtags);
-        // For the many to many relationship, we attach hashTagIds to $resourceCreated to fill the table hashtag_resource.
-        $resourceCreated->hashtags()->attach($hashtagIds);
 
         return redirect()->route('recursos.index')->with('message', 'Recurso guardado.');
     }
@@ -109,6 +108,42 @@ class ResourceController extends Controller
     public function destroy($id)
     {
         dd('destroy');
+    }
+
+    /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function anyData()
+    {
+        $userId = Auth::user()->id;
+
+        return datatables()->eloquent($this->resource->query())
+            ->addColumn('hashtags', function (Resource $resource) {
+                $hashtags = $resource->hashtags->pluck('name')->implode(', ');
+                return "<span class='label'>$hashtags</span>";
+            })
+            ->addColumn('actions', function (Resource $resource) use ($userId) {
+                if ($userId === $resource->user->id) {
+                    return '<div class="btn-group">
+                    <form action="'. route('establecimientos.show', $resource->id).'" method="get">
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-default btn-sm" title="Editar">
+                                <i class="fa fa-pen"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="modifyDeleteAction('.$resource->id.',\''. $resource->comercial_name .'\')" title="Eliminar">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>';
+                } else {
+                    return '<div class="btn-group"></div>';
+                }
+            })
+            ->rawColumns(['actions', 'hashtags'])
+            ->toJson();
     }
 
     /**
