@@ -2,11 +2,13 @@
 
 * Site under development at: http://dinamizadorlocal.com (Ask me for a user if you want to test it).
 
-* ⏰ Estimated hours of work so far: 18 hours.
+* ⏰ Estimated hours of work so far: 23 hours.
 
 ![Local](./screenshots/screenshot_01.png)
 
 ![Local](./screenshots/screenshot_03.png)
+
+![Local](./screenshots/screenshot_05.png)
 
 👨🏻‍💻 Jose Manuel Cerrejon Gonzalez
 
