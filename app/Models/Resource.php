@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Resource extends Model
 {
@@ -19,7 +20,7 @@ class Resource extends Model
         return $this->belongsTo(\App\Models\Mime::class);
     }
 
-    public function hashtags()
+    public function hashtags() : BelongsToMany
     {
        return $this->belongsToMany(\App\Models\Hashtag::class);
     }

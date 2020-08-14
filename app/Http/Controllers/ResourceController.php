@@ -13,9 +13,6 @@ use App\Http\Requests\ResourceRequest;
 
 class ResourceController extends Controller
 {
-    private const MAX_RESOLUTION_WIDTH = 1024;
-    private const HAS_SIGNATURE_STAMP = true;
-
     private $resource;
 
     public function __construct(Resource $resource)
@@ -54,16 +51,17 @@ class ResourceController extends Controller
         if ($request->has('resource_file')) {
             $validated['path'] = $this->saveFile($request->file('resource_file')); // TODO Handle resize if image, etc...
         }
-        
         unset($validated['hashtags'], $validated['resource_file']);
 
         try {
-            $this->resource->create($validated);
+            $resourceCreated = $this->resource->create($validated);
         } catch (Exception $e) {
             return back()->withError($e->getMessage())->withInput();
         }
 
-        $this->saveHashtags($hashtags);
+        $hashtagIds = $this->saveHashtags($hashtags);
+        // For the many to many relationship, we attach hashTagIds to $resourceCreated to fill the table hashtag_resource.
+        $resourceCreated->hashtags()->attach($hashtagIds);
 
         return redirect()->route('recursos.index')->with('message', 'Recurso guardado.');
     }
@@ -136,15 +134,19 @@ class ResourceController extends Controller
      * Get an array and transform each elements into hashtags
      *
      * @param  String  $hashtags
-     * @return  void
+     * @return  Array
      */
     private function saveHashtags($hashtags)
     {
         $tagsNames = explode(',', str_replace(' ','', $hashtags));
+        $tagsIds = [];
 
-        foreach($tagsNames as $tagName){
+        foreach($tagsNames as $tagName) {
             $normalizedHashtag = strtolower(($tagName[0] != '#') ? '#'.$tagName : $tagName);
-            Hashtag::firstOrCreate(['name' => $normalizedHashtag])->save();
+            $result = Hashtag::firstOrCreate(['name' => $normalizedHashtag]);
+            $tagsIds[] = $result->id;
         }
+
+        return $tagsIds;
     }
 }
