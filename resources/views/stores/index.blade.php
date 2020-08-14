@@ -21,8 +21,8 @@
                 </div>
                 <div class="modal-footer">
                     <form id="delete" action="{{ route('establecimientos.destroy', 1) }}" method="post">
-						@csrf
-						@method('DELETE')
+                        @csrf
+                        @method('DELETE')
                         <input type="hidden" id="id" name="id" value="">
                         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                         <button type="submit" class="btn btn-danger">Si</button>
@@ -68,7 +68,7 @@
                 "processing": true,
                 "serverSide": false,
                 "lengthChange": false,
-				"pageLength": 5,
+                "pageLength": 5,
                 "ajax": '{!! route('stores.datatables') !!}',
                 "language": {
                     "url": "{{ url('vendor/dataTables/Spanish.json') }}"
@@ -89,12 +89,12 @@
 
         function modifyDeleteAction(item, name) {
             $('#span_name').text(name);
-			$('#id').val(item);
+            $('#id').val(item);
             $('#delete').attr('action', '{{ url('establecimientos') }}/'+item);
         }
 
-		function newStore() {
-			window.location = "{{ url('establecimientos') }}/create";
-		}
+        function newStore() {
+            window.location = "{{ url('establecimientos') }}/create";
+        }
     </script>
 @stop
