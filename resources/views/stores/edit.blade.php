@@ -60,6 +60,15 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="cif" class="col-sm-2 control-label">CIF</label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="cif"
+                        title="CIF" placeholder="CIF"
+                        value="{{ $store->cif ?? old('cif') }}">
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="contact_name" class="col-sm-2 control-label">Persona de contacto*</label>
 
                 <div class="col-sm-10">

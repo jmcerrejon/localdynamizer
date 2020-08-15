@@ -27,6 +27,7 @@ class StoreRequest extends FormRequest
             'payment_method_id' => ['required', 'numeric'],
             'comercial_name' => ['required', 'max:100'],
             'business_name' => ['max:100'],
+            'cif' => ['max:9'],
             'is_active' => ['required'],
             'contact_name' => ['required', 'max:100'],
             'address' => ['required', 'max:191'],

@@ -10,7 +10,6 @@ class Store extends Model
     protected $casts = [
 		'created_at' => 'datetime:d/m/Y H:i',
 		'updated_at' => 'datetime:d/m/Y H:i',
-		'is_active'	 => 'boolean'
     ];
 
     protected $appends = [
@@ -18,7 +17,7 @@ class Store extends Model
 	];
 
     protected $fillable = [
-        'user_id', 'payment_method_id', 'comercial_name', 'business_name', 'is_active', 'contact_name', 'address', 'locality', 'population', 'postal_code', 'email', 'public_phone', 'contact_phone', 'whatsapp', 'website', 'subscription_type', 'logo_path'
+        'user_id', 'payment_method_id', 'comercial_name', 'business_name', 'cif', 'is_active', 'contact_name', 'address', 'locality', 'population', 'postal_code', 'email', 'public_phone', 'contact_phone', 'whatsapp', 'website', 'subscription_type', 'logo_path'
     ];
 
 	protected $dates = [

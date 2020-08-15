@@ -15,7 +15,7 @@ $factory->define(Store::class, function (Faker $faker) {
         'payment_method_id' => $paymentMethodIds[array_rand($paymentMethodIds, 1)],
         'comercial_name' => $faker->company,
         'business_name' => $faker->company,
-        'is_active' => $faker->boolean(70),
+        'cif' => 'A'.$faker->randomNumber(8),
         'contact_name' => $faker->name($isFemale ? 'female' : 'male'),
         'address' => $faker->address,
         'locality' => 'Isla Cristina',

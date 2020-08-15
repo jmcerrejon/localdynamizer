@@ -19,8 +19,9 @@ class CreateStoresTable extends Migration
             $table->unsignedBigInteger('payment_method_id');
             $table->string('comercial_name', 100);
             $table->string('business_name', 100)->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')->default(1);
             $table->string('contact_name', 100);
+            $table->string('cif', 9);
             $table->string('address', 191);
             $table->string('locality', 150)->nullable();
             $table->string('population', 150)->nullable();
