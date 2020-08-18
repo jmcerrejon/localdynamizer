@@ -19,5 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(HashtagsTableSeeder::class);
         $this->call(ResourcesTableSeeder::class);
         $this->call(HashtagResourcesTableSeeder::class);
+        $this->call(ServicesTableSeeder::class);
+        $this->call(InvoicesTableSeeder::class);
     }
 }
