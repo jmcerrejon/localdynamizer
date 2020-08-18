@@ -251,6 +251,11 @@ return [
             'url'  => 'recursos',
             'icon' => 'fas fa-fw fa-palette',
         ],
+        [
+            'text' => 'Facturación',
+            'url'  => 'facturacion',
+            'icon' => 'fas fa-fw fa-file-invoice-dollar',
+        ],
     ],
 
     /*
