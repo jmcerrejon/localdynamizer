@@ -2,7 +2,7 @@
 
 * Site under development at: http://dinamizadorlocal.com (Ask me for a user if you want to test it).
 
-* ⏰ Estimated hours of work so far: 25 hours.
+* ⏰ Estimated hours of work so far: 29 hours.
 
 ![Local](./screenshots/screenshot_01.png)
 
