@@ -7,7 +7,6 @@ use App\Models\Mime;
 use App\Models\Hashtag;
 use App\Models\Resource;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ResourceRequest;
 
@@ -20,6 +19,11 @@ class ResourceController extends Controller
         $this->resource = $resource;
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $totalResources = $this->resource->limit(10)->get();
