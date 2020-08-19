@@ -13,16 +13,13 @@ class ServicesTableSeeder extends Seeder
     public function run()
     {
         DB::table('services')->insert([
-            'description' => 'Servicio dinamizador',
+            'description' => 'Plan Básico',
             'price' => 50,
         ]);
+
         DB::table('services')->insert([
-            'description' => 'Servicio mantenimiento',
-            'price' => 50,
-        ]);
-        DB::table('services')->insert([
-            'description' => 'Servicio SEO',
-            'price' => 50,
+            'description' => 'Plan Premium',
+            'price' => 100,
         ]);
     }
 }
