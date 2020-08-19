@@ -16,9 +16,16 @@ class CreateInvoiceitemsTable extends Migration
         Schema::create('invoiceitems', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('service_id');
+            $table->unsignedBigInteger('invoice_id');
             $table->string('description', 191);
             $table->decimal('price', 6, 2);
-            $table->integer('quantity');
+            $table->unsignedinteger('quantity')->default(1);
+
+            $table->index(['service_id'], 'services_fk0');
+            $table->index(['invoice_id'], 'invoices_fk0');
+
+            $table->foreign('service_id')->references('id')->on('services');
+            $table->foreign('invoice_id')->references('id')->on('invoices');
         });
     }
 

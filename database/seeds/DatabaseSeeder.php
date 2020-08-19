@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(HashtagResourcesTableSeeder::class);
         $this->call(ServicesTableSeeder::class);
         $this->call(InvoicesTableSeeder::class);
+        $this->call(InvoiceItemsTableSeeder::class);
     }
 }
