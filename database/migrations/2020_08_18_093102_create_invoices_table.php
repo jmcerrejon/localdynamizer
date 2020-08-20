@@ -23,7 +23,7 @@ class CreateInvoicesTable extends Migration
             $table->boolean('is_sent')->default(false);
             $table->boolean('is_charged')->default(false);
             $table->decimal('charge_amount', 6, 2);
-            $table->decimal('discount_amount', 6, 2);
+            $table->unsignedTinyInteger('discount_percent')->default(0);
             $table->unsignedTinyInteger('tax')->default(21);
             $table->decimal('total_amount', 6, 2);
             $table->timestamp('start_at')->nullable();
