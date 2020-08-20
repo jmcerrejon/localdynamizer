@@ -12,9 +12,20 @@ class Invoice extends Model
     {
         return $this->HasMany(\App\Models\Invoiceitem::class);
     }
-
+    
     public function store() : BelongsTo
     {
         return $this->belongsTo(\App\Models\Store::class);
+    }
+
+    /**
+     * Get invoice by id with items and store
+     *
+     * @param  Int  $id
+     * @return Object
+     */
+    public function getInvoiceByIdWithItemsAndStore($id)
+    {
+        return $this->with('invoiceitems', 'store')->findOrFail($id);
     }
 }

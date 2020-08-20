@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
+use LaravelDaily\Invoices\Classes\Buyer;
+use LaravelDaily\Invoices\Classes\InvoiceItem;
+use LaravelDaily\Invoices\Invoice as LaravelInvoice;
 
 class InvoiceController extends Controller
 {
@@ -48,46 +52,27 @@ class InvoiceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Invoice  $invoice
+     * @param  \App\Models\Invoice  $invoices
+     * @param  Int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Invoice $invoice)
+    public function show(Invoice $invoices, $id)
     {
-        dd('show');
-    }
+        $invoiceData = $invoices->getInvoiceByIdWithItemsAndStore($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Invoice $invoice)
-    {
-        dd('edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Invoice $invoice)
-    {
-        dd('update');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Invoice $invoice)
-    {
-        dd('destroy');
+        if ($invoiceData->invoiceitems->isEmpty()) {
+            return back()->withError('Esta factura no tiene conceptos a calcular.');
+        }
+        
+        return LaravelInvoice::make()
+            ->sequence(667)
+            ->serialNumberFormat($invoiceData->invoice_sid)
+            ->dateFormat(Carbon::parse($invoiceData->start_at)->format("d/m/Y"))
+            ->buyer(new Buyer($this->getCustomer($invoiceData)))
+            ->taxRate($invoiceData->tax)
+            ->addItems($this->getInvoiceItems($invoiceData->invoiceitems))
+            ->filename($invoiceData->invoice_sid)
+            ->stream();
     }
 
     /**
@@ -102,11 +87,8 @@ class InvoiceController extends Controller
                     return '<div class="btn-group">
                     <form action="'. route('facturacion.show', $invoice->id).'" method="get">
                         <div class="btn-group">
-                            <button type="submit" class="btn btn-default btn-sm" title="Editar">
-                                <i class="fa fa-pen"></i>
-                            </button>
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="modifyDeleteAction('.$invoice->id.')" title="Eliminar">
-                                <i class="fa fa-trash"></i>
+                            <button type="submit" class="btn btn-default btn-sm" title="Descargar PDF">
+                                <i class="fas fa-arrow-circle-down"></i>
                             </button>
                         </div>
                     </form>
@@ -114,5 +96,36 @@ class InvoiceController extends Controller
             })
             ->rawColumns(['actions', 'hashtags'])
             ->toJson();
+    }
+
+    /**
+     * Get customer data for Buyer
+     *
+     * @param  \App\Models\Invoice  $invoice
+     * @return Array
+     */
+    private function getCustomer($invoice) : array
+    {
+        return [
+            'name'          => $invoice->store->business_name,
+            'custom_fields' => [
+                'Dirección' => $invoice->store->address,
+                'CIF' => $invoice->store->cif,
+                'Email' => $invoice->store->email,
+            ]
+        ];
+    }
+
+    /**
+     * Get invoice items
+     *
+     * @param  Illuminate\Database\Eloquent\Collection  $invoiceItems The collection to iterate over.
+     * @return Array
+     */
+    private function getInvoiceItems($invoiceItems) : array
+    {
+        return array_map(function ($invoiceItem) {
+            return (new InvoiceItem())->title($invoiceItem['description'])->pricePerUnit($invoiceItem['price']);
+        },$invoiceItems->toArray());
     }
 }
