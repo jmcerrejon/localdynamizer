@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\HashtagResource;
 use Illuminate\Database\Seeder;
 
@@ -9,6 +11,6 @@ class HashtagResourcesTableSeeder extends Seeder
     
     function run()
     {
-        factory(HashtagResource::class, self::TOTAL_RESOURCES)->create();
+        HashtagResource::factory(self::TOTAL_RESOURCES)->create();
     }
 }

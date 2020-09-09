@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Store;
 use Illuminate\Database\Seeder;
 
@@ -9,6 +11,6 @@ class StoresTableSeeder extends Seeder
 
     public function run()
     {
-        factory(Store::class, self::TOTAL_STORES)->create();
+        Store::factory(self::TOTAL_STORES)->create();
     }
 }

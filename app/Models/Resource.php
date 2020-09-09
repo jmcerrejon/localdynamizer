@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany};
 
 class Resource extends Model
 {
+    use HasFactory;
+
     public $fillable = [ 'user_id', 'mime_id', 'body', 'path', 'views', 'downloads' ];
 
     public function user() : BelongsTo

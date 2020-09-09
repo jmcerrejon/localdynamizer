@@ -1,29 +1,45 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Models\Invoice;
 use App\Models\Service;
 use App\Models\Invoiceitem;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Invoiceitem::class, function (Faker $faker) {
-    $service = getRandomService();
-    $invoiceId = Invoice::get()->modelKeys();
-
-    return [
-        'service_id' => $service->id,
-        'invoice_id' => $invoiceId[array_rand($invoiceId, 1)],
-        'description' => $service->description,
-        'price' => $service->price,
-    ];
-});
-
-function getRandomService()
+class InvoiceitemFactory extends Factory
 {
-    $services = Service::get();
-    $serviceIds = $services->modelKeys();
-    $randomServiceId = $serviceIds[array_rand($serviceIds, 1)];
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Invoiceitem::class;
 
-    return $services->where('id', $randomServiceId)->first();
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $service = $this->getRandomService();
+        $invoiceId = Invoice::get()->modelKeys();
+
+        return [
+            'service_id' => $service->id,
+            'invoice_id' => $invoiceId[array_rand($invoiceId, 1)],
+            'description' => $service->description,
+            'price' => $service->price,
+        ];
+    }
+
+    private function getRandomService()
+    {
+        $services = Service::get();
+        $serviceIds = $services->modelKeys();
+        $randomServiceId = $serviceIds[array_rand($serviceIds, 1)];
+
+        return $services->where('id', $randomServiceId)->first();
+    }
 }

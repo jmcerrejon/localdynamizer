@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Resource;
 use Illuminate\Database\Seeder;
 
@@ -9,6 +11,6 @@ class ResourcesTableSeeder extends Seeder
 
     public function run()
     {
-        factory(Resource::class, self::TOTAL_RESOURCES)->create();
+        Resource::factory(self::TOTAL_RESOURCES)->create();
     }
 }

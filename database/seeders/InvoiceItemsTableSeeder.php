@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Invoiceitem;
 use Illuminate\Database\Seeder;
 
@@ -9,6 +11,6 @@ class InvoiceItemsTableSeeder extends Seeder
 
     public function run()
     {
-        factory(Invoiceitem::class, self::TOTAL_ITEMS)->create();
+        Invoiceitem::factory(self::TOTAL_ITEMS)->create();
     }
 }

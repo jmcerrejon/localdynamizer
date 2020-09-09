@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Hashtag;
 use Illuminate\Database\Seeder;
 
@@ -9,6 +11,6 @@ class HashtagsTableSeeder extends Seeder
 
     public function run()
     {
-        factory(Hashtag::class, self::TOTAL_HASHTAGS)->create();
+        Hashtag::factory(self::TOTAL_HASHTAGS)->create();
     }
 }
