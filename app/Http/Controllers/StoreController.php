@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Store;
-use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
 use App\Http\Requests\StoreRequest;
 use Illuminate\Support\Facades\Auth;
@@ -133,18 +132,18 @@ class StoreController extends Controller
     {
         return datatables()->eloquent($this->store->query())
             ->addColumn('active', function (Store $store) {
-                $active = ($store->is_active) ? "label-success": "label-danger";
-                $active_txt = ($store->is_active) ? "Si": "No";
+                $active = ($store->is_active) ? "label-success" : "label-danger";
+                $active_txt = ($store->is_active) ? "Si" : "No";
                 return "<span class='label $active'>$active_txt</span>";
             })
             ->addColumn('actions', function (Store $store) {
                 return '<div class="btn-group">
-                    <form action="'. route('establecimientos.show', $store->id).'" method="get">
+                    <form action="' . route('establecimientos.show', $store->id) . '" method="get">
                         <div class="btn-group">
                             <button type="submit" class="btn btn-default btn-sm" title="Editar">
                                 <i class="fa fa-pen"></i>
                             </button>
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="modifyDeleteAction('.$store->id.',\''. $store->comercial_name .'\')" title="Eliminar">
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="modifyDeleteAction(' . $store->id . ',\'' . $store->comercial_name . '\')" title="Eliminar">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </div>
