@@ -7,6 +7,8 @@ Route::get('/', function () {
     return view('landscape');
 });
 
+Route::post('submit-landing-form', 'SubmitLandingFormController')->name('submit-landing-form');
+
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
