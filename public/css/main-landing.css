@@ -837,6 +837,10 @@ img {
   width: 50%;
 }
 
+.w-1\/4 {
+  width: 25%;
+}
+
 .w-full {
   width: 100%;
 }
@@ -1058,8 +1062,20 @@ img {
     display: flex;
   }
 
+  .md\:h-12 {
+    height: 3rem;
+  }
+
+  .md\:h-24 {
+    height: 6rem;
+  }
+
   .md\:mb-0 {
     margin-bottom: 0;
+  }
+
+  .md\:ml-8 {
+    margin-left: 2rem;
   }
 
   .md\:p-10 {
