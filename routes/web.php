@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('landscape');
+    return view('landing');
 });
 
 Route::post('submit-landing-form', 'SubmitLandingFormController')->name('submit-landing-form');
