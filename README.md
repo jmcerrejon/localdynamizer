@@ -2,7 +2,7 @@
 
 * Site under development at: http://dinamizadorlocal.com (Ask me for a user if you want to test it).
 
-* ⏰ Estimated hours of work so far: 48 hours.
+* ⏰ Estimated hours of work so far: 56 hours.
 
 * More screenshots on [directory screenshots](./screenshots).
 
@@ -84,3 +84,9 @@ php artisan config:cache # Run this when update files inside /config
 ### Development
 
 **NOTE:** Due we need to get this project raise up in a snap, TDD will be added in a near future. [Pest](https://pestphp.com/) is already included and ready to use 😉.
+
+### Packages and Libraries
+
+* https://flickity.metafizzy.co/
+
+* https://github.com/michalsnik/aos/tree/v2

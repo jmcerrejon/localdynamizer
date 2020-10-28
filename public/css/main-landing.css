@@ -473,16 +473,28 @@ img {
   background-color: rgba(0, 113, 254, var(--bg-opacity));
 }
 
-.bg-mybghighter {
-  --bg-opacity: 1;
-  background-color: #2d3646;
-  background-color: rgba(45, 54, 70, var(--bg-opacity));
-}
-
 .focus\:bg-white:focus {
   --bg-opacity: 1;
   background-color: #fff;
   background-color: rgba(255, 255, 255, var(--bg-opacity));
+}
+
+.bg-gradient-to-b {
+  background-image: linear-gradient(to bottom, var(--gradient-color-stops));
+}
+
+.from-myblue-top-bg {
+  --gradient-from-color: #0064fe;
+  --gradient-color-stops: var(--gradient-from-color), var(--gradient-to-color, rgba(0, 100, 254, 0));
+}
+
+.via-myblue-medium-bg {
+  --gradient-via-color: #0b54d9;
+  --gradient-color-stops: var(--gradient-from-color), var(--gradient-via-color), var(--gradient-to-color, rgba(11, 84, 217, 0));
+}
+
+.to-myblue-bottom-bg {
+  --gradient-to-color: #1441b1;
 }
 
 .border-gray-200 {
@@ -505,10 +517,6 @@ img {
 
 .rounded {
   border-radius: 0.25rem;
-}
-
-.rounded-lg {
-  border-radius: 0.5rem;
 }
 
 .rounded-full {
@@ -563,6 +571,10 @@ img {
   font-weight: 700;
 }
 
+.h-16 {
+  height: 4rem;
+}
+
 .h-20 {
   height: 5rem;
 }
@@ -607,10 +619,6 @@ img {
   list-style-type: none;
 }
 
-.m-2 {
-  margin: 0.5rem;
-}
-
 .m-6 {
   margin: 1.5rem;
 }
@@ -652,12 +660,8 @@ img {
   margin-right: 0.5rem;
 }
 
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-
-.mt-4 {
-  margin-top: 1rem;
+.ml-2 {
+  margin-left: 0.5rem;
 }
 
 .ml-4 {
@@ -686,16 +690,6 @@ img {
 
 .max-w-6xl {
   max-width: 72rem;
-}
-
-.object-none {
-  -o-object-fit: none;
-     object-fit: none;
-}
-
-.object-top {
-  -o-object-position: top;
-     object-position: top;
 }
 
 .focus\:outline-none:focus {
@@ -763,10 +757,6 @@ img {
   padding-right: 4rem;
 }
 
-.pl-2 {
-  padding-left: 0.5rem;
-}
-
 .pr-4 {
   padding-right: 1rem;
 }
@@ -785,10 +775,6 @@ img {
 
 .text-right {
   text-align: right;
-}
-
-.text-justify {
-  text-align: justify;
 }
 
 .text-white {
@@ -957,6 +943,8 @@ img {
          url('../fonts/poppins-v13-latin-600.woff') format('woff');
 }
 
+/* Tailwind grouped styles */
+
 .default_article {
   margin-left: auto;
   margin-right: auto;
@@ -982,6 +970,83 @@ img {
   color: rgba(74, 85, 104, var(--text-opacity));
 }
 
+.box_undertake {
+  padding: 2rem;
+  text-align: center;
+  border-width: 1px;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  margin: 0.5rem;
+}
+
+.p_undertake {
+  margin-top: 1rem;
+  --text-opacity: 1;
+  color: #4a5568;
+  color: rgba(74, 85, 104, var(--text-opacity));
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.checked_icon {
+  -o-object-fit: none;
+     object-fit: none;
+  -o-object-position: top;
+     object-position: top;
+}
+
+.p_two_box {
+  margin-top: 1rem;
+  --text-opacity: 1;
+  color: #4a5568;
+  color: rgba(74, 85, 104, var(--text-opacity));
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.p_carousel_title {
+  --text-opacity: 1;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  text-align: center;
+  font-weight: 100;
+}
+
+.p_carousel_subtitle {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  --text-opacity: 1;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  text-align: center;
+  font-weight: 700;
+}
+
+.input_form {
+  border-width: 1px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-width: 2px;
+  --border-opacity: 1;
+  border-color: #edf2f7;
+  border-color: rgba(237, 242, 247, var(--border-opacity));
+  border-radius: 0.25rem;
+  width: 100%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  --text-opacity: 1;
+  color: #4a5568;
+  color: rgba(74, 85, 104, var(--text-opacity));
+  line-height: 1.25;
+}
+
 @media (min-width: 768px) {
   .md\:flex {
     display: flex;
@@ -989,10 +1054,6 @@ img {
 
   .md\:mb-0 {
     margin-bottom: 0;
-  }
-
-  .md\:mr-6 {
-    margin-right: 1.5rem;
   }
 
   .md\:p-10 {
