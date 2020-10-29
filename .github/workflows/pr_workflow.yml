@@ -18,4 +18,4 @@ jobs:
                 key: ${{ secrets.SSH_PRIVATE_KEY }}
                 username: ${{ secrets.SSH_USERNAME }}
                 port: ${{ secrets.SSH_PORT }}
-                script: p && git pull
+                script: cd ${{ secrets.WWW_PATH}} && git pull
