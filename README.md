@@ -1,26 +1,18 @@
 # Local Dynamizer Admin Panel
 
-* Site under development at: http://dinamizadorlocal.com (Ask me for a user if you want to test it).
+![PUSH Workflow](https://github.com/jmcerrejon/localdynamizer/workflows/PUSH%20Workflow/badge.svg?branch=master)
 
-* ⏰ Estimated hours of work so far: 60 hours.
+* Site under development at: https://dinamizadorlocal.com (Ask me for a user if you want to test it).
 
-* More screenshots on [directory screenshots](./screenshots).
+* ⏰ Estimated hours of work so far: 61 hours.
+
+* More screenshots on [screenshots directory](./screenshots).
 
 ![Local](./screenshots/screenshot_08.png)
 
 ![Local](./screenshots/screenshot_03.png)
 
 ![Local](./screenshots/screenshot_05.png)
-
-👨🏻‍💻 Jose Manuel Cerrejon Gonzalez
-
-✉️ jmcerrejon@icloud.com
-
-📍 Huelva, Spain
-
-📚 Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International Public License ©2020
-
-Dev with ♥️ using [Laravel](https://www.laravel.com)
 
 ### Prerequisites
 
@@ -83,10 +75,22 @@ php artisan config:cache # Run this when update files inside /config
 
 ### Development
 
-**NOTE:** Due we need to get this project raise up in a snap, TDD will be added in a near future. [Pest](https://pestphp.com/) is already included and ready to use 😉.
+**NOTE:** Due we need to get this project raise up in a snap, TDD will be added in a near future.
 
 ### Packages and Libraries
 
 * https://flickity.metafizzy.co/
 
 * https://github.com/michalsnik/aos/tree/v2
+
+### Credits
+
+👨🏻‍💻 Jose Manuel Cerrejon Gonzalez
+
+✉️ jmcerrejon@icloud.com
+
+📍 Huelva, Spain
+
+Dev with ♥️ using [Laravel](https://www.laravel.com) and landing with [Tailwind CSS](https://tailwindcss.com).
+
+📚 Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International Public License ©2020
