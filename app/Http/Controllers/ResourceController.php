@@ -52,7 +52,8 @@ class ResourceController extends Controller
         $validated = $request->validated();
         $hashtags = $validated['hashtags'];
         $validated['user_id'] = Auth::user()->id;
-        if ($request->has('resource_file')) {
+
+        if ($request->has('resource_file') && !startWith($request->file('resource_file'), 'http')) {
             $validated['path'] = $this->saveFile($request->file('resource_file'));
         }
         unset($validated['hashtags'], $validated['resource_file']);
@@ -79,6 +80,8 @@ class ResourceController extends Controller
     {
         $resource = Resource::findOrFail($id);
         $resource['hashtags'] = $resource->hashtags->pluck('name')->implode(', ');
+        $resource['path'] = (startWith($resource->path, 'http')) ? $resource->path : asset("storage/$resource->path");
+
         $mimes = Mime::get();
 
         return view('resources.edit', compact('resource', 'mimes'));
@@ -97,20 +100,17 @@ class ResourceController extends Controller
         $hashtags = $validated['hashtags'];
         $validated['user_id'] = Auth::user()->id;
         $resource = $this->resource->findOrFail($id);
-        if ($request->has('resource_file')) {
+        if ($request->has('resource_file') && !startWith($request->file('resource_file'), 'http')) {
             $oldResourceFilePath = $resource['path'];
             $validated['path'] = $this->saveFile($request->file('resource_file'));
         }
         unset($validated['resource_file']);
 
         try {
-            $resource
-                ->fill($validated)
-                ->save();
+            $resource->fill($validated)->save();
             $hashtagIds = $this->saveHashtags($hashtags);
             $resource->hashtags()->sync($hashtagIds);
-
-            if ($validated['path'] !== null) {
+            if (isset($validated['path']) && $validated['path'] !== null) {
                 $this->delFile($oldResourceFilePath);
             }
         } catch (Exception $e) {
@@ -154,12 +154,12 @@ class ResourceController extends Controller
             ->addColumn('actions', function (Resource $resource) use ($userId) {
                 if ($userId === $resource->user->id) {
                     return '<div class="btn-group">
-                    <form action="'. route('recursos.show', $resource->id).'" method="get">
+                    <form action="' . route('recursos.show', $resource->id) . '" method="get">
                         <div class="btn-group">
                             <button type="submit" class="btn btn-default btn-sm" title="Editar">
                                 <i class="fa fa-pen"></i>
                             </button>
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="modifyDeleteAction('.$resource->id.')" title="Eliminar">
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="modifyDeleteAction(' . $resource->id . ')" title="Eliminar">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </div>
@@ -202,11 +202,11 @@ class ResourceController extends Controller
      */
     private function saveHashtags($hashtags)
     {
-        $tagsNames = explode(',', str_replace(' ','', $hashtags));
+        $tagsNames = explode(',', str_replace(' ', '', $hashtags));
         $tagsIds = [];
 
-        foreach($tagsNames as $tagName) {
-            $normalizedHashtag = strtolower(($tagName[0] != '#') ? '#'.$tagName : $tagName);
+        foreach ($tagsNames as $tagName) {
+            $normalizedHashtag = strtolower(($tagName[0] != '#') ? '#' . $tagName : $tagName);
             $result = Hashtag::firstOrCreate(['name' => $normalizedHashtag]);
             $tagsIds[] = $result->id;
         }
