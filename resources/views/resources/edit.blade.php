@@ -35,7 +35,7 @@
 
             <div class="col-sm-10">
                 <textarea rows="2" cols="50" type="text" class="form-control"
-                    name="body">{{ $resource->body ?? old('body') }}</textarea>
+                    name="body" id="body">{{ $resource->body ?? old('body') }}</textarea>
                 <p class="help-block">Texto a desarrollar para ser usado en redes sociales. Lo mejor es que sea escueto
                     y no supere los 150 caracteres. Ayuda (inglés): <a target="_blank"
                         href="https://sproutsocial.com/insights/social-media-character-counter/">sproutsocial.com</a>
@@ -47,7 +47,7 @@
             <div class="col-sm-10">
                 @if (isset($resource) && ($resource->path))
                 <div class="input-group">
-                    <img width="352" height="288" src="{{ asset("storage/".$resource->path) ?? old('path') }}">
+                    <img width="352" height="288" src="{{ $resource->path ?? old('path') }}">
                 </div>
                 <br>
                 @endif
@@ -66,7 +66,7 @@
                 <input type="text" class="form-control" name="hashtags" title="Escribe los hashtags separados por coma"
                     placeholder="Escribe los hashtags separados por coma"
                     value="{{ $resource->hashtags ?? old('hashtags') }}">
-                <p class="help-block">Pon tantos como puedas. Servirán sobretodo para etiquetar y organizar las búsquedas.</p>
+                <p class="help-block">Pon tantos como puedas separados por coma. Servirán sobretodo para etiquetar y organizar las búsquedas.</p>
             </div>
         </div>
         <div class="box-footer">
@@ -79,4 +79,12 @@
     <br>
     <br>
 </div> <!-- /.box-footer -->
+@stop
+
+@section('js')
+    <script src="/js/dcounts-js.min.js"></script>
+
+    <script>
+      dCounts('body', 150, document.getElementById('body').value.length); //without #
+    </script>
 @stop
