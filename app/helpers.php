@@ -80,3 +80,16 @@ if (!function_exists('delFile')) {
         return false;
     }
 }
+
+if (!function_exists('startWith')) {
+    /**
+     * Return boolean if the string begins with
+     *
+     * @param  String  $path
+     * @return void
+     */
+    function startWith($string, $compare)
+    {
+        return (strpos($string, $compare) === 0);
+    }
+}
