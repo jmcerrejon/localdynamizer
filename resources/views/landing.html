@@ -40,11 +40,11 @@
 <body>
         <!-- Header nav -->
 
-        <article class="container default_article items-center md:flex">
+        <article class="container default_article items-center flex">
 
             <!-- Left -->
 
-            <section class="p-3">
+            <section class="md:w-1/2 w-4/5">
                 <a href="https://dinamizadorlocal.com">
                     <img src="images/landing/logo_horizontal.png" alt="dinamizadorlocal.com" width="384" height="76">
                 </a>
@@ -52,8 +52,12 @@
 
             <!-- Right -->
 
-            <section class="text-center">
-                <a href="http://dinamizadorlocal.com/login" class="border border-myblue text-myblue px-3 py-2 rounded-full">Acceso dinamizadores</a>
+            <section class="md:w-1/2 w-1/5">
+                <a class="float-right" href="http://dinamizadorlocal.com/login">
+                   <p class="border border-myblue text-myblue px-3 py-2 rounded-full hidden md:block">Acceso dinamizadores</p>
+                   <img class="md:hidden block" src="images/landing/user-profile-locked.png" alt="dinamizadorlocal.com" width="32" height="32">
+                </a>
+                
             </section>
         </article>
 

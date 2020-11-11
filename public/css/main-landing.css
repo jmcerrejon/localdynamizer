@@ -231,6 +231,10 @@ textarea {
  * Add the correct display in IE 10.
  */
 
+[hidden] {
+  display: none;
+}
+
 /**
  * Manually forked from SUIT CSS Base: https://github.com/suitcss/base
  * A thin layer on top of normalize.css that provides a starting point more
@@ -549,6 +553,10 @@ img {
   display: flex;
 }
 
+.hidden {
+  display: none;
+}
+
 .items-center {
   align-items: center;
 }
@@ -561,8 +569,8 @@ img {
   justify-content: center;
 }
 
-.font-hairline {
-  font-weight: 100;
+.float-right {
+  float: right;
 }
 
 .font-medium {
@@ -611,10 +619,6 @@ img {
 
 .text-2xl {
   font-size: 1.5rem;
-}
-
-.text-3xl {
-  font-size: 1.875rem;
 }
 
 .text-5xl {
@@ -845,8 +849,20 @@ img {
   width: 25%;
 }
 
+.w-1\/5 {
+  width: 20%;
+}
+
+.w-4\/5 {
+  width: 80%;
+}
+
 .w-full {
   width: 100%;
+}
+
+.w-screen {
+  width: 100vw;
 }
 
 @-webkit-keyframes spin {
@@ -962,8 +978,6 @@ img {
 }
 
 .checked_icon {
-  width: 24px;
-  height: 24px;
   -o-object-fit: none;
      object-fit: none;
   -o-object-position: top;
@@ -1022,8 +1036,16 @@ img {
 }
 
 @media (min-width: 768px) {
+  .md\:block {
+    display: block;
+  }
+
   .md\:flex {
     display: flex;
+  }
+
+  .md\:hidden {
+    display: none;
   }
 
   .md\:h-12 {
