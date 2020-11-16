@@ -45,12 +45,23 @@
         <div class="form-group">
             <label for="resource_file" class="col-sm-2 control-label">Recurso multimedia</label>
             <div class="col-sm-10">
-                @if (isset($resource) && ($resource->path))
                 <div class="input-group">
+                    @if (isset($resource) && ($resource->path))
+                        @switch($resource->mime_id)
+                        @case(2)
+                        @case(4)
                     <img width="352" height="288" src="{{ $resource->path ?? old('path') }}">
+                        @break
+                        @case(3)
+                    <video controls width="528">
+                        <source src="{{ $resource->path ?? old('path') }}" type="video/mp4">
+                        Lo siento, tu navegador no soporta vídeos incrustados.
+                    </video>
+                        @break
+                        @endswitch
+                    @endif
                 </div>
                 <br>
-                @endif
                 <div class="input-group">
                     <input type="file" class="form-control pull-right" title="Dirección del logo" name="resource_file" value="">
                 </div>
