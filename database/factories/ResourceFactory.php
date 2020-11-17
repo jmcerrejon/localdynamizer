@@ -29,6 +29,7 @@ class ResourceFactory extends Factory
         return [
             'user_id' => $userIds[array_rand($userIds, 1)],
             'mime_id' => $mimeIds[array_rand($mimeIds, 1)],
+            // 'published' => true,
             'body' => $this->faker->paragraph,
             'path' => $this->faker->imageUrl(1024, 768),
             'views' => 23,

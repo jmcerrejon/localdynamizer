@@ -17,6 +17,8 @@ class CreateResourcesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('mime_id');
+            // $table->string('title', 191);
+            // $table->boolean('published');
             $table->text('body');
             $table->string('path', 191)->nullable();
             $table->string('views', 191)->default(0);

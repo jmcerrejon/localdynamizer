@@ -26,8 +26,11 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        $totalResources = $this->resource->limit(10)->get();
-        return view('resources.index', compact('totalResources'));
+        $resources = $this->resource
+            ->orderBy('created_at','desc')
+            ->paginate(6);
+
+        return view('resources.index', compact('resources'));
     }
 
     /**
@@ -135,42 +138,6 @@ class ResourceController extends Controller
         $resource->delete();
 
         return redirect()->back()->with('message', 'Recurso eliminado.');
-    }
-
-    /**
-     * Process datatables ajax request.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function anyData()
-    {
-        $userId = Auth::user()->id;
-
-        return datatables()->eloquent($this->resource->query())
-            ->addColumn('hashtags', function (Resource $resource) {
-                $hashtags = $resource->hashtags->pluck('name')->implode(', ');
-                return "<span class='label'>$hashtags</span>";
-            })
-            ->addColumn('actions', function (Resource $resource) use ($userId) {
-                if ($userId === $resource->user->id) {
-                    return '<div class="btn-group">
-                    <form action="' . route('recursos.show', $resource->id) . '" method="get">
-                        <div class="btn-group">
-                            <button type="submit" class="btn btn-default btn-sm" title="Editar">
-                                <i class="fa fa-pen"></i>
-                            </button>
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="modifyDeleteAction(' . $resource->id . ')" title="Eliminar">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>';
-                } else {
-                    return '<div class="btn-group"></div>';
-                }
-            })
-            ->rawColumns(['actions', 'hashtags'])
-            ->toJson();
     }
 
     /**
