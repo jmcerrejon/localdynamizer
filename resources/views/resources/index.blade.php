@@ -45,7 +45,7 @@
                                         @break
                                         @case(3)
                                     <video controls class="img-responsive center-block d-block mx-auto img-fluid">
-                                        <source src="{{ $resource->path }}" type="video/mp4">
+                                        <source src="storage/{{ $resource->path }}" type="video/mp4">
                                         Lo siento, tu navegador no soporta vídeos incrustados.
                                     </video>
                                         @break
