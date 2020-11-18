@@ -140,6 +140,22 @@ class ResourceController extends Controller
         return redirect()->back()->with('message', 'Recurso eliminado.');
     }
 
+     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  Integer  $id
+     * @return  Blob
+     */
+    public function download($id)
+    {
+        $resource = $this->resource->findOrFail($id);
+        if (startWith( $resource->path, 'http')) {
+            return redirect()->to($resource->path);
+        }
+        
+        return response()->download('public/'.$resource->path);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

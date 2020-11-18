@@ -17,8 +17,11 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('home');
 
     Route::get('stores/datatables', 'StoreController@anyData')->name('stores.datatables');
-    Route::get('resources/datatables', 'ResourceController@anyData')->name('resources.datatables');
     Route::get('invoices/datatables', 'InvoiceController@anyData')->name('invoices.datatables');
+
+    Route::get('recursos/descarga/{id}', 'ResourceController@download')
+        ->name('recursos.download')
+        ->where('id', '[0-9]+');
 
     Route::resources([
         'establecimientos' => StoreController::class,

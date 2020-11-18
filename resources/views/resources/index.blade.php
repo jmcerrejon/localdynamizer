@@ -61,7 +61,7 @@
                                   <div class="card-footer">
                                     <div class="text-right">
                                         <form action="{{ route('recursos.show', $resource->id) }}" method="get">
-                                            <a href="{{ route('recursos.download', $resource->id) }}" class="btn bg-teal btn-sm">
+                                            <a href="{{ route('recursos.download', ['id' => $resource->id]) }}" class="btn bg-teal btn-sm">
                                                 <i class="fas fa-download"></i>
                                             </a>
                                             <a href="{{ route('recursos.show', $resource->id) }}" class="btn btn-sm @if (auth()->user()->id === $resource->user_id) btn-primary @else bg-teal @endif">
