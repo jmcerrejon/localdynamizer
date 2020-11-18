@@ -50,10 +50,12 @@
                                     </video>
                                         @break
                                         @endswitch
-                                        <p class="text-muted text-sm"><b>Hashtags: </b> #homem, #requit </p>
+                                        @foreach ($resource->hashtags as $item)
+                                          <small class="mt-2 mb-2 btn btn-outline-primary btn-sm">{{ $item->name }}</small>
+                                        @endforeach
                                         <ul class="ml-4 mb-0 fa-ul text-muted">
-                                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-eye"></i></span> Vistas: {{ $resource->views }}</li>
-                                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-cloud-download-alt"></i></span> Descargas: {{ $resource->downloads }}</li>
+                                          <li class="small"><div class="fa-li"><i class="fas fa-lg fa-eye"></i></div> {{ $resource->views }}</li>
+                                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-cloud-download-alt"></i></span> {{ $resource->downloads }}</li>
                                         </ul>
                                       </div>
                                     </div>

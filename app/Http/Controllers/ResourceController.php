@@ -82,6 +82,9 @@ class ResourceController extends Controller
     public function show($id)
     {
         $resource = Resource::findOrFail($id);
+
+        $resource->increment('views');
+
         $resource['hashtags'] = $resource->hashtags->pluck('name')->implode(', ');
         $resource['path'] = (startWith($resource->path, 'http')) ? $resource->path : asset("storage/$resource->path");
 
@@ -149,6 +152,11 @@ class ResourceController extends Controller
     public function download($id)
     {
         $resource = $this->resource->findOrFail($id);
+
+        // TODO Check if resource exists
+
+        $resource->increment('downloads');
+
         if (startWith( $resource->path, 'http')) {
             return redirect()->to($resource->path);
         }
