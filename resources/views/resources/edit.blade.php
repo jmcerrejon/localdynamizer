@@ -11,6 +11,30 @@
 
 @section('content')
 @include('layouts.messages')
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Eliminar</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" id="myModalLabel"></h2>
+            </div>
+            <div class="modal-body">
+                ¿Desea eliminar este recurso?
+            </div>
+            <div class="modal-footer">
+                <form id="delete" action="{{ route('recursos.destroy', 1) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" id="id" name="id" value="">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-danger">Si</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="box box-info">
     <!-- /.box-header -->
     <!-- form start -->
@@ -61,6 +85,7 @@
                         @endswitch
                     @endif
                 </div>
+                @if (auth()->user()->id === $resource->user_id)
                 <br>
                 <div class="input-group">
                     <input type="file" class="form-control pull-right" title="Dirección del logo" name="resource_file" value="">
@@ -69,6 +94,7 @@
                     jpg, png.
                     <br>Resolución aconsejada máxima para videos: 720p | Máximo 20 Mb. Soportados: .mp4.
                 </p>
+                @endif
             </div>
         </div>
         <div class="form-group">
@@ -82,9 +108,18 @@
         </div>
         <div class="box-footer">
             @if (isset($resource))
-            <button type="button" class="btn btn-default" onclick="window.location.href='{{ route('recursos.index') }}'">Volver</button>
+            <a class="btn btn-default" onclick="window.location.href='{{ route('recursos.index') }}'">
+                <i class="fas fa-arrow-left"></i> Volver
+            </a>
             @endif
-            <button type="submit" class="btn btn-info pull-right" id="submit">Guardar</button>
+            @if (auth()->user()->id === $resource->user_id)
+            <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#myModal" onclick="modifyDeleteAction({{ $resource->id }});" title="Eliminar">
+                <i class="fas fa-trash"></i>
+            </button>
+            <button type="submit" class="btn btn-info pull-right" id="submit">
+                <i class="fas fa-save"></i> Guardar
+            </button>
+            @endif
         </div>
     </form>
     <br>
@@ -94,8 +129,41 @@
 
 @section('js')
     <script src="/js/dcounts-js.min.js"></script>
-
     <script>
-      dCounts('body', 150, document.getElementById('body').value.length); //without #
+        const formElementsEnabled = @if (auth()->user()->id === $resource->user_id) false @else true @endif;
+        dCounts('body', 150, document.getElementById('body').value.length); // without #
+
+        function modifyDeleteAction(item) {
+            $('#id').val(item);
+            $('#delete').attr('action', '{{ url('recursos') }}/'+item);
+        }
+
+        @if (auth()->user()->id !== $resource->user_id)
+        const inputs = document.getElementsByTagName('input');
+        for (var i = 0; i < inputs.length; i++) { 
+            inputs[i].disabled = true;
+        } 
+        @endif
+
+        function toggleFormElements(bDisabled) { 
+            var inputs = document.getElementsByTagName("input"); 
+            for (var i = 0; i < inputs.length; i++) { 
+                inputs[i].disabled = bDisabled;
+            } 
+            var selects = document.getElementsByTagName("select");
+            for (var i = 0; i < selects.length; i++) {
+                selects[i].disabled = bDisabled;
+            }
+            var textareas = document.getElementsByTagName("textarea"); 
+            for (var i = 0; i < textareas.length; i++) { 
+                textareas[i].disabled = bDisabled;
+            }
+            var buttons = document.getElementsByTagName("button");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].disabled = bDisabled;
+            }
+        }
+
+        toggleFormElements(formElementsEnabled);
     </script>
 @stop

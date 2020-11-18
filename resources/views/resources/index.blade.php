@@ -8,30 +8,7 @@
 
 @section('content')
 @include('layouts.messages')
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4>Eliminar</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <h2 class="modal-title" id="myModalLabel"></h2>
-            </div>
-            <div class="modal-body">
-                ¿Desea eliminar este recurso?
-            </div>
-            <div class="modal-footer">
-                <form id="delete" action="{{ route('recursos.destroy', 1) }}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" id="id" name="id" value="">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                    <button type="submit" class="btn btn-danger">Si</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="row">
     <code>
     </code>
@@ -58,11 +35,25 @@
                                   <div class="card-body pt-0">
                                     <div class="row">
                                       <div class="col-lg-12">
+                                        @switch($resource->mime_id)
+                                        @case(1)
+                                        <p>{{ $resource->body }}</p>
+                                        @break
+                                        @case(2)
+                                        @case(4)
                                         <img class="img-responsive center-block d-block mx-auto img-fluid" src="{{ $resource->path }}">
+                                        @break
+                                        @case(3)
+                                    <video controls class="img-responsive center-block d-block mx-auto img-fluid">
+                                        <source src="{{ $resource->path }}" type="video/mp4">
+                                        Lo siento, tu navegador no soporta vídeos incrustados.
+                                    </video>
+                                        @break
+                                        @endswitch
                                         <p class="text-muted text-sm"><b>Hashtags: </b> #homem, #requit </p>
                                         <ul class="ml-4 mb-0 fa-ul text-muted">
-                                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Vistas: {{ $resource->views }}</li>
-                                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Descargas: {{ $resource->downloads }}</li>
+                                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-eye"></i></span> Vistas: {{ $resource->views }}</li>
+                                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-cloud-download-alt"></i></span> Descargas: {{ $resource->downloads }}</li>
                                         </ul>
                                       </div>
                                     </div>
@@ -70,18 +61,13 @@
                                   <div class="card-footer">
                                     <div class="text-right">
                                         <form action="{{ route('recursos.show', $resource->id) }}" method="get">
-                                        <a href="{{ URL::to('recursos/' . $resource->id) }}" class="btn btn-sm bg-teal">
-                                        <i class="fas fa-eye"></i> Ver ficha
-                                      </a>
-                                      @if (auth()->user()->id === $resource->user_id)
-                                        <button type="submit" class="btn btn-primary btn-sm" title="Editar">
-                                            <i class="fas fa-pen"></i> Editar
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="modifyDeleteAction(' . $resource->id . ')" title="Eliminar">
-                                            <i class="fas fa-trash"></i> Eliminar
-                                        </button>
-                                        @endif
-                                    </form>
+                                            <a href="{{ route('recursos.download', $resource->id) }}" class="btn bg-teal btn-sm">
+                                                <i class="fas fa-download"></i>
+                                            </a>
+                                            <a href="{{ route('recursos.show', $resource->id) }}" class="btn btn-sm @if (auth()->user()->id === $resource->user_id) btn-primary @else bg-teal @endif">
+                                                <i class="fas fa-eye"></i> @if (auth()->user()->id === $resource->user_id) Ver/Editar @else Ver @endif ficha
+                                            </a>
+                                        </form>
                                     </div>
                                   </div>
                                 </div>
@@ -114,11 +100,6 @@
                 }
             });
         });
-
-        function modifyDeleteAction(item) {
-            $('#id').val(item);
-            $('#delete').attr('action', '{{ url('recursos') }}/'+item);
-        }
 
         function newResource() {
             window.location = "{{ url('recursos') }}/create";
