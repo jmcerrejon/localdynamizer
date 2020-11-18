@@ -161,7 +161,7 @@ class ResourceController extends Controller
             return redirect()->to($resource->path);
         }
         
-        return response()->download('public/'.$resource->path);
+        return response()->download('storage/'.$resource->path);
     }
 
     /**
