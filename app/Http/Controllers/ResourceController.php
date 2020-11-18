@@ -41,7 +41,7 @@ class ResourceController extends Controller
     public function create()
     {
         $mimes = Mime::get();
-        return view('resources.edit', compact('mimes'));
+        return view('resources.new', compact('mimes'));
     }
 
     /**
@@ -140,7 +140,7 @@ class ResourceController extends Controller
 
         $resource->delete();
 
-        return redirect()->back()->with('message', 'Recurso eliminado.');
+        return redirect()->route('recursos.index');
     }
 
      /**
@@ -204,4 +204,5 @@ class ResourceController extends Controller
 
         return $tagsIds;
     }
+
 }

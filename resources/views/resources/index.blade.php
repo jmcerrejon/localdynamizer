@@ -28,7 +28,7 @@
                             <div class="row d-flex align-items-stretch">
                               @foreach($resources as $resource)
                               <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
-                                <div class="card bg-light">
+                                <div class="card bg-light container-fluid">
                                   <div class="card-header text-muted border-bottom-0 h-10" style="height: 5.3rem;">
                                     {{ Str::limit($resource->body, 100) }}
                                   </div>

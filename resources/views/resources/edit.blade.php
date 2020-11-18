@@ -1,12 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Recurso Video')
+@section('title', 'Editar recurso')
 
 @section('content_header')
-<h1 class="m-0 text-dark">Nuevo/Editar recurso</h1>
+<h1 class="m-0 text-dark">Editar recurso</h1>
 
-<p class="mb-0">Crea o edita nuevos recursos para ser usado por todos los dinamizadores. Echa a volar tu
-    imaginación creando contenido para redes sociales.</p>
+<p class="mb-0">Edita recursos que ya hayas subido previamente. Echa a volar tu imaginación creando contenido para redes sociales.</p>
 @stop
 
 @section('content')
@@ -85,7 +84,7 @@
                         @endswitch
                     @endif
                 </div>
-                @if (auth()->user()->id === $resource->user_id)
+                @if (isset($resource) && auth()->user()->id === $resource->user_id)
                 <br>
                 <div class="input-group">
                     <input type="file" class="form-control pull-right" title="Dirección del logo" name="resource_file" value="">
@@ -112,7 +111,7 @@
                 <i class="fas fa-arrow-left"></i> Volver
             </a>
             @endif
-            @if (auth()->user()->id === $resource->user_id)
+            @if (isset($resource) && auth()->user()->id === $resource->user_id)
             <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#myModal" onclick="modifyDeleteAction({{ $resource->id }});" title="Eliminar">
                 <i class="fas fa-trash"></i>
             </button>
@@ -130,20 +129,13 @@
 @section('js')
     <script src="/js/dcounts-js.min.js"></script>
     <script>
-        const formElementsEnabled = @if (auth()->user()->id === $resource->user_id) false @else true @endif;
+        const formElementsEnabled = @if (isset($resource) && auth()->user()->id === $resource->user_id) false @else true @endif;
         dCounts('body', 150, document.getElementById('body').value.length); // without #
 
         function modifyDeleteAction(item) {
             $('#id').val(item);
             $('#delete').attr('action', '{{ url('recursos') }}/'+item);
         }
-
-        @if (auth()->user()->id !== $resource->user_id)
-        const inputs = document.getElementsByTagName('input');
-        for (var i = 0; i < inputs.length; i++) { 
-            inputs[i].disabled = true;
-        } 
-        @endif
 
         function toggleFormElements(bDisabled) { 
             var inputs = document.getElementsByTagName("input"); 
