@@ -10,7 +10,7 @@
 
 ![Local](./screenshots/screenshot_08.png)
 
-![Local](./screenshots/screenshot_03.png)
+![Local](./screenshots/screenshot_02.png)
 
 ![Local](./screenshots/screenshot_05.png)
 
