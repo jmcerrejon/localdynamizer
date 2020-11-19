@@ -39,7 +39,7 @@ class CreateStoresTable extends Migration
             $table->index(['user_id'], 'users_fk0');
             $table->index(['payment_method_id'], 'payment_method_fk1');
 
-			$table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
+			$table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 			$table->foreign('payment_method_id')->references('id')->on('payment_methods')->onUpdate('cascade');
         });
     }

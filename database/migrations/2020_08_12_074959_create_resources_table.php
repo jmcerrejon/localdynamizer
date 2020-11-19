@@ -29,7 +29,7 @@ class CreateResourcesTable extends Migration
             $table->index(['user_id'], 'users_fk0');
             $table->index(['mime_id'], 'mime_fk0');
 
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('mime_id')->references('id')->on('mimes')->onUpdate('cascade');
         });
     }
