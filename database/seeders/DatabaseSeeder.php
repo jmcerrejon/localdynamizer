@@ -13,16 +13,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(PaymentMethodsTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
-        $this->call(LocationsTableSeeder::class);
-        $this->call(StoresTableSeeder::class);
-        $this->call(MimesTableSeeder::class);
-        $this->call(HashtagsTableSeeder::class);
-        $this->call(ResourcesTableSeeder::class);
-        $this->call(HashtagResourcesTableSeeder::class);
-        $this->call(ServicesTableSeeder::class);
-        $this->call(InvoicesTableSeeder::class);
-        $this->call(InvoiceItemsTableSeeder::class);
+        $this->call([
+            PaymentMethodsTableSeeder::class,
+            UsersTableSeeder::class,
+            LocationsTableSeeder::class,
+            StoresTableSeeder::class,
+            MimesTableSeeder::class,
+            HashtagsTableSeeder::class,
+            ResourcesTableSeeder::class,
+            HashtagResourcesTableSeeder::class,
+            ServicesTableSeeder::class,
+            InvoicesTableSeeder::class,
+            AppointmentsTableSeeder::class,
+        ]);
     }
 }
