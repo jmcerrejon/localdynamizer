@@ -242,6 +242,11 @@ return [
             'icon' => 'fas fa-fw fa-home',
         ],
         [
+            'text' => 'Calendario',
+            'url'  => 'calendario',
+            'icon' => 'fas fa-fw fa-calendar-alt',
+        ],
+        [
             'text' => 'Establecimientos',
             'url'  => 'establecimientos',
             'icon' => 'fas fa-fw fa-store',

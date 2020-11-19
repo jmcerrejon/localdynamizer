@@ -14,7 +14,23 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        //
+        $events = [];
+
+        $appointments = Appointment::get();
+
+        foreach ($appointments as $appointment) {
+            if (!$appointment->start_time) {
+                continue;
+            }
+
+            $events[] = [
+                'title' => $appointment->title,
+                'start' => $appointment->start_time,
+                'url'   => route('calendario.edit', $appointment->id),
+            ];
+        }
+
+        return view('calendar.index', compact('events'));
     }
 
     /**
