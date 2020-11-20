@@ -28,7 +28,7 @@ class AppointmentController extends Controller
             $events[] = [
                 'title' => $appointment->title,
                 'start' => $appointment->start_time,
-                'url'   => route('calendario.edit', $appointment->id),
+                'url'   => route('appointment.edit', $appointment->id),
             ];
         }
 
@@ -42,7 +42,7 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        return view('calendar.edit');
+        return view('calendar.new');
     }
 
     /**
@@ -57,18 +57,7 @@ class AppointmentController extends Controller
         $appointment['user_id'] = Auth::user()->id;
         Appointment::create($appointment);
 
-        return redirect()->route('calendario.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Appointment $appointment)
-    {
-        //
+        return redirect()->route('appointment.index');
     }
 
     /**
@@ -79,7 +68,7 @@ class AppointmentController extends Controller
      */
     public function edit(Appointment $appointment)
     {
-        //
+        return view('calendar.edit', compact('appointment'));
     }
 
     /**
@@ -89,9 +78,11 @@ class AppointmentController extends Controller
      * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Appointment $appointment)
+    public function update(AppointmentRequest $request, Appointment $appointment)
     {
-        //
+        $appointment->update($request->validated());
+
+        return redirect()->route('appointment.index');
     }
 
     /**
@@ -102,6 +93,8 @@ class AppointmentController extends Controller
      */
     public function destroy(Appointment $appointment)
     {
-        //
+        $appointment->delete();
+
+        return redirect()->route('appointment.index');
     }
 }

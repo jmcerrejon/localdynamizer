@@ -27,7 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
         'establecimientos' => StoreController::class,
         'recursos' => ResourceController::class,
         'facturacion' => InvoiceController::class,
-        'calendario' => AppointmentController::class,
+        'appointment' => AppointmentController::class,
     ]);
 });
 

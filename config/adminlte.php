@@ -243,7 +243,7 @@ return [
         ],
         [
             'text' => 'Calendario',
-            'url'  => 'calendario',
+            'url'  => 'appointment',
             'icon' => 'fas fa-fw fa-calendar-alt',
         ],
         [

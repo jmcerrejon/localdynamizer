@@ -3,9 +3,7 @@
 @section('title', 'Gestionar citas')
 
 @section('content_header')
-<h1 class="m-0 text-dark">Crear cita</h1>
-
-<p class="mb-0">Crea una cita para recordar eventos importantes, como visitas a clientes y/o establecimientos, subir contenido...</p>
+<h1 class="m-0 text-dark">Editar cita</h1>
 @stop
 
 @section('content')
@@ -23,7 +21,7 @@
                 ¿Desea eliminar esta cita?
             </div>
             <div class="modal-footer">
-                <form id="delete" action="{{ route('recursos.destroy', 1) }}" method="post">
+                <form id="delete" action="{{ route('appointment.destroy', 1) }}" method="post">
                     @csrf
                     @method('DELETE')
                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
@@ -34,12 +32,9 @@
     </div>
 </div>
 <div class="box box-info">
-    <!-- /.box-header -->
-    <!-- form start -->
-    <form id="form_edit" role="form" enctype="multipart/form-data" class="form-horizontal" action="{{ route('calendario.store') }}" method="post">
+    <form id="form_edit" role="form" enctype="multipart/form-data" class="form-horizontal" action="{{ route('appointment.update', $appointment->id) }}" method="post">
         @csrf
-        @method('POST')
-        <input type="hidden" name="id" value="{{ $appointment->id ?? '' }}">
+        @method('PUT')
         <div class="container">
             <div class="row">
                 <div class="col"></div>
@@ -47,24 +42,27 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="title" class="control-label">Título</label>
-                            <input type="text" class="form-control" name="title" title="Título" placeholder="Título" value="">
+                            <input type="text" class="form-control" name="title" title="Título" placeholder="Título" value="{{ $appointment->title ?? '' }}">
                         </div>
                         <div class="form-group">
                             <label for="start_time" class="control-label">Empieza</label>
-                            <input type="datetime-local" class="form-control" name="start_time" title="Empieza" placeholder="Empieza" value="{{ \Carbon\carbon::now()->format('Y-m-d\TH:i') }}">
+                            <input type="datetime-local" class="form-control" name="start_time" title="Empieza" placeholder="Empieza" value="{{ \Carbon\carbon::parse($appointment->start_time)->format('Y-m-d\TH:i') }}">
                         </div>
                         <div class="form-group">
                             <label for="finish_time" class="control-label">Termina</label>
-                            <input type="datetime-local" class="form-control" name="finish_time" title="Termina" placeholder="Termina" value="{{ \Carbon\carbon::now()->addHours(1)->format('Y-m-d\TH:i') }}">
+                            <input type="datetime-local" class="form-control" name="finish_time" title="Termina" placeholder="Termina" value="{{ \Carbon\carbon::parse($appointment->finish_time)->format('Y-m-d\TH:i') }}">
                         </div>
                         <div class="form-group">
                             <label for="comments" class="control-label">Comentarios</label>
-                                <textarea rows="2" cols="50" type="text" class="form-control" name="comments" id="comments">{{ old('body') ?? '' }}</textarea>
+                                <textarea rows="2" cols="50" type="text" class="form-control" name="comments" id="comments">{{ $appointment->comments ?? '' }}</textarea>
                         </div>
                         <div class="box-footer">
-                            <a class="btn btn-default" onclick="window.location.href='{{ route('calendario.index') }}'">
+                            <a class="btn btn-default" onclick="window.location.href='{{ route('appointment.index') }}'">
                                 <i class="fas fa-arrow-left"></i> Volver
                             </a>
+                            <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#myModal" onclick="modifyDeleteAction({{ $appointment->id }});" title="Eliminar">
+                                <i class="fas fa-trash"></i>
+                            </button>
                             <button type="submit" class="btn btn-info pull-right" id="submit">
                                 <i class="fas fa-save"></i> Guardar
                             </button>
@@ -77,14 +75,14 @@
     </form>
     <br>
     <br>
-</div> <!-- /.box-footer -->
+</div>
 @stop
 
 @section('js')
     <script>
         function modifyDeleteAction(item) {
             $('#id').val(item);
-            $('#delete').attr('action', '{{ url('calendario') }}/'+item);
+            $('#delete').attr('action', '{{ url('appointment') }}/'+item);
         }
     </script>
 @stop
