@@ -2,9 +2,11 @@
 
 ![PUSH Workflow](https://github.com/jmcerrejon/localdynamizer/workflows/PUSH%20Workflow/badge.svg?branch=master)
 
+This panel (only in Spanish atm) tries to help community managers to manage their clients' social networks. For now it is a proof of concept with sections to import resources that can serve them, an agenda to keep appointments and a database with clients (here called stores).
+
 * Site under development at: https://dinamizadorlocal.com (Ask me for a user if you want to test it).
 
-* ⏰ Estimated hours of work so far: 70 hours.
+* ⏰ Estimated hours of work so far: 72 hours.
 
 * More screenshots on [screenshots directory](./screenshots).
 
