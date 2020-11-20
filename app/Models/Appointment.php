@@ -10,4 +10,6 @@ class Appointment extends Model
     use HasFactory;
 
     protected $model = Appointment::class;
+
+    public $fillable = ['title', 'start_time', 'finish_time', 'comments'];
 }
