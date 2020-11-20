@@ -14,7 +14,8 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <p class="mb-0">Organiza tu día a día.</p>
+                <p class="mb-0 mb-2">Organiza tu día a día y planifica tu semana.</p>
+                <a type="button" class="btn btn-primary" href="{{ url('calendario') }}/create"><i class="fas fa-calendar-plus"></i> Nueva cita</a>
                 <br>
                 <div class="box-body table-responsive">
                     <div id='calendar'></div>
