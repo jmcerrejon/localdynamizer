@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\AppointmentRequest;
 
 class AppointmentController extends Controller
 {
@@ -40,18 +42,22 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('calendar.edit');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \app\Http\Requests\AppointmentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AppointmentRequest $request)
     {
-        //
+        $appointment = $request->validated();
+        $appointment['user_id'] = Auth::user()->id;
+        Appointment::create($appointment);
+
+        return redirect()->route('calendario.index');
     }
 
     /**
