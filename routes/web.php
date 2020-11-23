@@ -3,9 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('landing');
-});
+Route::view('/','landing');
 
 Route::post('submit-landing-form', 'SubmitLandingFormController')->name('submit-landing-form');
 
@@ -31,6 +29,5 @@ Route::group(['middleware' => 'auth'], function () {
     ]);
 });
 
-Route::get('/{any?}', function () {
-    return view('welcome');
-})->where('any', '^(?!api\/)[\/\w\.-]*');
+Route::view('/{any?}', 'landing')
+    ->where('any', '^(?!api\/)[\/\w\.-]*');
