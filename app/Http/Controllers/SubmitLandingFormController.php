@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendEmailJob;
 use Illuminate\Http\Request;
-use App\Mail\LandingFormReceived;
-use Illuminate\Support\Facades\Mail;
 
 class SubmitLandingFormController
 {
@@ -17,7 +16,7 @@ class SubmitLandingFormController
     public function __invoke(Request $request)
     {
         // NOTE: This controller is excluded from csrf-token verification at app/Http/Middleware/VerifyCsrfToken.php
-        Mail::send(new LandingFormReceived($request->all()));
+        dispatch(new SendEmailJob($request->all()));
 
         return view('landing-mail-sent');
     }
