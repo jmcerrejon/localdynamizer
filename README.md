@@ -6,7 +6,7 @@ This panel (only in Spanish atm) tries to help community managers to manage thei
 
 * Site under development at: https://dinamizadorlocal.com (Ask me for a user if you want to test it).
 
-* ⏰ Estimated hours of work so far: 72 hours.
+* ⏰ Estimated hours of work so far: 75 hours.
 
 * More screenshots on [screenshots directory](./screenshots).
 
@@ -22,7 +22,7 @@ This panel (only in Spanish atm) tries to help community managers to manage thei
 
 ### Install
 
-```bash
+```sh
 git clone https://github.com/jmcerrejon/localdynamizer.git
 composer update && npm install
 cp .env.example .env # Add your MySQL config
@@ -36,7 +36,7 @@ composer dump-autoload
 
 Maybe our hosting has a *public_html* directory, so we can't use public. Don't worry, try the next:
 
-```bash
+```sh
 ln -s $PWD/storage/app/public/ $PWD/public_html/storage
 sudo chmod -R 775 storage
 ```
@@ -45,7 +45,7 @@ sudo chmod -R 775 storage
 
 It's a knighmare. Some tips:
 
-```bash
+```sh
 chown -R $USER:$(id -gn $USER) storage
 chown -h $USER:$(id -gn $USER) storage
 find * -type d -exec chmod 755 {} \;
@@ -56,13 +56,13 @@ On **production** environment an extra step maybe is required:
 
 Install packages:
 
-```
+```sh
 sudo apt install -y php7.3-zip php-xml php7.3-gd
 ```
 
 Change time-zone (Debian):
 
-```
+```sh
 timedatectl set-timezone "Europe/Madrid"
 timedatectl | grep "Time"
 timedatectl  status
@@ -70,14 +70,10 @@ timedatectl  status
 
 Now: 
 
-```
+```sh
 npm run production
 php artisan config:cache # Run this when update files inside /config 
 ```
-
-### Development
-
-**NOTE:** Due we need to get this project raise up in a snap, TDD will be added in a near future.
 
 ### Packages and Libraries
 
@@ -93,6 +89,6 @@ php artisan config:cache # Run this when update files inside /config
 
 📍 Huelva, Spain
 
-Dev with ♥️ using [Laravel](https://www.laravel.com) and landing with [Tailwind CSS](https://tailwindcss.com).
+Dev with ♥️ using [Laravel](https://www.laravel.com), AdminLTE for panel and landing with [Tailwind CSS](https://tailwindcss.com).
 
 📚 Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International Public License ©2020
