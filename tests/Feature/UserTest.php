@@ -1,11 +1,30 @@
 <?php
 
-uses(Illuminate\Foundation\Testing\RefreshDatabase::class);
+test('User exists', function () {
+    $this->seed(UsersTableSeeder::class)
+        ->assertDatabaseHas('users', [
+            'email' => 'ulysess@gmail.com',
+        ]);
+});
 
-beforeEach(fn () => App\Models\User::factory()->create());
+test('Users can sign in', function() {
+    $this->get('/login')
+        ->assertSee('Autenticarse para iniciar sesión');
 
-it('has users', function () {
-    $response = $this->assertDatabaseHas('users', [
-        'id' => 1,
-    ]);
+    $credentials = [
+        'email' => 'ulysess@gmail.com',
+        'password' => 'secret'
+    ];
+
+    $this->post('/login', $credentials)
+        ->assertRedirect('/home');
+    $this->assertCredentials($credentials);
+});
+
+test('Users can see home', function() {
+    $user = App\Models\User::first();
+
+    $this->actingAs($user)
+        ->get(route('home'))
+        ->assertSee('¡Bienvenido!');
 });
