@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/','landing');
 
-Route::post('submit-landing-form', 'SubmitLandingFormController')->name('submit-landing-form');
+Route::post('submit-landing-form', SubmitLandingFormController::class)->name('submit-landing-form');
 
 Auth::routes();
 
@@ -14,10 +14,10 @@ Route::group(['middleware' => 'auth'], function () {
         return view('home');
     })->name('home');
 
-    Route::get('stores/datatables', 'StoreController@anyData')->name('stores.datatables');
-    Route::get('invoices/datatables', 'InvoiceController@anyData')->name('invoices.datatables');
+    Route::get('stores/datatables', [ App\Http\Controllers\StoreController::class, 'anyData' ])->name('stores.datatables');
+    Route::get('invoices/datatables', [ App\Http\Controllers\InvoiceController::class, 'anyData'])->name('invoices.datatables');
 
-    Route::get('recursos/descarga/{id}', 'ResourceController@download')
+    Route::get('recursos/descarga/{id}', [ App\Http\Controllers\ResourceController::class, 'download'])
         ->name('recursos.download')
         ->where('id', '[0-9]+');
 
