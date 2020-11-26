@@ -25,6 +25,6 @@ test('Users can see home', function() {
     $user = App\Models\User::first();
 
     $this->actingAs($user)
-        ->get(route('home'))
+        ->get(route('home.index'))
         ->assertSee('¡Bienvenido!');
 });

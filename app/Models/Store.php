@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 
-class Store extends Model
+class Store extends Model implements Searchable
 {
     use HasFactory;
+
+    public $searchableType = 'Establecimientos';
 
     protected $casts = [
         'created_at' => 'datetime:d/m/Y H:i',
@@ -54,5 +58,16 @@ class Store extends Model
     public function invoices() : HasMany
     {
         return $this->HasMany(\App\Models\Invoice::class);
+    }
+
+    public function getSearchResult(): SearchResult
+    {
+        $url = route('establecimientos.show', $this->id);
+
+        return new SearchResult(
+            $this,
+            $this->comercial_name,
+            $url
+         );
     }
 }
