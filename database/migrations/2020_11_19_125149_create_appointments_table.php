@@ -23,6 +23,8 @@ class CreateAppointmentsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+            $table->index('title');
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
