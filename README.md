@@ -81,6 +81,8 @@ php artisan config:cache # Run this when update files inside /config
 
 * https://github.com/michalsnik/aos/tree/v2
 
+* https://github.com/spatie/laravel-searchable
+
 ### Credits
 
 👨🏻‍💻 Jose Manuel Cerrejon Gonzalez
