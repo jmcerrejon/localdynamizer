@@ -10,7 +10,12 @@ class Resource extends Model
 {
     use HasFactory;
 
-    public $fillable = [ 'user_id', 'mime_id', 'body', 'path', 'views', 'downloads' ];
+    public $fillable = [ 'title', 'published', 'user_id', 'mime_id', 'body', 'path', 'views', 'downloads' ];
+
+    public function setPublishedAttribute($value)
+    {
+        $this->attributes['published'] = ($value === "on") ? 1 : 0;
+    }
 
     public function user() : BelongsTo
     {

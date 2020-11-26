@@ -23,14 +23,14 @@
                     <a type="button" class="btn btn-primary" href="{{ url('recursos') }}/create"><i class="fas fa-pen"></i> Nuevo recurso</a>
                     <br />
                     <div class="scrolling-pagination">
-
                         <div class="card-body pb-0">
                             <div class="row d-flex align-items-stretch">
                               @foreach($resources as $resource)
+                              @if(($resource->published) || (Auth::user()->id === $resource->user_id && !$resource->published))
                               <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
                                 <div class="card bg-light container-fluid">
                                   <div class="card-header text-muted border-bottom-0 h-10" style="height: 5.3rem;">
-                                    {{ Str::limit($resource->body, 100) }}
+                                    {{ Str::limit($resource->title, 100) }}
                                   </div>
                                   <div class="card-body pt-0">
                                     <div class="row">
@@ -63,17 +63,34 @@
                                   <div class="card-footer">
                                     <div class="text-right">
                                         <form action="{{ route('recursos.show', $resource->id) }}" method="get">
-                                            <a href="{{ route('recursos.download', ['id' => $resource->id]) }}" class="btn bg-teal btn-sm">
+                                          @if (!$resource->published)
+                                            <a href="#" class="btn bg-warning btn-sm" title="Recurso tuyo NO publicado, por lo que otros dinamizadores NO lo pueden ver/usar">
+                                                <i class="fas fa-eye-slash"></i>
+                                            </a>
+                                          @endif
+                                            <a href="{{ route('recursos.download', ['id' => $resource->id]) }}" class="btn bg-teal btn-sm" title="Decargar recurso">
                                                 <i class="fas fa-download"></i>
                                             </a>
-                                            <a href="{{ route('recursos.show', $resource->id) }}" class="btn btn-sm @if (auth()->user()->id === $resource->user_id) btn-primary @else bg-teal @endif">
-                                                <i class="fas fa-eye"></i> @if (auth()->user()->id === $resource->user_id) Ver/Editar @else Ver @endif ficha
+                                            <a href="{{ route('recursos.show', $resource->id) }}" class="btn btn-sm @if (auth()->user()->id === $resource->user_id) btn-primary @else bg-teal @endif" title="Ver o editar recurso si procede">
+                                                <i class="fas fa-eye"></i> @if (auth()->user()->id === $resource->user_id) Ver/Editar @else Ver @endif recurso
                                             </a>
                                         </form>
                                     </div>
                                   </div>
                                 </div>
                               </div>
+                              @else
+                              <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+                                <div class="card bg-light container-fluid text-center">
+                                    <div class="my-auto">
+                                      <p class="btn bg-warning btn-sm">
+                                        <i class="fas fa-eye-slash"></i>
+                                      </p>
+                                      <p>Recurso no publicado aún por su dinamizador</p>
+                                    </div>
+                                </div>
+                              </div>
+                              @endif
                               @endforeach
                               {{ $resources->links() }}
                             </div>

@@ -17,7 +17,24 @@
     <form id="form_edit" role="form" enctype="multipart/form-data" class="form-horizontal" action="{{ route('recursos.store') }}" method="post">
         @csrf
         @if (isset($resource)) @method('PUT') @endif
-        <input type="hidden" name="id" value="">
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">Título *</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="title" title="Descripción de lo que representa el recurso"
+                    placeholder="Descripción de lo que representa el recurso" value="{{ $resource->title ?? old('title') }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="published" class="col-sm-2 control-label">¿Publicado?</label>
+
+            <div class="col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="published" title="activado = se publica" @if ((isset($resource) && $resource->published) || old('published')) checked @endif>
+                    </label>
+                </div>
+            </div>
+        </div>
         <div class="form-group">
             <label for="mime_id" class="col-sm-2 control-label">Tipo de recurso</label>
             <div class="col-sm-10">
@@ -29,7 +46,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="body" class="col-sm-2 control-label">Mensaje/Descripción</label>
+            <label for="body" class="col-sm-2 control-label">Mensaje/Descripción *</label>
 
             <div class="col-sm-10">
                 <textarea rows="2" cols="50" type="text" class="form-control"
@@ -53,7 +70,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="hashtags" class="col-sm-2 control-label">Hashtags</label>
+            <label for="hashtags" class="col-sm-2 control-label">Hashtags *</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" name="hashtags" title="Escribe los hashtags separados por coma"
                     placeholder="Escribe los hashtags separados por coma"

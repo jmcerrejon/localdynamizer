@@ -27,13 +27,14 @@ class ResourceFactory extends Factory
         $mimeIds = Mime::get()->modelKeys();
 
         return [
+            'title' => $this->faker->sentence(),
+            'published' => true,
             'user_id' => $userIds[array_rand($userIds, 1)],
             'mime_id' => $mimeIds[array_rand($mimeIds, 1)],
-            // 'published' => true,
             'body' => $this->faker->paragraph,
             'path' => $this->faker->imageUrl(1024, 768),
-            'views' => 23,
-            'downloads' => 23,
+            'views' => $this->faker->numberBetween(0, 100),
+            'downloads' => $this->faker->numberBetween(0, 100),
         ];
     }
 }

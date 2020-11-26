@@ -35,14 +35,31 @@
     </div>
 </div>
 <div class="box box-info">
-    <!-- /.box-header -->
-    <!-- form start -->
     <form id="form_edit" role="form" enctype="multipart/form-data" class="form-horizontal"
         action="{{ (isset($resource)) ? route('recursos.update', $resource->id) : route('recursos.store') }}"
         method="post">
         @csrf
         @if (isset($resource)) @method('PUT') @endif
+        <input type="hidden" name="published" value="0">
         <input type="hidden" name="id" value="{{ $resource->id ?? '' }}">
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">Título *</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="title" title="Descripción de lo que representa el recurso"
+                    placeholder="Descripción de lo que representa el recurso" value="{{ $resource->title ?? old('title') }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="published" class="col-sm-2 control-label">¿Publicado?</label>
+
+            <div class="col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="published" title="activado = se publica" @if ((isset($resource) && $resource->published) || old('published')) checked @endif>
+                    </label>
+                </div>
+            </div>
+        </div>
         <div class="form-group">
             <label for="mime_id" class="col-sm-2 control-label">Tipo de recurso</label>
             <div class="col-sm-10">
