@@ -28,7 +28,7 @@ class ResourceFactory extends Factory
 
         return [
             'title' => $this->faker->sentence(),
-            'published' => true,
+            'published' => 'on',
             'user_id' => $userIds[array_rand($userIds, 1)],
             'mime_id' => $mimeIds[array_rand($mimeIds, 1)],
             'body' => $this->faker->paragraph,

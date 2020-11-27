@@ -6,6 +6,7 @@ use Exception;
 use App\Models\Mime;
 use App\Models\Hashtag;
 use App\Models\Resource;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ResourceRequest;
@@ -85,7 +86,7 @@ class ResourceController extends Controller
 
         $resource->increment('views');
 
-        $resource['hashtags'] = $resource->hashtags->pluck('name')->implode(', ');
+        $resource['hashtags'] = $resource->hashtags->pluck('name')->implode(', #');
         $resource['path'] = (startWith($resource->path, 'http')) ? $resource->path : asset("storage/$resource->path");
 
         $mimes = Mime::get();
@@ -165,6 +166,25 @@ class ResourceController extends Controller
     }
 
     /**
+     * Filter Resource by Hashtags and return the result paginated
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function filterByHashtags(Request $request)
+    {
+        $hashtags = Hashtag::where('name', $request->get('q'))->pluck('id');
+
+        $resources = Resource::whereHas('hashtags', function($query) use ($hashtags ) {
+            $query->whereIn('hashtag_id', $hashtags );
+        })
+        ->orderBy('created_at','desc')
+        ->paginate(6);
+
+        return view('resources.index', compact('resources'));
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  Object  $file
@@ -193,11 +213,15 @@ class ResourceController extends Controller
      */
     private function saveHashtags($hashtags)
     {
-        $tagsNames = explode(',', str_replace(' ', '', $hashtags));
+        // We remove spaces and symbol #
+        $tagsNames = explode(',', str_replace([' ', '#'], '', $hashtags));
         $tagsIds = [];
 
         foreach ($tagsNames as $tagName) {
-            $normalizedHashtag = strtolower(($tagName[0] != '#') ? '#' . $tagName : $tagName);
+            if ($tagName === '') {
+                continue;
+            }
+            $normalizedHashtag = strtolower($tagName);
             $result = Hashtag::firstOrCreate(['name' => $normalizedHashtag]);
             $tagsIds[] = $result->id;
         }

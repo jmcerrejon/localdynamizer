@@ -27,6 +27,7 @@ class CreateResourcesTable extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
 
+            $table->index('title');
             
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('mime_id')->references('id')->on('mimes')->onUpdate('cascade');

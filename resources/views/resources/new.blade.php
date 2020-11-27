@@ -12,11 +12,10 @@
 @include('layouts.messages')
 
 <div class="box box-info">
-    <!-- /.box-header -->
-    <!-- form start -->
     <form id="form_edit" role="form" enctype="multipart/form-data" class="form-horizontal" action="{{ route('recursos.store') }}" method="post">
         @csrf
         @if (isset($resource)) @method('PUT') @endif
+        <input type="hidden" name="published" value="0">
         <div class="form-group">
             <label for="title" class="col-sm-2 control-label">Título *</label>
             <div class="col-sm-10">
@@ -89,7 +88,7 @@
     </form>
     <br>
     <br>
-</div> <!-- /.box-footer -->
+</div>
 @stop
 
 @section('js')

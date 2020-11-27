@@ -93,3 +93,16 @@ if (!function_exists('startWith')) {
         return (strpos($string, $compare) === 0);
     }
 }
+
+if (!function_exists('addHashTag')) {
+    /**
+     * Return string with hashtag symbol
+     *
+     * @param  String  $path
+     * @return void
+     */
+    function addHashTag(string $string)
+    {
+        return Str::start($string, '#');
+    }
+}

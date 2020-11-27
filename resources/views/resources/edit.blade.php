@@ -26,6 +26,7 @@
                 <form id="delete" action="{{ route('recursos.destroy', 1) }}" method="post">
                     @csrf
                     @method('DELETE')
+                    <input type="hidden" name="published" value="0">
                     <input type="hidden" id="id" name="id" value="">
                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                     <button type="submit" class="btn btn-danger">Si</button>
@@ -118,7 +119,7 @@
             <div class="col-sm-10">
                 <input type="text" class="form-control" name="hashtags" title="Escribe los hashtags separados por coma"
                     placeholder="Escribe los hashtags separados por coma"
-                    value="{{ $resource->hashtags ?? old('hashtags') }}">
+                    value="{{ addHashTag($resource->hashtags) ?? old('hashtags') }}">
                 <p class="help-block">Pon tantos como puedas separados por coma. Servirán sobretodo para etiquetar y organizar las búsquedas.</p>
             </div>
         </div>
