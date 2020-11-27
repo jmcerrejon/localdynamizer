@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Hashtag extends Model
+class Hashtag extends Model implements Searchable
 {
     use HasFactory;
 
@@ -15,6 +17,17 @@ class Hashtag extends Model
 
     public function resources()
     {
-        return $this->belongsToMany(\App\Models\Hashtag::class);
+        return $this->belongsToMany(\App\Models\Resource::class);
+    }
+
+    public function getSearchResult(): SearchResult
+    {
+        $url = route('recursos.show', $this->id);
+
+        return new SearchResult(
+            $this,
+            $this->name,
+            $url
+         );
     }
 }
