@@ -20,7 +20,7 @@ test('R - User can view calendar page', function () {
 
     $this->actingAs($user)
         ->get(route('appointment.index'))
-        ->assertSee('Calendario');
+        ->assertSee('Mi Agenda');
 });
 
 test('U - User can edit an appointment', function () {

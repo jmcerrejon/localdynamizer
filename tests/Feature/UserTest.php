@@ -26,5 +26,5 @@ test('Users can see home', function() {
 
     $this->actingAs($user)
         ->get(route('home.index'))
-        ->assertSee('¡Bienvenido!');
+        ->assertSee('¡Bienvenid@!');
 });
