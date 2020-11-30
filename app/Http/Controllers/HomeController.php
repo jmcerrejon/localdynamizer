@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Store;
 use App\Models\Resource;
 use App\Models\Appointment;
+use App\Models\Hashtag;
 use Illuminate\Http\Request;
 use Spatie\Searchable\Search;
 
@@ -36,6 +37,7 @@ class HomeController extends Controller
             ->registerModel(Appointment::class, 'title')
             ->registerModel(Store::class, ['comercial_name', 'business_name', 'contact_name'])
             ->registerModel(Resource::class, 'title')
+            ->registerModel(Hashtag::class, 'name')
             ->perform($request->input('q'));
 
         return view('home.search', compact('results'));

@@ -22,11 +22,11 @@ class Hashtag extends Model implements Searchable
 
     public function getSearchResult(): SearchResult
     {
-        $url = route('recursos.show', $this->id);
+        $url = route('recursos.hashtags.search').'?q='.$this->name;
 
         return new SearchResult(
             $this,
-            $this->name,
+            'Mostrar recursos con hashtag: '.$this->name,
             $url
          );
     }
