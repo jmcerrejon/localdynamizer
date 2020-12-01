@@ -13,7 +13,7 @@ test('Users can sign in', function() {
 
     $credentials = [
         'email' => 'ulysess@gmail.com',
-        'password' => 'secret'
+        'password' => config('auth.test_password')
     ];
 
     $this->post('/login', $credentials)
