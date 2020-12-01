@@ -16,13 +16,13 @@ class AdminsTableSeeder extends Seeder
     {
         DB::table('admins')->insert([
             'name' => 'Jose Cerrejon (admin)',
-            'email' => 'admin@dinamizadorsocial.com',
+            'email' => 'admin@dinamizadorlocal.com',
             'password' => '$2y$10$7HzofNKxFCjjdvyFdJk9TOUOWDlefF31no6oSKM3gPb8EiOg2N126', // secret
         ]);
 
         DB::table('admins')->insert([
             'name' => 'Jose Cardenas (admin)',
-            'email' => 'ceo@dinamizadorsocial.com',
+            'email' => 'ceo@dinamizadorlocal.com',
             'password' => '$2y$10$7HzofNKxFCjjdvyFdJk9TOUOWDlefF31no6oSKM3gPb8EiOg2N126', // secret
         ]);
     }

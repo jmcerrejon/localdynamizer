@@ -6,10 +6,10 @@ it('has admin login page', function () {
     $response->assertStatus(200);
 });
 
-it('admin@dinamizadorsocial.com exists', function () {
+it('admin@dinamizadorlocal.com exists', function () {
     $this->seed(AdminsTableSeeder::class)
         ->assertDatabaseHas('admins', [
-            'email' => 'admin@dinamizadorsocial.com',
+            'email' => 'admin@dinamizadorlocal.com',
         ]);
 });
 
@@ -18,7 +18,7 @@ it('admin can sign in', function () {
     ->assertSee('Panel administrador');
 
     $credentials = [
-        'email' => 'admin@dinamizadorsocial.com',
+        'email' => 'admin@dinamizadorlocal.com',
         'password' => config('auth.test_password')
     ];
 
