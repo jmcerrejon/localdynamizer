@@ -26,7 +26,7 @@ class Hashtag extends Model implements Searchable
 
         return new SearchResult(
             $this,
-            'Mostrar recursos con hashtag: '.$this->name,
+            'Mostrar recursos que contengan: '.$this->name,
             $url
          );
     }
