@@ -1,13 +1,22 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\Admin\Auth\LoginController;
 
 Route::view('/','landing');
 
 Route::post('submit-landing-form', SubmitLandingFormController::class)->name('submit-landing-form');
 
 Auth::routes();
+
+Route::get('admon/login', [ LoginController::class, 'showLoginForm'])->name('admin.login.index');
+Route::post('admon/login', [ LoginController::class, 'login'])->name('admin.login');
+Route::get('admon/logout', [ LoginController::class, 'logout'])->name('admin.logout');
+Route::group(['middleware' => 'auth:admin'], function () {
+    Route::get('admon/home', function() {
+        return view('auth.admin.home');
+    })->name('admin.home');
+});
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('home', [ App\Http\Controllers\HomeController::class, 'index'])->name('home.index');

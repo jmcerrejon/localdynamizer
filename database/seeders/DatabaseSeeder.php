@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             ServicesTableSeeder::class,
             InvoicesTableSeeder::class,
             AppointmentsTableSeeder::class,
+            AdminsTableSeeder::class,
         ]);
     }
 }
