@@ -18,7 +18,7 @@
                     <ul>
                         <li><a href="{{ $searchResult->url }}">{{ $searchResult->title }}</a></li>
                     </ul>
-                    @if ($type === 'hashtags') @break @endif
+                    {{-- @if ($type === 'hashtags') @break @endif --}}
                     @endforeach
                     @endforeach
                 </div>

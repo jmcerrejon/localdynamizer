@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Store;
+use App\Models\Hashtag;
 use App\Models\Resource;
 use App\Models\Appointment;
-use App\Models\Hashtag;
 use Illuminate\Http\Request;
 use Spatie\Searchable\Search;
+use Spatie\Searchable\ModelSearchAspect;
 
 class HomeController extends Controller
 {
@@ -33,11 +34,26 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
+        $userId = auth()->user()->id;
         $results = (new Search())
-            ->registerModel(Appointment::class, 'title')
-            ->registerModel(Store::class, ['comercial_name', 'business_name', 'contact_name'])
+            ->registerModel(Appointment::class, function(ModelSearchAspect $modelSearchAspect) use ($userId){
+                $modelSearchAspect
+                   ->addSearchableAttribute('title')
+                   ->where('user_id', $userId);
+            })
+            ->registerModel(Store::class, function(ModelSearchAspect $modelSearchAspect) use ($userId){
+                $modelSearchAspect
+                   ->addSearchableAttribute('comercial_name')
+                   ->addSearchableAttribute('business_name')
+                   ->addSearchableAttribute('contact_name')
+                   ->where('user_id', $userId);
+            })
             ->registerModel(Resource::class, 'title')
-            ->registerModel(Hashtag::class, 'name')
+            ->registerModel(Hashtag::class, function(ModelSearchAspect $modelSearchAspect) {
+                $modelSearchAspect
+                   ->addSearchableAttribute('name')
+                   ->limit(1);
+            })
             ->perform($request->input('q'));
 
         return view('home.search', compact('results'));
