@@ -16,14 +16,14 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'Jose Cerrejon',
+            'name' => 'Jose Cerrejon (dinamizador)',
             'email' => 'ulysess@gmail.com',
             'email_verified_at' => new DateTime(),
             'password' => '$2y$10$7HzofNKxFCjjdvyFdJk9TOUOWDlefF31no6oSKM3gPb8EiOg2N126', // secret
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Jose Cardenas',
+            'name' => 'Jose Cardenas (dinamizador)',
             'email' => 'ceo@dinamizadorsocial.com',
             'email_verified_at' => new DateTime(),
             'password' => '$2y$10$7HzofNKxFCjjdvyFdJk9TOUOWDlefF31no6oSKM3gPb8EiOg2N126', // secret
