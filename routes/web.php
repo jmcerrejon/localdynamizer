@@ -14,7 +14,7 @@ Route::post('admon/login', [ LoginController::class, 'login'])->name('admin.logi
 Route::get('admon/logout', [ LoginController::class, 'logout'])->name('admin.logout');
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('admon/home', function() {
-        return view('auth.admin.home');
+        return view('admin.dashboard');
     })->name('admin.home');
 });
 
