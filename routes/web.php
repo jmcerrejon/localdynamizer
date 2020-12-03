@@ -9,18 +9,16 @@ Route::post('submit-landing-form', SubmitLandingFormController::class)->name('su
 
 Auth::routes();
 
-Route::get('admon/login', [ LoginController::class, 'showLoginForm'])->name('admin.login.index');
-Route::post('admon/login', [ LoginController::class, 'login'])->name('admin.login');
-Route::get('admon/logout', [ LoginController::class, 'logout'])->name('admin.logout');
+Route::get('admon/login', [ LoginController::class, 'showLoginForm' ])->name('admin.login.index');
+Route::post('admon/login', [ LoginController::class, 'login' ])->name('admin.login');
+Route::get('admon/logout', [ LoginController::class, 'logout' ])->name('admin.logout');
 Route::group(['middleware' => 'auth:admin'], function () {
-    Route::get('admon/home', function() {
-        return view('admin.dashboard');
-    })->name('admin.home');
+    Route::get('admon/home', [ App\Http\Controllers\Admin\Home\HomeController::class, 'index' ])->name('admin.home');
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('home', [ App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
-    Route::get('home/search', [ App\Http\Controllers\HomeController::class, 'search'])->name('home.search');
+    Route::get('home', [ App\Http\Controllers\HomeController::class, 'index' ])->name('home.index');
+    Route::get('home/search', [ App\Http\Controllers\HomeController::class, 'search' ])->name('home.search');
     Route::get('recursos/hashtags', [ App\Http\Controllers\ResourceController::class, 'filterByHashtags'])->name('recursos.hashtags.search');
 
     Route::get('stores/datatables', [ App\Http\Controllers\StoreController::class, 'anyData' ])->name('stores.datatables');
