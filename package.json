@@ -5,6 +5,7 @@
         "migrate-testing": "php artisan migrate:refresh --seed --database=dynamizer-testing",
         "composer-dump-autoload": "composer dump-autoload -o",
         "composer-update": "composer update",
+        "test": "php artisan test",
         "listen-jobs": "php artisan queue:listen",
         "update": "php artisan optimize –force",
         "fix-permissions": "sudo chmod -R 775 storage",
