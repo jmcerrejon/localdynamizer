@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Home;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Models\Store;
