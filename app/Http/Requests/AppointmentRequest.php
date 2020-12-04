@@ -6,12 +6,12 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class AppointmentRequest extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'title' => ['required'],
@@ -21,7 +21,7 @@ class AppointmentRequest extends FormRequest
         ];
     }
 
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'title' => 'título',

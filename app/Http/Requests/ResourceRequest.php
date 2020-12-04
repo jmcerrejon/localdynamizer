@@ -6,12 +6,12 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ResourceRequest extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'mime_id' => ['required', 'numeric'],
@@ -23,7 +23,7 @@ class ResourceRequest extends FormRequest
         ];
     }
 
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'mime_id' => 'tipo de recurso',
