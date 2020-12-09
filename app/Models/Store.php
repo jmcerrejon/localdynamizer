@@ -5,8 +5,9 @@ namespace App\Models;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 
 class Store extends Model implements Searchable
 {
@@ -24,15 +25,22 @@ class Store extends Model implements Searchable
     ];
 
     protected $fillable = [
-        'user_id', 'payment_method_id', 'comercial_name', 'business_name', 'cif', 'is_active', 'contact_name', 'address', 'locality', 'population', 'postal_code', 'email', 'public_phone', 'contact_phone', 'whatsapp', 'website', 'subscription_type', 'logo_path'
+        'user_id', 'payment_method_id', 'service_id', 'comercial_name', 'business_name',
+        'cif', 'is_active', 'contact_name', 'address', 'locality', 'population',
+        'postal_code', 'email', 'public_phone', 'contact_phone', 'whatsapp',
+        'website', 'subscription_type', 'logo_path'
     ];
 
     protected $dates = [
         'created_at', 'updated_at'
     ];
     
-    public function getImgPathAttribute()
+    public function getImgPathAttribute(): string
     {
+        if (is_null($this->logo_path)) {
+            return '';
+        }
+
         if (strpos($this->logo_path, 'https') !== false) {
             return $this->logo_path;
         }
@@ -60,6 +68,11 @@ class Store extends Model implements Searchable
         return $this->HasMany(\App\Models\Invoice::class);
     }
 
+    public function service(): BelongsTo
+    {
+        return $this->belongsTo(\App\Models\Service::class);
+    }
+
     public function getSearchResult(): SearchResult
     {
         $url = route('establecimientos.show', $this->id);
@@ -68,6 +81,6 @@ class Store extends Model implements Searchable
             $this,
             $this->comercial_name,
             $url
-         );
+        );
     }
 }
