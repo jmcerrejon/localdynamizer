@@ -17,6 +17,7 @@
         @if (isset($store)) @method('PUT') @endif
         <input type="hidden" name="id" value="{{ $store->id ?? '' }}">
         <input type="hidden" name="subscription_type" value="{{ $store->subscription_type ?? 1 }}">
+        <input type="hidden" name="service_id" value="{{ $store->subscription_type ?? 1 }}">
         <input type="hidden" name="is_active" value="0">
         <div class="box-body">
             <div class="form-group">
@@ -38,6 +39,17 @@
                         @foreach($payment_methods as $payment_method)
                         <option value="{{ $payment_method->id }}" @if ((isset($store)) && ($payment_method->id ===
                             $store->payment_method_id)) selected @endif>{{ $payment_method->type }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="service_id" class="col-sm-2 control-label">Servicio contratado*</label>
+                <div class="col-sm-10">
+                    <select id="service_id" name="service_id" class="form-control">
+                        @foreach($services as $service)
+                        <option value="{{ $service->id }}" @if ((isset($store)) && ($service->id ===
+                            $store->service_id)) selected @endif>{{ $service->description }}</option>
                         @endforeach
                     </select>
                 </div>

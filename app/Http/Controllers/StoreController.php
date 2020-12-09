@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Store;
+use App\Models\Service;
 use App\Models\PaymentMethod;
 use App\Http\Requests\StoreRequest;
 use Illuminate\Support\Facades\Auth;
@@ -40,8 +41,9 @@ class StoreController extends Controller
     public function create()
     {
         $payment_methods = PaymentMethod::get();
+        $services = Service::get();
 
-        return view('stores.edit', compact('payment_methods'));
+        return view('stores.edit', compact('payment_methods', 'services'));
     }
 
     /**
@@ -76,8 +78,9 @@ class StoreController extends Controller
     {
         $store = $this->store->findOrFail($id);
         $payment_methods = PaymentMethod::get();
+        $services = Service::get();
 
-        return view('stores.edit', compact('store', 'payment_methods'));
+        return view('stores.edit', compact('store', 'payment_methods', 'services'));
     }
 
     /**

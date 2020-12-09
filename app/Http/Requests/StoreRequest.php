@@ -15,6 +15,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'payment_method_id' => ['required', 'numeric'],
+            'service_id' => ['required', 'numeric'],
             'comercial_name' => ['required', 'max:100'],
             'business_name' => ['max:100'],
             'cif' => ['max:9'],
@@ -31,6 +32,20 @@ class StoreRequest extends FormRequest
             'website' => ['nullable', 'url', 'max:100'],
             'subscription_type' => ['required', 'numeric'],
             'logo_file' => ['nullable', 'image', 'dimensions:max_width=2048,max_height=1024'],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'payment_method_id' => 'método de pago',
+            'service_id' => 'servicio contratado',
+            'comercial_name' => 'nombre comercial',
+            'contact_name' => 'persona de contacto',
+            'address' => 'dirección del establecimiento',
+            'postal_code' => 'código postal',
+            'email' => 'correo electrónico',
+            'contact_phone' => 'teléfono de contacto',
         ];
     }
 }

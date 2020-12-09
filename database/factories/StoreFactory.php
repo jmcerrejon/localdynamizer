@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Store;
+use App\Models\Service;
 use App\Models\PaymentMethod;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -24,10 +25,12 @@ class StoreFactory extends Factory
     {
         $isFemale = $this->faker->boolean(50);
         $paymentMethodIds = PaymentMethod::get()->modelKeys();
+        $serviceIds = Service::get()->modelKeys();
 
         return [
             'user_id' => 1,
             'payment_method_id' => $paymentMethodIds[array_rand($paymentMethodIds, 1)],
+            'service_id' => $serviceIds[array_rand($serviceIds, 1)],
             'comercial_name' => $this->faker->company,
             'business_name' => $this->faker->company,
             'cif' => 'A'.$this->faker->randomNumber(8),

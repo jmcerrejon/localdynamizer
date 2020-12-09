@@ -15,6 +15,11 @@ class ServicesTableSeeder extends Seeder
     public function run()
     {
         DB::table('services')->insert([
+            'description' => 'Plan Gratuíto',
+            'price' => 0,
+        ]);
+
+        DB::table('services')->insert([
             'description' => 'Plan Básico',
             'price' => 50,
         ]);
