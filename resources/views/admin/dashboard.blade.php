@@ -360,3 +360,8 @@
 
     </div>
 @endsection
+
+@section('js')
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="/admin/js/scripts.js"></script>
+@endsection

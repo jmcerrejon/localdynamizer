@@ -25,6 +25,7 @@
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css">
     <link rel="stylesheet" type="text/css" href="/admin/css/style.css">
+    @yield('links')
     <title>@yield('title') - Panel Web</title>
 </head>
 
@@ -166,10 +167,8 @@
     <!-- end wrapper -->
 
     <!-- script -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="/admin/js/scripts.js"></script>
-    <!-- end script -->
     @yield('js')
+    <!-- end script -->
 
 </body>
 
