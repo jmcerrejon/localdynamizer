@@ -2,10 +2,8 @@
 
 namespace Tests;
 
-/**
- * A basic assert example.
- */
-function assertExample(): void
+function actingAsAdmin(): TestCase
 {
-    test()->assertTrue(true);
+    app(\Database\Seeders\DatabaseSeeder::class)->call(\Database\Seeders\AdminsTableSeeder::class);
+    return test()->actingAs(\App\Models\User::first(), 'admin');
 }

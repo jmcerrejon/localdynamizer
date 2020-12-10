@@ -136,16 +136,16 @@
                 <!-- end sidebar toggle -->
 
                 <!-- link -->
-                <a href="#" class="mb-3 capitalize font-medium text-lg hover:text-teal-600 transition ease-in-out duration-500 text-gray-100">
-                    <i class="fad fa-chart-pie text-xs mr-2"></i>
+                <a href="{{ route('admin.home') }}" class="mb-3 capitalize font-medium text-lg hover:text-teal-600 transition ease-in-out duration-500 text-gray-100">
+                    <i class="fad fa-home text-lg mr-2"></i>
                     Inicio
                 </a>
                 <!-- end link -->
 
                 <!-- link -->
-                <a href="#" class="mb-3 capitalize font-medium text-lg hover:text-teal-600 transition ease-in-out duration-500 text-gray-100">
-                    <i class="fad fa-shopping-cart text-xs mr-2"></i>
-                    Usuarios
+                <a href="{{ route('dynamizers.index') }}" class="mb-3 capitalize font-medium text-lg hover:text-teal-600 transition ease-in-out duration-500 text-gray-100">
+                    <i class="fad fa-users text-lg mr-2"></i>
+                    Dinamizadores
                 </a>
                 <!-- end link -->
             </div>

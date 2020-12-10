@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="cif" class="col-sm-2 control-label">CIF</label>
+                <label for="cif" class="col-sm-2 control-label">CIF*</label>
 
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name="cif"
