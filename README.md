@@ -6,7 +6,7 @@ This panel (only in Spanish atm) tries to help community managers to manage thei
 
 * Site under development at: https://dinamizadorlocal.com (Ask me for a user if you want to test it).
 
-* ⏰ Estimated hours of work so far: 87 hours.
+* ⏰ Estimated hours of work so far: 92 hours.
 
 * More screenshots on [screenshots directory](./screenshots).
 
@@ -82,6 +82,8 @@ php artisan config:cache # Run this when update files inside /config
 * https://github.com/michalsnik/aos/tree/v2
 
 * https://github.com/spatie/laravel-searchable
+
+* https://github.com/fiduswriter/Simple-DataTables
 
 ### Credits
 
