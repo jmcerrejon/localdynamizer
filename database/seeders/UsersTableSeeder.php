@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Jose Cerrejon (dinamizador)',
             'email' => 'ulysess@gmail.com',
+            'phone1' => '555123456',
             'email_verified_at' => new DateTime(),
             'password' => '$2y$10$7HzofNKxFCjjdvyFdJk9TOUOWDlefF31no6oSKM3gPb8EiOg2N126', // secret
         ]);
@@ -25,6 +26,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Jose Cardenas (dinamizador)',
             'email' => 'ceo@dinamizadorlocal.com',
+            'phone1' => '555654321',
             'email_verified_at' => new DateTime(),
             'password' => '$2y$10$7HzofNKxFCjjdvyFdJk9TOUOWDlefF31no6oSKM3gPb8EiOg2N126', // secret
         ]);

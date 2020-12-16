@@ -27,10 +27,11 @@ class UserFactory extends Factory
             'name' => $this->faker->name,
             'is_enabled' => true,
             'email' => $this->faker->unique()->safeEmail,
+            'phone1' => $this->faker->e164PhoneNumber,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'remember_token' => Str::random(10),
-            'last_login_at' => Arr::random([now()->subDays(rand(1,100)), null]),
+            'last_login_at' => Arr::random([now()->subDays(rand(1, 100)), null]),
         ];
     }
 }

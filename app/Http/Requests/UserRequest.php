@@ -16,11 +16,13 @@ class UserRequest extends FormRequest
         $rules = [
             'name' => ['required', 'string'],
             'email' => ['required', 'email'],
+            // 'email' => ['required', 'unique:email'], TODO Uncomment when table user become dynamizer
+            'phone1' => ['required', 'string'],
         ];
 
-        if ($this->getMethod() == 'POST') {
-            $rules += ['password' => 'required|min:6'];
-        }
+        // if ($this->getMethod() == 'POST') {
+        //     $rules += ['password' => 'required', 'min:6]'];
+        // }
 
         return $rules;
     }
