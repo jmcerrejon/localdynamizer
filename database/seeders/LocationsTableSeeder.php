@@ -17,7 +17,6 @@ class LocationsTableSeeder extends Seeder
         DB::table('locations')->insert([
             'name' => 'Isla Cristina',
             'postal_code' => '21400',
-            'slug' => 'isla-cristina',
         ]);
 
         DB::table('location_user')->insert([
