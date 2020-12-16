@@ -14,6 +14,7 @@ test('C - Admin can add a new dynamizer', function () {
     $this->post(route('dynamizers.store'), [
         'name' => 'Jonnhy Mnemonic',
         'email' => 'jonnhy@example.net',
+        'phone1' => '555-6527685',
         'password' => 'secret',
     ]);
 
@@ -22,13 +23,17 @@ test('C - Admin can add a new dynamizer', function () {
 });
 
 test('R - Admin can read/edit a dynamizer', function () {
-    $this->withoutMiddleware();
+    $this->seed(AdminsTableSeeder::class);
+    $this->seed(UsersTableSeeder::class);
 
+    $admin = App\Models\Admin::first();
     $user = User::first();
 
-    $this->get(route('dynamizers.edit', $user->id));
-    // TODO When we create the view, uncomment the next
-    // $this->assertSee($user->name);
+    // $response = $this->get(route('dynamizers.edit', $user->id))->dump();
+    $this->actingAs($admin, 'admin')
+        ->get(url('admon/dynamizers').'/'.$user->id.'/edit')
+        ->assertStatus(200)
+        ->assertSee($user->name);
 });
 
 test('U - Admin can update a dynamizer', function () {
