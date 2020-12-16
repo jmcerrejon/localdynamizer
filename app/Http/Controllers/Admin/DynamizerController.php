@@ -20,16 +20,19 @@ class DynamizerController extends Controller
         return view('admin.dynamizers.index', compact('headings', 'data'));
     }
 
-    public function create()
+    public function create(): View
     {
-        //
+        return view('admin.dynamizers.edit');
     }
 
     public function store(UserRequest $request): RedirectResponse
     {
-        User::create($request->validated());
+        $fieldsValidated = $request->validated();
+        $fieldsValidated['password'] = bcrypt('secret');
 
-        return redirect()->route('dynamizers.index');
+        User::create($fieldsValidated);
+
+        return redirect()->route('dynamizers.index')->with('message', 'Nuevo dinamizador creado.');
     }
 
     public function edit(User $dynamizer): View
@@ -41,10 +44,9 @@ class DynamizerController extends Controller
     {
         $dynamizer = User::findOrFail($id);
 
-        $dynamizer->update($request->all());
-        // $dynamizer->update($request->validated());
+        $dynamizer->update($request->validated());
 
-        return redirect()->route('dynamizers.index');
+        return redirect()->route('dynamizers.index')->with('message', 'Dinamizador editado.');
     }
 
     public function destroy($id): RedirectResponse

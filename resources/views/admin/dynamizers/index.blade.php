@@ -34,11 +34,13 @@
         <!-- header -->
         <div class="card-header flex flex-row justify-between">
             <h1 class="h6">Dinamizadores</h1>
+            <button type="button" onclick="addItem();"><i class="fa fa-user-plus"></i></button>
         </div>
         <!-- end header -->
 
         <!-- body -->
         <div class="card-body grid gap-6 grid-cols-1">
+            @include('layouts.messages')
             <table id="main_table" class="overflow-x-auto block w-full"></table>
         </div>
         <!-- end body -->
@@ -101,7 +103,6 @@
     }
 
     function editItem(id) {
-        alert('WIP');
         window.location = '{{ url('admon/dynamizers') }}/'+ id +'/edit';
     }
 
