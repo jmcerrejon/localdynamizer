@@ -8,27 +8,9 @@
 @endsection
 
 @section('content')
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h2>Eliminar dinamizador</h2>
-        </div>
-        <div class="modal-body">
-            <p>¿Desea eliminar al dinamizador <span id="spName"></span>?</p>
-            <p><b>NOTA:</b> Esta acción es permanente.</p>
-        </div>
-        <div class="modal-footer">
-            <form id="delete" action="{{ route('dynamizers.destroy', 1) }}" method="post">
-                @csrf
-                @method('DELETE')
-                <input type="hidden" id="id">
-                <button type="submit" class="btn btn-danger ml-3">Si, deseo eliminarlo</button>
-            </form>
-        </div>
-        </div>
-    
-    </div>
-  
+@include('admin.layouts.modal-delete', [
+    'title' => 'Eliminar dinamizador'
+])
     <div class="card md:mt-2">
 
         <!-- header -->
@@ -49,7 +31,8 @@
 @endsection
 
 @section('js')
-<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"></script>
+<script src="/admin/js/modal.js"></script>
     <script>
     const modal = document.getElementById("myModal");
 
@@ -108,8 +91,8 @@
 
     function deleteItem(id, name) {
         document.getElementById('spName').innerHTML = name;
-        document.getElementById('id').innerHTML = id;
-        modal.style.display = 'block';
+        document.getElementById('formDelete').action = 'dynamizers/' + id;
+        toggleModal();
     }
     </script>
 @endsection
