@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Store;
-use App\Models\Hashtag;
-use App\Models\Resource;
-use App\Models\Appointment;
 use Illuminate\Http\Request;
-use Spatie\Searchable\Search;
-use Spatie\Searchable\ModelSearchAspect;
+use Spatie\Searchable\{Search, ModelSearchAspect};
+use App\Models\{Store, Hashtag, Resource, Appointment};
 
 class HomeController extends Controller
 {

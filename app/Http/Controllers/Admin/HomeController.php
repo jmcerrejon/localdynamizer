@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
-use App\Models\Store;
-use App\Models\Invoice;
-use App\Models\Resource;
+use App\Models\{User, Store, Invoice, Resource};
 
 class HomeController
 {
