@@ -96,12 +96,10 @@ navbarToggle.addEventListener("click", function() {
         var _classRemover = function() {
             navbar.classList.remove("fadeIn");
             navbar.classList.add("fadeOut");
-            console.log("removed");
         };
 
         var animate = async function() {
             await _classRemover();
-            console.log("animated");
 
             setTimeout(function() {
                 navbar.classList.add("md:hidden");
@@ -191,15 +189,12 @@ function hideSideBar() {
         var _class = function() {
             sideBar.classList.remove("md:slideInLeft");
             sideBar.classList.add("md:slideOutLeft");
-
-            console.log("hide");
         };
         var animate = async function() {
             await _class();
 
             setTimeout(function() {
                 sideBar.classList.replace("md:ml-0", "md:-ml-64");
-                console.log("animated");
             }, 300);
         };
 
