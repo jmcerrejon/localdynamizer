@@ -6,6 +6,8 @@ Route::view('/', 'landing');
 
 Route::post('submit-landing-form', SubmitLandingFormController::class)->name('submit-landing-form');
 
+Route::get('get_location', GetLocationController::class)->name('get-location');
+
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
