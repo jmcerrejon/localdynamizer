@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,10 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Artisan::call('import:locations');
+
         $this->call([
             PaymentMethodsTableSeeder::class,
             UsersTableSeeder::class,
-            LocationsTableSeeder::class,
             ServicesTableSeeder::class,
             StoresTableSeeder::class,
             MimesTableSeeder::class,
