@@ -32,8 +32,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="./images/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="./css/main-landing.css">
-    <link rel="stylesheet" href="./css/flickity.css">
+    <link rel="stylesheet" href="./css/main-landing.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 
@@ -332,61 +331,7 @@
                 <label class="block text-gray-700 font-semibold mb-1 md:mb-0 pr-4" for="city">
                     Ciudad de interés
                 </label>
-                <input class="border border-gray shadow appearance-none border-2 border-gray-200 rounded md:w-1/2 w-full py-2 mt-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="city" name="city" type="text" list="spain-cities" placeholder="Ciudad de interés" />
-                <datalist id="spain-cities">
-                    <option>Albacete</option>
-                    <option>Alicante/Alacant</option>
-                    <option>Almería</option>
-                    <option>Araba/Álava</option>
-                    <option>Asturias</option>
-                    <option>Ávila</option>
-                    <option>Badajoz</option>
-                    <option>Balears, Illes</option>
-                    <option>Barcelona</option>
-                    <option>Bizkaia</option>
-                    <option>Burgos</option>
-                    <option>Cáceres</option>
-                    <option>Cádiz</option>
-                    <option>Cantabria</option>
-                    <option>Castellón/Castelló</option>
-                    <option>Ciudad Real</option>
-                    <option>Córdoba</option>
-                    <option>Coruña, A</option>
-                    <option>Cuenca</option>
-                    <option>Gipuzkoa</option>
-                    <option>Girona</option>
-                    <option>Granada</option>
-                    <option>Guadalajara</option>
-                    <option>Huelva</option>
-                    <option>Huesca</option>
-                    <option>Jaén</option>
-                    <option>León</option>
-                    <option>Lleida</option>
-                    <option>Lugo</option>
-                    <option>Madrid</option>
-                    <option>Málaga</option>
-                    <option>Murcia</option>
-                    <option>Navarra</option>
-                    <option>Ourense</option>
-                    <option>Palencia</option>
-                    <option>Palmas, Las</option>
-                    <option>Pontevedra</option>
-                    <option>Rioja, La</option>
-                    <option>Salamanca</option>
-                    <option>Santa Cruz de Tenerife</option>
-                    <option>Segovia</option>
-                    <option>Sevilla</option>
-                    <option>Soria</option>
-                    <option>Tarragona</option>
-                    <option>Teruel</option>
-                    <option>Toledo</option>
-                    <option>Valencia/València</option>
-                    <option>Valladolid</option>
-                    <option>Zamora</option>
-                    <option>Zaragoza</option>
-                    <option>Ceuta</option>
-                    <option>Melilla</option>                        
-                </datalist>
+                <input class="border border-gray shadow appearance-none border-2 border-gray-200 rounded md:w-1/2 w-full py-2 mt-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="city" name="city" type="text" placeholder="Ciudad de interés" />
             </div>
             <div class="mb-6">
                 <label class="block text-gray-700 font-semibold mb-1 md:mb-0 pr-4" for="message">
@@ -429,6 +374,7 @@
     </footer>
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="/js/autocomplete.min.js"></script>
     <script>
         AOS.init();
         document.querySelector('form').addEventListener('submit', event => {
@@ -437,6 +383,23 @@
                 event.preventDefault();
                 alert('Usted debe estar conforme con la política de privacidad.');
                 return false;
+            }
+        });
+
+        const input = document.getElementById('city');
+        autocomplete({
+            input: input,
+            minLength: 2,
+            debounceWaitMs: 200,
+            preventSubmit: true,
+            emptyMsg: 'No se han encontrado municipios que contengan esos caracteres',
+            fetch: function(text, update) {
+                fetch(`{{ url('/get_location?q=')}}${text.toLowerCase()}`)
+                    .then(response => response.json())
+                    .then(data => update(data));
+            },
+            onSelect: function(item) {
+                input.value = item.label;
             }
         });
     </script>
