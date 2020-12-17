@@ -5,3 +5,7 @@
     overflow-x: hidden;
     overflow-y: visible !important;
 }
+/* Fix datatable font in front of modals */
+.dataTable-sorter {
+    position:inherit;
+}
