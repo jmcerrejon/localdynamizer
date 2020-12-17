@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "74b8946ceed989c721bf9adb490cbf6c",
+    "content-hash": "0be843afc62a63b27b7cd774a6542f14",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -8523,6 +8523,63 @@
                 }
             ],
             "time": "2020-07-12T23:59:07+00:00"
+        },
+        {
+            "name": "zaknesler/tailwind-preset",
+            "version": "v7.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zaknesler/tailwind-preset.git",
+                "reference": "b91d504228293a37b4d921ac3aa59b4a0edd9135"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zaknesler/tailwind-preset/zipball/b91d504228293a37b4d921ac3aa59b4a0edd9135",
+                "reference": "b91d504228293a37b4d921ac3aa59b4a0edd9135",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^7.0|^8.0",
+                "illuminate/filesystem": "^7.0|^8.0",
+                "illuminate/support": "^7.0|^8.0",
+                "laravel/ui": "^2.2",
+                "php": "^7.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ZakNesler\\TailwindPreset\\TailwindServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ZakNesler\\TailwindPreset\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zak Nesler",
+                    "email": "zak@nesler.dev"
+                }
+            ],
+            "description": "A Tailwind CSS preset for Laravel.",
+            "keywords": [
+                "laravel",
+                "preset",
+                "tailwind",
+                "tailwindcss"
+            ],
+            "support": {
+                "issues": "https://github.com/zaknesler/tailwind-preset/issues",
+                "source": "https://github.com/zaknesler/tailwind-preset/tree/master"
+            },
+            "time": "2020-09-08T17:37:16+00:00"
         }
     ],
     "aliases": [],

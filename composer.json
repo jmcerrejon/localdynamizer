@@ -29,7 +29,8 @@
         "nunomaduro/collision": "^5.0",
         "pestphp/pest": "^0.3.12",
         "pestphp/pest-plugin-laravel": "^0.3.0",
-        "phpunit/phpunit": "^9.3"
+        "phpunit/phpunit": "^9.3",
+        "zaknesler/tailwind-preset": "^7.2"
     },
     "config": {
         "optimize-autoloader": true,
