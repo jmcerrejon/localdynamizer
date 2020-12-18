@@ -6,7 +6,7 @@ This panel (only in Spanish atm) tries to help community managers to manage thei
 
 -   Site under development at: https://dinamizadorlocal.com (Ask me for a user if you want to test it).
 
--   ⏰ Estimated hours of work so far: 102 hours.
+-   ⏰ Estimated hours of work so far: 104 hours.
 
 -   More screenshots on [screenshots directory](./screenshots).
 
@@ -16,11 +16,11 @@ This panel (only in Spanish atm) tries to help community managers to manage thei
 
 ![Local](./screenshots/screenshot_05.png)
 
-### Prerequisites
+## Prerequisites
 
 -   Modify on _php.ini_ date.timezone = "Europe/Madrid"
 
-### Install
+## Install
 
 ```sh
 git clone https://github.com/jmcerrejon/localdynamizer.git
@@ -75,7 +75,7 @@ npm run production
 php artisan config:cache # Run this when update files inside /config
 ```
 
-### Packages and Libraries
+## Packages and Libraries
 
 -   https://flickity.metafizzy.co/
 
@@ -87,7 +87,7 @@ php artisan config:cache # Run this when update files inside /config
 
 -   https://docs.laravel-excel.com/3.1/getting-started/
 
-### Credits
+## Credits
 
 👨🏻‍💻 Jose Manuel Cerrejon Gonzalez
 
@@ -97,4 +97,12 @@ php artisan config:cache # Run this when update files inside /config
 
 Dev with ♥️ using [Laravel](https://www.laravel.com), AdminLTE for panel and landing/Admin panel with [Tailwind CSS](https://tailwindcss.com).
 
-📚 Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International Public License ©2020
+## Licence
+
+### Commercial license
+
+If you want to use it to use in commercial product, projects, and applications, the Commercial license is the appropriate license. With this option, your source code is kept proprietary. To purchase a commercial license you need to buy a licence from the owner. [Contact for licence](info@dinamizadorlocal.com)
+
+### Open-source license
+
+Free just for educational and **non-commercial purpose**.
