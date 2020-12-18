@@ -32,8 +32,9 @@
 <body class="bg-gray-100">
     <!-- start navbar -->
     <div id="navbar-overlay" class="absolute w-full h-full bg-gray-900 opacity-50 z-30 hidden"></div>
-    <div class="md:fixed md:w-full md:top-0 md:z-20 flex flex-row flex-wrap items-center bg-white p-6 border-b border-gray-300">
-    
+    <div
+        class="md:fixed md:w-full md:top-0 md:z-20 flex flex-row flex-wrap items-center bg-white p-6 border-b border-gray-300">
+
         <!-- logo -->
         <div class="flex-none w-56 flex flex-row items-center">
             <img src="/images/logos/logo_min.png" class="w-10 flex-none">
@@ -85,7 +86,8 @@
                     <button class="menu-btn focus:outline-none focus:shadow-outline flex flex-wrap items-center">
                         <div class="ml-2 capitalize flex ">
                             <h1 class="text-sm text-gray-800 font-semibold m-0 p-0 leading-none">
-                                {{ Auth::user()->name }}</h1>
+                                {{ Auth::user()->name }}
+                            </h1>
                             <i class="fad fa-chevron-down ml-2 text-xs leading-none"></i>
                         </div>
                     </button>
@@ -144,21 +146,23 @@
                 </div>
                 <!-- end sidebar toggle -->
 
-                <!-- link -->
                 <a href="{{ route('admin.home') }}"
                     class="mb-3 capitalize font-medium text-lg hover:text-teal-600 transition ease-in-out duration-500 text-gray-100">
                     <i class="fad fa-home text-lg mr-2"></i>
                     Inicio
                 </a>
-                <!-- end link -->
 
-                <!-- link -->
                 <a href="{{ route('dynamizers.index') }}"
                     class="mb-3 capitalize font-medium text-lg hover:text-teal-600 transition ease-in-out duration-500 text-gray-100">
                     <i class="fad fa-users text-lg mr-2"></i>
                     Dinamizadores
                 </a>
-                <!-- end link -->
+
+                <a href="{{ route('admin.filemanager') }}"
+                    class="mb-3 capitalize font-medium text-lg hover:text-teal-600 transition ease-in-out duration-500 text-gray-100">
+                    <i class="fad fa-copy text-lg mr-2"></i>
+                    Gestor de ficheros
+                </a>
             </div>
             <!-- end sidebar content -->
 
@@ -167,7 +171,7 @@
 
         <!-- strat content -->
         <div id="container" class="bg-gray-100 flex-1 p-4 md:mt-32 rounded">
-        @yield('content')
+            @yield('content')
         </div>
         <!-- end content -->
 
@@ -179,4 +183,5 @@
     @yield('js')
     <!-- end script -->
 </body>
+
 </html>
