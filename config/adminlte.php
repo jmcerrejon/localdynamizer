@@ -261,6 +261,11 @@ return [
             'url'  => 'facturacion',
             'icon' => 'fas fa-fw fa-file-invoice-dollar',
         ],
+        [
+            'text' => 'Gestor de Ficheros',
+            'url'  => 'ficheros',
+            'icon' => 'fas fa-fw fa-copy',
+        ],
     ],
 
     /*
