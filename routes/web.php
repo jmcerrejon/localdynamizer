@@ -13,6 +13,8 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('home', [ App\Http\Controllers\HomeController::class, 'index' ])->name('home.index');
     Route::get('home/search', [ App\Http\Controllers\HomeController::class, 'search' ])->name('home.search');
+    Route::get('ficheros', FileManagerController::class)->name('filemanager');
+
     Route::get('recursos/hashtags', [ App\Http\Controllers\ResourceController::class, 'filterByHashtags'])->name('recursos.hashtags.search');
 
     Route::get('stores/datatables', [ App\Http\Controllers\StoreController::class, 'anyData' ])->name('stores.datatables');
