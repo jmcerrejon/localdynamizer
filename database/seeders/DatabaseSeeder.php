@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             InvoicesTableSeeder::class,
             AppointmentsTableSeeder::class,
             AdminsTableSeeder::class,
+            LocationUsersTableSeeder::class,
         ]);
     }
 }
