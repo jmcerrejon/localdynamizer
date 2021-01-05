@@ -25,7 +25,7 @@ class Store extends Model implements Searchable
     ];
 
     protected $fillable = [
-        'user_id', 'payment_method_id', 'service_id', 'comercial_name', 'business_name',
+        'user_id', 'payment_method_id', 'service_id', 'location_id', 'comercial_name', 'business_name',
         'cif', 'is_active', 'contact_name', 'address', 'locality', 'population',
         'postal_code', 'email', 'public_phone', 'contact_phone', 'whatsapp',
         'website', 'subscription_type', 'logo_path'
@@ -66,6 +66,11 @@ class Store extends Model implements Searchable
     public function invoices() : HasMany
     {
         return $this->HasMany(\App\Models\Invoice::class);
+    }
+
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(\App\Models\Location::class);
     }
 
     public function service(): BelongsTo

@@ -31,6 +31,7 @@ class StoreFactory extends Factory
             'user_id' => 1,
             'payment_method_id' => $paymentMethodIds[array_rand($paymentMethodIds, 1)],
             'service_id' => $serviceIds[array_rand($serviceIds, 1)],
+            'location_id' => 3270,
             'comercial_name' => $this->faker->company,
             'business_name' => $this->faker->company,
             'cif' => 'A'.$this->faker->randomNumber(8),

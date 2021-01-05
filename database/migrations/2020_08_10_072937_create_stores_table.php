@@ -15,9 +15,10 @@ class CreateStoresTable extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('payment_method_id');
-            $table->unsignedBigInteger('service_id');
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('payment_method_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('service_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('location_id')->constrained();
             $table->string('comercial_name', 100);
             $table->string('business_name', 100)->nullable();
             $table->boolean('is_active')->default(1);
@@ -39,10 +40,6 @@ class CreateStoresTable extends Migration
 
             $table->index('comercial_name');
             $table->index('business_name');
-
-			$table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-			$table->foreign('payment_method_id')->references('id')->on('payment_methods')->onUpdate('cascade');
-			$table->foreign('service_id')->references('id')->on('services')->onUpdate('cascade');
         });
     }
 
