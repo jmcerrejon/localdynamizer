@@ -19,6 +19,7 @@ class CreateLocationsTable extends Migration
             $table->char('dc', 1);
             $table->string('name', 100);
             $table->string('codauto', 2);
+            $table->boolean('active')->nullable();
         });
     }
 
