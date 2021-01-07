@@ -8,7 +8,7 @@ class ActivityStoreTable extends Migration
 {
     public function up() : void
     {
-        Schema::create('activities_store', function (Blueprint $table) {
+        Schema::create('activity_store', function (Blueprint $table) {
             $table->foreignId('activity_id')->constrained()->onDelete('cascade');
             $table->foreignId('store_id')->constrained()->onDelete('cascade');
         });
@@ -16,6 +16,6 @@ class ActivityStoreTable extends Migration
 
     public function down() : void
     {
-        Schema::dropIfExists('activities_store');
+        Schema::dropIfExists('activity_store');
     }
 }
