@@ -3,6 +3,7 @@
 # Set the cursor in a request and press Cmd+Alt+R on macOS
 #
 @baseUrl = http://dinamizadorlocal.test/api
+#@baseUrl = https://dinamizadorlocal.com/api
 @token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9mb2Uuc29wb3J0dGVjLmVzXC9hcGlcL2F1dGhcL2xvZ2luIiwiaWF0IjoxNTc5MDgxMjk4LCJuYmYiOjE1NzkwODEyOTgsImp0aSI6IlRqWTdxRlR3c3NuejU4bHQiLCJzdWIiOiJhZmlsaWFkbzJAZ21haWwuY29tIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.-IyyIduQm4EThfeRnJXiGEmhwAc-fB_9tf_Ok7s48zQ
 
 ### Active locations
