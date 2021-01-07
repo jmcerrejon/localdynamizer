@@ -1,0 +1,14 @@
+# REST Client tests (using VSCode https://open-vsx.org/extension/humao/rest-client)
+# https://blog.bitsrc.io/vs-codes-rest-client-plugin-is-all-you-need-to-make-api-calls-e9e95fcfd85a
+# Set the cursor in a request and press Cmd+Alt+R on macOS
+#
+@baseUrl = http://dinamizadorlocal.test/api
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9mb2Uuc29wb3J0dGVjLmVzXC9hcGlcL2F1dGhcL2xvZ2luIiwiaWF0IjoxNTc5MDgxMjk4LCJuYmYiOjE1NzkwODEyOTgsImp0aSI6IlRqWTdxRlR3c3NuejU4bHQiLCJzdWIiOiJhZmlsaWFkbzJAZ21haWwuY29tIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.-IyyIduQm4EThfeRnJXiGEmhwAc-fB_9tf_Ok7s48zQ
+
+### Active locations
+GET {{baseUrl}}/locations HTTP/1.1
+content-type: application/json
+
+### Categories
+GET {{baseUrl}}/categories HTTP/1.1
+content-type: application/json
