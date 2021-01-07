@@ -8,19 +8,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InvoiceFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = Invoice::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
+    public function definition() : array
     {
         static $invoiceId = 1;
         $chargeAmount = $this->faker->randomElement([50, 100, 150]);
