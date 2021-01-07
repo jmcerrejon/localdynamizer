@@ -44,6 +44,17 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="category_id" class="col-sm-2 control-label">Categoría*</label>
+                <div class="col-sm-10">
+                    <select id="category_id" name="category_id" class="form-control">
+                        @foreach($categories as $category)
+                        <option value="{{ $category->id }}" @if ((isset($store)) && ($category->id ===
+                            $store->category_id)) selected @endif>{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="service_id" class="col-sm-2 control-label">Servicio contratado*</label>
                 <div class="col-sm-10">
                     <select id="service_id" name="service_id" class="form-control">

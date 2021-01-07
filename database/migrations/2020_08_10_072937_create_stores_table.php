@@ -19,6 +19,7 @@ class CreateStoresTable extends Migration
             $table->foreignId('payment_method_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('service_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('location_id')->constrained();
+            $table->foreignId('category_id')->constrained();
             $table->string('comercial_name', 100);
             $table->string('business_name', 100)->nullable();
             $table->boolean('is_active')->default(1);

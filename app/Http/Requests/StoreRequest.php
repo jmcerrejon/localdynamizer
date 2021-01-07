@@ -16,6 +16,7 @@ class StoreRequest extends FormRequest
         return [
             'payment_method_id' => ['required', 'numeric'],
             'service_id' => ['required', 'numeric'],
+            'category_id' => ['required', 'numeric'],
             'comercial_name' => ['required', 'max:100'],
             'business_name' => ['max:100'],
             'cif' => ['required', 'max:9'],
@@ -40,6 +41,7 @@ class StoreRequest extends FormRequest
         return [
             'payment_method_id' => 'método de pago',
             'service_id' => 'servicio contratado',
+            'category_id' => 'categoría',
             'comercial_name' => 'nombre comercial',
             'cif' => 'CIF',
             'contact_name' => 'persona de contacto',

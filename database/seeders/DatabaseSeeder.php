@@ -7,12 +7,7 @@ use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
+    public function run() : void
     {
         Artisan::call('import:locations');
 
@@ -20,6 +15,7 @@ class DatabaseSeeder extends Seeder
             PaymentMethodsTableSeeder::class,
             UsersTableSeeder::class,
             ServicesTableSeeder::class,
+            CategorySeeder::class,
             StoresTableSeeder::class,
             MimesTableSeeder::class,
             HashtagsTableSeeder::class,
