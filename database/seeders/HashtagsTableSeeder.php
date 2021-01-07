@@ -9,7 +9,7 @@ class HashtagsTableSeeder extends Seeder
 {
     const TOTAL_HASHTAGS = 50;
 
-    public function run()
+    public function run() : void
     {
         Hashtag::factory(self::TOTAL_HASHTAGS)->create();
     }
