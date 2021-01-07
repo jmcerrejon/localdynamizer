@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             ServicesTableSeeder::class,
             CategorySeeder::class,
+            ActivitySeeder::class,
             StoresTableSeeder::class,
             MimesTableSeeder::class,
             HashtagsTableSeeder::class,
