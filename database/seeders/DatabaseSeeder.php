@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             AppointmentsTableSeeder::class,
             AdminsTableSeeder::class,
             LocationUsersTableSeeder::class,
+            ActivityStoresTableSeeder::class,
         ]);
     }
 }
