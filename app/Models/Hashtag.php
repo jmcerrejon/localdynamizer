@@ -6,6 +6,8 @@ use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class Hashtag extends Model implements Searchable
 {
@@ -15,7 +17,7 @@ class Hashtag extends Model implements Searchable
 
     public $fillable = ['name'];
 
-    public function resources()
+    public function resources() : BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Resource::class);
     }
