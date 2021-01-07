@@ -9,7 +9,7 @@ class LocationController extends BaseController
     public function __invoke() : array
     {
         return $this->sendResponse(
-            'listado municipios activos',
+            'active mun list',
             Location::whereActive(true)->get()
         );
     }
