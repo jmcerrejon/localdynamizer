@@ -6,12 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateHashtagResourceTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up() : void
     {
         Schema::create('hashtag_resource', function (Blueprint $table) {
             $table->unsignedBigInteger('hashtag_id');
@@ -22,12 +17,7 @@ class CreateHashtagResourceTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down() : void
     {
         Schema::dropIfExists('hashtag_resource');
     }

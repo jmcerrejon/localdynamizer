@@ -7,12 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateResourcesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up() : void
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->id();
@@ -36,12 +31,7 @@ class CreateResourcesTable extends Migration
         DB::statement('ALTER TABLE `resources` ADD FULLTEXT INDEX resource_body_index (body)');
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down() : void
     {
         Schema::table('resources', function($table) {
             $table->dropIndex('resource_body_index');

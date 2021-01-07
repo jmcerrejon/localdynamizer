@@ -6,12 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateLocationUserTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up() : void
     {
         Schema::create('location_user', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
@@ -19,12 +14,7 @@ class CreateLocationUserTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down() : void
     {
         Schema::dropIfExists('location_user');
     }

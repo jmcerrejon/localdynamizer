@@ -6,12 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateCategoriesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up() : void
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
@@ -19,12 +14,7 @@ class CreateCategoriesTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down() : void
     {
         Schema::dropIfExists('categories');
     }
