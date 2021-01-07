@@ -7,23 +7,19 @@ use Illuminate\Support\Facades\DB;
 
 class AdminsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public function run() : void
     {
         DB::table('admins')->insert([
-            'name' => 'Jose Cerrejon (admin)',
-            'email' => 'admin@dinamizadorlocal.com',
-            'password' => '$2y$10$7HzofNKxFCjjdvyFdJk9TOUOWDlefF31no6oSKM3gPb8EiOg2N126', // secret
-        ]);
-
-        DB::table('admins')->insert([
-            'name' => 'Jose Cardenas (admin)',
-            'email' => 'ceo@dinamizadorlocal.com',
-            'password' => '$2y$10$7HzofNKxFCjjdvyFdJk9TOUOWDlefF31no6oSKM3gPb8EiOg2N126', // secret
+            [
+                'name' => 'Jose Cerrejon (admin)',
+                'email' => 'admin@dinamizadorlocal.com',
+                'password' => '$2y$10$7HzofNKxFCjjdvyFdJk9TOUOWDlefF31no6oSKM3gPb8EiOg2N126' // secret
+            ], 
+            [
+                'name' => 'Jose Cardenas (admin)',
+                'email' => 'ceo@dinamizadorlocal.com',
+                'password' => '$2y$10$7HzofNKxFCjjdvyFdJk9TOUOWDlefF31no6oSKM3gPb8EiOg2N126' // secret
+            ], 
         ]);
     }
 }

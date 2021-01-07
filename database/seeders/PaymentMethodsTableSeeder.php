@@ -7,30 +7,15 @@ use Illuminate\Support\Facades\DB;
 
 class PaymentMethodsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public function run() : void
     {
         DB::table('payment_methods')->insert([
-            'type' => 'Tarjeta de crédito',
-        ]);
-        DB::table('payment_methods')->insert([
-            'type' => 'Banco',
-        ]);
-        DB::table('payment_methods')->insert([
-            'type' => 'Contado',
-        ]);
-        DB::table('payment_methods')->insert([
-            'type' => 'Bizum',
-        ]);
-        DB::table('payment_methods')->insert([
-            'type' => 'Paypal',
-        ]);
-        DB::table('payment_methods')->insert([
-            'type' => 'Otros',
+            ['type' => 'Tarjeta de crédito' ],
+            ['type' => 'Banco' ],
+            ['type' => 'Contado' ],
+            ['type' => 'Bizum' ],
+            ['type' => 'Paypal' ],
+            ['type' => 'Otros' ],
         ]);
     }
 }

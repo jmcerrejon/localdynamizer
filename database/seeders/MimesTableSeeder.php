@@ -7,24 +7,13 @@ use Illuminate\Support\Facades\DB;
 
 class MimesTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public function run() : void
     {
         DB::table('mimes')->insert([
-            'name' => 'text',
-        ]);
-        DB::table('mimes')->insert([
-            'name' => 'image',
-        ]);
-        DB::table('mimes')->insert([
-            'name' => 'video',
-        ]);
-        DB::table('mimes')->insert([
-            'name' => 'gif',
+            ['name' => 'text'],
+            ['name' => 'image'],
+            ['name' => 'video'],
+            ['name' => 'gif'],
         ]);
     }
 }
