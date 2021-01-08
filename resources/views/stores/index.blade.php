@@ -47,7 +47,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Activo?</th>
+                                    <th>Servicio</th>
                                     <th>Fecha</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -76,7 +76,7 @@
                 columns: [
                     { data: 'id', name: 'id' },
                     { data: 'comercial_name', name: 'comercial_name' },
-                    { data: 'active', name: 'active' },
+                    { data: 'service_name', name: 'service_name' },
                     { data: 'updated_at', name: 'updated_at' },
                     { data: 'actions', name: 'actions' }
                 ]
