@@ -14,25 +14,34 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'payment_method_id' => ['required', 'numeric'],
-            'service_id' => ['required', 'numeric'],
-            'category_id' => ['required', 'numeric'],
-            'comercial_name' => ['required', 'max:100'],
-            'business_name' => ['max:100'],
-            'cif' => ['required', 'max:9'],
+            // Basic
             'is_active' => ['required'],
+            'service_id' => ['required', 'numeric'],
+            'comercial_name' => ['required', 'max:100'],
+            'business_name' => ['nullable', 'max:100'],
+            'cif' => ['required', 'max:9'],
             'contact_name' => ['required', 'max:100'],
+            'category_id' => ['required', 'numeric'],
+            'taggles' => ['required', 'array'],
             'address' => ['required', 'max:191'],
-            'locality' => ['max:150'],
-            'population' => ['max:150'],
             'postal_code' => ['required', 'max:5'],
             'email' => ['required', 'email', 'max:50'],
-            'public_phone' => ['nullable', 'digits_between:9,15'],
+            'email_public' => ['nullable', 'email', 'max:50'],
             'contact_phone' => ['required', 'digits_between:9,15'],
+            'public_phone' => ['nullable', 'digits_between:9,15'],
             'whatsapp' => ['nullable', 'digits_between:9,15'],
-            'website' => ['nullable', 'url', 'max:100'],
-            'subscription_type' => ['required', 'numeric'],
             'logo_file' => ['nullable', 'image', 'dimensions:max_width=2048,max_height=1024'],
+            // Premium
+            'payment_method_id' => ['nullable','numeric'],
+            'description' => ['nullable'],
+            'website' => ['nullable', 'url', 'max:100'],
+            'facebook' => ['nullable', 'max:50'],
+            'instagram' => ['nullable', 'max:50'],
+            'twitter' => ['nullable', 'max:50'],
+            'tripadvisor' => ['nullable', 'max:50'],
+            'tiktok' => ['nullable', 'max:50'],
+            'menu_es' => ['nullable', 'url', 'max:100'],
+            'menu' => ['nullable', 'url', 'max:100'],
         ];
     }
 

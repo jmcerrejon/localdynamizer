@@ -14,15 +14,17 @@ class StoreFactory extends Factory
 
     public function definition() : array
     {
+        $arrPremium = [];
         $isFemale = $this->faker->boolean(50);
         $paymentMethodIds = PaymentMethod::get()->modelKeys();
         $serviceIds = Service::get()->modelKeys();
+        $getServiceId = $serviceIds[array_rand($serviceIds, 1)];
         $categoryIds = Category::get()->modelKeys();
+        $email = $this->faker->email;
 
-        return [
+        $store = [
             'user_id' => 1,
-            'payment_method_id' => $paymentMethodIds[array_rand($paymentMethodIds, 1)],
-            'service_id' => $serviceIds[array_rand($serviceIds, 1)],
+            'service_id' => $getServiceId,
             'location_id' => 3270,
             'category_id' => $categoryIds[array_rand($categoryIds, 1)],
             'comercial_name' => $this->faker->company,
@@ -30,16 +32,31 @@ class StoreFactory extends Factory
             'cif' => 'A'.$this->faker->randomNumber(8),
             'contact_name' => $this->faker->name($isFemale ? 'female' : 'male'),
             'address' => $this->faker->address,
-            'locality' => 'Isla Cristina',
-            'population' => 'Isla Cristina',
-            'postal_code' => '21410',
-            'email' => $this->faker->email,
+            'postal_code' => '21042',
+            'email' => $email,
+            'email_public' => $this->faker->boolean(70) ? $email : null,
             'public_phone' => ltrim($this->faker->e164PhoneNumber, '+'),
             'contact_phone' => ltrim($this->faker->e164PhoneNumber, '+'),
             'whatsapp' => ltrim($this->faker->e164PhoneNumber, '+'),
             'website' => $this->faker->url,
-            'subscription_type' => 1,
             'logo_path' => $this->faker->imageUrl(1024, 768),
         ];
+
+        if ($getServiceId === 1) {
+            $arrPremium = [
+                'payment_method_id' => $paymentMethodIds[array_rand($paymentMethodIds, 1)],
+                'description' => $this->faker->sentence(15),
+                'website' => $this->faker->boolean(70) ? $this->faker->url : null,
+                'facebook' => $this->faker->word,
+                'instagram' => $this->faker->word,
+                'twitter' => $this->faker->word,
+                'tripadvisor' => $this->faker->word,
+                'tiktok' => $this->faker->word,
+                'menu_es' => $this->faker->boolean(70) ? $this->faker->url : null,
+                'menu' => $this->faker->boolean(50) ? $this->faker->url : null,
+            ];
+        }
+
+        return array_merge($store, $arrPremium);
     }
 }

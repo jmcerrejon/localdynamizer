@@ -26,10 +26,10 @@ class Store extends Model implements Searchable
     ];
 
     protected $fillable = [
-        'user_id', 'payment_method_id', 'service_id', 'location_id', 'category_id', 'comercial_name', 'business_name',
-        'cif', 'is_active', 'contact_name', 'address', 'locality', 'population',
-        'postal_code', 'email', 'public_phone', 'contact_phone', 'whatsapp',
-        'website', 'subscription_type', 'logo_path'
+        'user_id', 'service_id', 'location_id', 'category_id', 'payment_method_id', 'is_active', 'comercial_name',
+        'business_name', 'cif', 'contact_name', 'address', 'postal_code', 'contact_phone', 'public_phone', 'whatsapp',
+        'email', 'email_public', 'logo_path', 'website', 'description', 'facebook', 'instagram', 'twitter', 'tripadvisor',
+        'tiktok', 'menu_es', 'menu', 
     ];
 
     protected $dates = [
