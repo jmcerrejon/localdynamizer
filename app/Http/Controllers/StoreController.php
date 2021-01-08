@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Store;
 use App\Models\Service;
+use App\Models\Activity;
 use App\Models\Category;
+use App\Models\Location;
+use Illuminate\Support\Str;
 use App\Models\PaymentMethod;
 use App\Http\Requests\StoreRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class StoreController extends Controller
 {
@@ -44,25 +48,25 @@ class StoreController extends Controller
         $payment_methods = PaymentMethod::get();
         $services = Service::get();
         $categories = Category::get();
+        $allActivities = Activity::get()->pluck('name');
 
-        return view('stores.edit', compact('payment_methods', 'services', 'categories'));
+        return view('stores.edit', compact('payment_methods', 'services', 'categories', 'allActivities'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  App\Http\Requests\StoreRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request) : RedirectResponse
     {
         $validated = $request->validated();
+        $activities = $validated['taggles'];
         $validated['user_id'] = Auth::user()->id;
         $validated['logo_path'] =  $this->saveResizedImageFile2Disk($request->file('logo_file'), $validated['user_id']);
+        $validated['location_id'] = $this->getLocationId($validated['postal_code']);
         unset($validated['logo_file']);
+        unset($validated['taggles']);
 
         try {
-            $this->store->create($validated);
+            $newStore = $this->store->create($validated);
+            $activityIds = $this->saveTaggles($activities);
+            $newStore->activities()->sync($activityIds);
         } catch (Exception $e) {
             return back()->withError($e->getMessage())->withInput();
         }
@@ -82,32 +86,37 @@ class StoreController extends Controller
         $payment_methods = PaymentMethod::get();
         $services = Service::get();
         $categories = Category::get();
+        $allActivities = Activity::get()->pluck('name');
 
-        return view('stores.edit', compact('store', 'payment_methods', 'services', 'categories'));
+        return view('stores.edit', compact('store', 'payment_methods', 'services', 'categories', 'allActivities'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  App\Http\Requests\StoreRequest  $request
-     * @param  Integer  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(StoreRequest $request, $id)
+    public function update(StoreRequest $request, int $id) : RedirectResponse
     {
         $validated = $request->validated();
+        $activities = $validated['taggles'];
         $validated['user_id'] = Auth::user()->id;
         $store = $this->store->findOrFail($id);
         $validated['logo_path'] = $this->saveResizedImageFile2Disk($request->file('logo_file'), $store['id']);
+        $validated['location_id'] = $this->getLocationId($validated['postal_code']);
+
         unset($validated['logo_file']);
+        unset($validated['taggles']);
 
         if ($validated['logo_path'] !== null) {
             $this->delFile($store->logo_path);
         }
 
-        $store
+        // TODO put inside a transaction
+        try {
+            $store
             ->fill($validated)
             ->save();
+            $activityIds = $this->saveTaggles($activities);
+            $store->activities()->sync($activityIds);
+        } catch (Exception $e) {
+            return back()->withError($e->getMessage())->withInput();
+        }
 
         return redirect()->route('establecimientos.index');
     }
@@ -160,19 +169,35 @@ class StoreController extends Controller
             ->toJson();
     }
 
-    /**
-     * Save a resized image to disk
-     *
-     * @param  Illuminate\Http\UploadedFile  $file
-     * @param  Integer  $storeId
-     * @return mixed
-     */
-    private function saveResizedImageFile2Disk($file, $storeId)
+    private function saveResizedImageFile2Disk(\Illuminate\Http\UploadedFile $file, int $storeId) : string
     {
         if (!$file) {
             return null;
         }
 
         return saveImageResized($file, 'images/establecimientos', self::MAX_RESOLUTION_WIDTH, self::HAS_SIGNATURE_STAMP, $storeId)['filePath'];
+    }
+
+    private function saveTaggles($activities) : array
+    {
+        $activitiesIds = [];
+        
+        foreach ($activities as $activityName) {
+            if ($activityName === '') {
+                continue;
+            }
+            $normalizedHashactivity = Str::title($activityName);
+            $result = Activity::firstOrCreate(['name' => $normalizedHashactivity]);
+            $activitiesIds[] = $result->id;
+        }
+
+        return $activitiesIds;
+    }
+
+    private function getLocationId($postalCode) : int
+    {
+        $result = Location::where('postal_code', $postalCode)->first();
+
+        return $result->id;
     }
 }
