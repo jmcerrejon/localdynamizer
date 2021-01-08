@@ -6,8 +6,8 @@ use Exception;
 use App\Models\Mime;
 use App\Models\Hashtag;
 use App\Models\Resource;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ResourceRequest;
 
@@ -209,9 +209,8 @@ class ResourceController extends Controller
      * Get an array and transform each elements into hashtags
      *
      * @param  String  $hashtags
-     * @return  Array
      */
-    private function saveHashtags($hashtags)
+    private function saveHashtags($hashtags) : array
     {
         // We remove spaces and symbol #
         $tagsNames = explode(',', str_replace([' ', '#'], '', $hashtags));
