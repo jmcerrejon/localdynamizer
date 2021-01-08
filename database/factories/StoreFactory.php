@@ -38,12 +38,12 @@ class StoreFactory extends Factory
             'public_phone' => ltrim($this->faker->e164PhoneNumber, '+'),
             'contact_phone' => ltrim($this->faker->e164PhoneNumber, '+'),
             'whatsapp' => ltrim($this->faker->e164PhoneNumber, '+'),
-            'website' => $this->faker->url,
             'logo_path' => $this->faker->imageUrl(1024, 768),
         ];
-
-        if ($getServiceId === 1) {
+        
+        if ($getServiceId === 2) {
             $arrPremium = [
+                'website' => $this->faker->url,
                 'payment_method_id' => $paymentMethodIds[array_rand($paymentMethodIds, 1)],
                 'description' => $this->faker->sentence(15),
                 'website' => $this->faker->boolean(70) ? $this->faker->url : null,
