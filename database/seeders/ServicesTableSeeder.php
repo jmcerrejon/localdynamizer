@@ -15,13 +15,9 @@ class ServicesTableSeeder extends Seeder
                 'price' => 0,
             ],
             [
-                'description' => 'Plan Básico',
-                'price' => 50,
-            ],
-            [
                 'description' => 'Plan Premium',
-                'price' => 100,
-            ]
+                'price' => 15,
+            ],
         ]);
     }
 }
