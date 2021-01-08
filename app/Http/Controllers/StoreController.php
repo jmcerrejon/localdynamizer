@@ -152,10 +152,9 @@ class StoreController extends Controller
     public function anyData()
     {
         return datatables()->eloquent($this->store->query())
-            ->addColumn('active', function (Store $store) {
-                $active = ($store->is_active) ? "label-success" : "label-danger";
-                $active_txt = ($store->is_active) ? "Si" : "No";
-                return "<span class='label $active'>$active_txt</span>";
+            ->addColumn('service_name', function (Store $store) {
+                $serviceName = Service::find($store->service_id)->description;
+                return $serviceName;
             })
             ->addColumn('actions', function (Store $store) {
                 return '<div class="btn-group">
