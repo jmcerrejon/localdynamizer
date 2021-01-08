@@ -58,7 +58,10 @@ class StoreController extends Controller
         $validated = $request->validated();
         $activities = $validated['taggles'];
         $validated['user_id'] = Auth::user()->id;
-        $validated['logo_path'] =  $this->saveResizedImageFile2Disk($request->file('logo_file'), $validated['user_id']);
+        $validated['logo_path'] = ($request->has('logo_file') && (!empty($request->file('logo_file'))))
+        ? $this->saveResizedImageFile2Disk($request->file('logo_file'), $validated['user_id'])
+        : null;
+
         $validated['location_id'] = $this->getLocationId($validated['postal_code']);
         unset($validated['logo_file']);
         unset($validated['taggles']);
@@ -97,7 +100,10 @@ class StoreController extends Controller
         $activities = $validated['taggles'];
         $validated['user_id'] = Auth::user()->id;
         $store = $this->store->findOrFail($id);
-        $validated['logo_path'] = $this->saveResizedImageFile2Disk($request->file('logo_file'), $store['id']);
+        $validated['logo_path'] = ($request->has('logo_file') && (!empty($request->file('logo_file'))))
+        ? $this->saveResizedImageFile2Disk($request->file('logo_file'), $validated['store_id'])
+        : null;
+
         $validated['location_id'] = $this->getLocationId($validated['postal_code']);
 
         unset($validated['logo_file']);
