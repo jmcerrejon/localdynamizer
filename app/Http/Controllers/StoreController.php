@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Location;
 use Illuminate\Support\Str;
 use App\Models\PaymentMethod;
+use Illuminate\Http\JsonResponse;
 use App\Http\Requests\StoreRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
@@ -101,7 +102,7 @@ class StoreController extends Controller
         $validated['user_id'] = Auth::user()->id;
         $store = $this->store->findOrFail($id);
         $validated['logo_path'] = ($request->has('logo_file') && (!empty($request->file('logo_file'))))
-        ? $this->saveResizedImageFile2Disk($request->file('logo_file'), $validated['store_id'])
+        ? $this->saveResizedImageFile2Disk($request->file('logo_file'), $store->id)
         : null;
 
         $validated['location_id'] = $this->getLocationId($validated['postal_code']);
@@ -127,29 +128,21 @@ class StoreController extends Controller
         return redirect()->route('establecimientos.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroy($id)
+    public function destroy(int $id) : RedirectResponse
     {
         $store = $this->store->findOrFail($id);
-
-        $this->delFile($store->logo_path);
-
-        $store->delete();
+        $logoPath = $store->logo_path;
+        if ($store->delete()) {
+            $this->delFile($logoPath);
+        }
 
         return redirect()->back();
     }
 
     /**
      * Process datatables ajax request.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function anyData()
+    public function anyData() : JsonResponse
     {
         return datatables()->eloquent($this->store->query())
             ->addColumn('service_name', function (Store $store) {
@@ -186,7 +179,7 @@ class StoreController extends Controller
     private function saveTaggles($activities) : array
     {
         $activitiesIds = [];
-        
+
         foreach ($activities as $activityName) {
             if ($activityName === '') {
                 continue;
