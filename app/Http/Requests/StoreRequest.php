@@ -51,6 +51,7 @@ class StoreRequest extends FormRequest
             'payment_method_id' => 'método de pago',
             'service_id' => 'servicio contratado',
             'category_id' => 'categoría',
+            'taggles' => 'actividad',
             'comercial_name' => 'nombre comercial',
             'cif' => 'CIF',
             'contact_name' => 'persona de contacto',
