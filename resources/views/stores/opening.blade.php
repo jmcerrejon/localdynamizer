@@ -119,6 +119,7 @@
 
         const activityTag = new Taggle('exceptions', {
             tags: arrCurrentExceptions,
+            submitKeys: [9,13],
             duplicateTagClass: 'bounce'
         });
     });
