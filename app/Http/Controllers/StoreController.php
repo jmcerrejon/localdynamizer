@@ -203,7 +203,6 @@ class StoreController extends Controller
     }
     private function setExceptionsFormatted($openingHours) : array
     {
-        dd($openingHours);
         return ['31/12', '06/06/2020', '25/12,09:00-14:00', '25/12/2021,09:00-14:00,17:00-21:00'];
     }
 
