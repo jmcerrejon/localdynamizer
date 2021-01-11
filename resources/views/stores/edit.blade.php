@@ -25,16 +25,30 @@
         <input type="hidden" name="is_active" value="0">
 
         <div class="box-body">
-            <div class="form-group">
-                <label for="is_active" class="col-sm-2 control-label">¿Activo?</label>
+            <div class="row">
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="is_active" class="col-sm-2 control-label">¿Activo?</label>
 
-                <div class="col-sm-10">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="is_active" title="activado = se publica" @if ((isset($store) &&
-                                $store->is_active) || old('is_active') || !isset($store)) checked @endif>
-                        </label>
+                    <div class="col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="is_active" title="activado = se publica" @if ((isset($store) &&
+                                    $store->is_active) || old('is_active') || !isset($store)) checked @endif>
+                            </label>
+                        </div>
                     </div>
+                </div>
+                <!-- /.form-group -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-6">
+                <div class="form-group">
+                    @if (isset($store))
+                    <button type="button" class="btn btn-info" onclick="window.location.href='{{ route('establecimientos.show-opening', $store->id) }}'">Horarios de apertura/cierre</button>
+                    @endif
+                </div>
+                <!-- /.form-group -->
                 </div>
             </div>
 

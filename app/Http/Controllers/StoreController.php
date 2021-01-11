@@ -8,10 +8,13 @@ use App\Models\Service;
 use App\Models\Activity;
 use App\Models\Category;
 use App\Models\Location;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\StoreRequest;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 
@@ -19,6 +22,7 @@ class StoreController extends Controller
 {
     private const MAX_RESOLUTION_WIDTH = 1024;
     private const HAS_SIGNATURE_STAMP = true;
+    private const REGEX_VALID_TIME_24_HOURS = '/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/';
 
     private $store;
 
@@ -167,6 +171,60 @@ class StoreController extends Controller
             ->toJson();
     }
 
+    public function showOpening(int $id) : View
+    {
+        $store = $this->store->findOrFail($id);
+        $exceptions = [];
+        $opening_hours = [];
+        $tempOpeningHours = $store->opening_hours;
+
+        if (!empty($tempOpeningHours)) {
+            // Remember: Arr::pull remove 'exceptions' from $tempOpeningHours
+            $tempExceptions = Arr::pull($tempOpeningHours, 'exceptions');
+            $opening_hours = $this->setOpeningHoursFormatted($tempOpeningHours);
+            $exceptions = $this->setExceptionsFormatted($tempExceptions);
+        }
+
+        return view('stores.opening', compact('store', 'opening_hours', 'exceptions'));
+    }
+
+    private function setOpeningHoursFormatted($openingHours) : array
+    {
+        foreach ($openingHours as $dayIndex => $openingHour) {
+            foreach ($openingHour as $rangeIndex => $timeRange) {
+                if (empty($timeRange)) {
+                    continue;
+                }
+                $openingHours[$dayIndex][$rangeIndex] = explode('-', $timeRange);
+            }
+        }
+
+        return $openingHours;
+    }
+    private function setExceptionsFormatted($openingHours) : array
+    {
+        dd($openingHours);
+        return ['31/12', '06/06/2020', '25/12,09:00-14:00', '25/12/2021,09:00-14:00,17:00-21:00'];
+    }
+
+    public function saveOpening(Request $request)
+    {
+        $daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+        $daysOfWeekWithRange = [];
+        $exceptions = [];
+
+        foreach ($daysOfWeek as $key => $value) {
+            $daysOfWeekWithRange[$value] = $this->normalizeOpeningHoursFormat($request->day_range[$key]);
+        }
+        $exceptions = $this->normalizeExceptionsFormat($request->taggles);
+
+        $store = Store::findOrFail($request->id);
+        $store->opening_hours = array_merge($daysOfWeekWithRange, $exceptions);
+        $store->save();
+
+        return redirect()->route('establecimientos.show-opening', $request->id);
+    }
+
     private function saveResizedImageFile2Disk(\Illuminate\Http\UploadedFile $file, int $storeId) : string
     {
         if (!$file) {
@@ -178,7 +236,7 @@ class StoreController extends Controller
 
     private function saveTaggles($activities) : array
     {
-        $activitiesIds = [];
+        $activityIds = [];
 
         foreach ($activities as $activityName) {
             if ($activityName === '') {
@@ -186,10 +244,10 @@ class StoreController extends Controller
             }
             $normalizedHashactivity = Str::title($activityName);
             $result = Activity::firstOrCreate(['name' => $normalizedHashactivity]);
-            $activitiesIds[] = $result->id;
+            $activityIds[] = $result->id;
         }
 
-        return $activitiesIds;
+        return $activityIds;
     }
 
     private function getLocationId($postalCode) : int
@@ -197,5 +255,83 @@ class StoreController extends Controller
         $result = Location::where('postal_code', $postalCode)->first();
 
         return $result->id;
+    }
+
+    private function normalizeOpeningHoursFormat(array $unformatTimeRange) : array
+    {
+        $validValues = $this->getValidHours($unformatTimeRange);
+
+        if (empty($validValues)) {
+            return [];
+        }
+
+        // Add end time if value is not mod by 2
+        if ((count($validValues) % 2) != 0) {
+            $validValues[] = '24:00';
+        }
+
+        // split in pairs to implode
+        return array_map(function($item) {
+            return implode('-', $item);
+        }, array_chunk($validValues, 2));
+    }
+
+    private function getValidHours(array $unformatTimeRange) : array
+    {
+        return Arr::where($unformatTimeRange, function ($value) {
+            return preg_match(self::REGEX_VALID_TIME_24_HOURS, $value);
+        });
+    }
+
+    private function normalizeExceptionsFormat(array $checkTimeRanges) : array
+    {
+        if (empty($checkTimeRanges)) {
+            return [];
+        }
+
+        $result = [];
+        $validFormats = [
+            'd/m',
+            'd/m,H:i-H:i',
+            'd/m,H:i-H:i,H:i-H:i',
+            'd/m/Y',
+            'd/m/Y,H:i-H:i',
+            'd/m/Y,H:i-H:i,H:i-H:i',
+        ];
+
+        foreach ($checkTimeRanges as $dateTimeRange) {
+            $isValidDateTimeRange = true;
+            foreach ($validFormats as $validFormat) {
+                try {
+                    \Carbon\Carbon::createFromFormat($validFormat, $dateTimeRange);
+                    $dateFormat = (Str::of($validFormat)->contains(',')) ? explode(',', $validFormat)[0] : $validFormat;
+                    [$keyDate, $valueRange] = $this->getValidDateRange($dateFormat, $dateTimeRange);
+                    $result[$keyDate[0]] = $valueRange[0];
+                    break;
+                } catch (\Carbon\Exceptions\InvalidFormatException $exp) {
+                    $isValidDateTimeRange = false;
+                }
+            }
+            if (!$isValidDateTimeRange) {
+                // TODO What should we do?
+            }
+        }
+
+        return  [
+            'exceptions' => $result
+        ];
+    }
+
+    private function getValidDateRange(string $dateFormat, string $dateTimeRange) : array
+    {
+        $arrDateRanges = (Str::of($dateTimeRange)->contains(',')) ? explode(',', $dateTimeRange) : [$dateTimeRange];
+        $validDateRange = \Carbon\Carbon::createFromFormat($dateFormat, $arrDateRanges[0])->format(strrev($dateFormat));
+        $countArrDateRanges = count($arrDateRanges);
+        if ($countArrDateRanges > 1) {
+            // We remove the first value, the date
+            array_shift($arrDateRanges);
+        }
+
+        return Arr::divide([$validDateRange => ($countArrDateRanges === 1) ? [] : $arrDateRanges]);
     }
 }

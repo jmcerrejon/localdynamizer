@@ -25,6 +25,13 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('recursos.download')
         ->where('id', '[0-9]+');
 
+    Route::get('establecimientos/{id}/horarios', [ App\Http\Controllers\StoreController::class, 'showOpening'])
+    ->name('establecimientos.show-opening')
+    ->where('id', '[0-9]+');
+
+    Route::post('establecimientos/{id}/horarios', [ App\Http\Controllers\StoreController::class, 'saveOpening'])
+    ->name('establecimientos.save-opening');
+
     Route::resources([
         'establecimientos' => StoreController::class,
         'recursos' => ResourceController::class,

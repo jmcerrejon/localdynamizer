@@ -16,11 +16,6 @@ class Store extends Model implements Searchable
 
     public $searchableType = 'Establecimientos';
 
-    protected $casts = [
-        'created_at' => 'datetime:d/m/Y H:i',
-        'updated_at' => 'datetime:d/m/Y H:i',
-    ];
-
     protected $appends = [
         'img_path'
     ];
@@ -29,13 +24,19 @@ class Store extends Model implements Searchable
         'user_id', 'service_id', 'location_id', 'category_id', 'payment_method_id', 'is_active', 'comercial_name',
         'business_name', 'cif', 'contact_name', 'address', 'postal_code', 'contact_phone', 'public_phone', 'whatsapp',
         'email', 'email_public', 'logo_path', 'website', 'description', 'facebook', 'instagram', 'twitter', 'tripadvisor',
-        'tiktok', 'menu_es', 'menu', 
+        'tiktok', 'menu_es', 'menu', 'opening_hours'
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime:d/m/Y H:i',
+        'updated_at' => 'datetime:d/m/Y H:i',
+        'opening_hours' => 'array',
     ];
 
     protected $dates = [
         'created_at', 'updated_at'
     ];
-    
+
     public function getImgPathAttribute(): string
     {
         if (is_null($this->logo_path)) {

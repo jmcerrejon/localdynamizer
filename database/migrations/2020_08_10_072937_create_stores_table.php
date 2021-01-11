@@ -38,6 +38,7 @@ class CreateStoresTable extends Migration
             $table->string('tiktok', 50)->nullable();
             $table->string('menu_es', 150)->nullable();
             $table->string('menu', 150)->nullable();
+            $table->json('opening_hours')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
 
