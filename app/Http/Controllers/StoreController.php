@@ -20,8 +20,12 @@ use Illuminate\Http\RedirectResponse;
 
 class StoreController extends Controller
 {
+    /** 
+     * WARNING!: The next class is not optimized. Use it on your own risk. ;)
+     */
     private const MAX_RESOLUTION_WIDTH = 1024;
     private const HAS_SIGNATURE_STAMP = true;
+    private const MAX_CHAR_MD = 5;
     private const REGEX_VALID_TIME_24_HOURS = '/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/';
 
     private $store;
@@ -31,29 +35,14 @@ class StoreController extends Controller
         $this->store = $store;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index() : View
     {
-        // Just for test until we get the Datatables
-        $totalStores = $this->store->limit(10)->get();
-        return view('stores/index', compact('totalStores'));
+        return view('stores/index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create() : View
     {
-        $payment_methods = PaymentMethod::get();
-        $services = Service::get();
-        $categories = Category::get();
-        $allActivities = Activity::get()->pluck('name');
+        [$payment_methods, $services, $categories, $allActivities] = $this->getCommonModels();
 
         return view('stores.edit', compact('payment_methods', 'services', 'categories', 'allActivities'));
     }
@@ -68,8 +57,7 @@ class StoreController extends Controller
         : null;
 
         $validated['location_id'] = $this->getLocationId($validated['postal_code']);
-        unset($validated['logo_file']);
-        unset($validated['taggles']);
+        unset($validated['logo_file'], $validated['taggles']);
 
         try {
             $newStore = $this->store->create($validated);
@@ -82,19 +70,10 @@ class StoreController extends Controller
         return redirect()->route('establecimientos.index')->with('message', 'Establecimiento guardado.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Store  $store
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(int $id) : View
     {
         $store = $this->store->findOrFail($id);
-        $payment_methods = PaymentMethod::get();
-        $services = Service::get();
-        $categories = Category::get();
-        $allActivities = Activity::get()->pluck('name');
+        [$payment_methods, $services, $categories, $allActivities] = $this->getCommonModels();
 
         return view('stores.edit', compact('store', 'payment_methods', 'services', 'categories', 'allActivities'));
     }
@@ -110,9 +89,7 @@ class StoreController extends Controller
         : null;
 
         $validated['location_id'] = $this->getLocationId($validated['postal_code']);
-
-        unset($validated['logo_file']);
-        unset($validated['taggles']);
+        unset($validated['logo_file'], $validated['taggles']);
 
         if ($validated['logo_path'] !== null) {
             $this->delFile($store->logo_path);
@@ -188,7 +165,7 @@ class StoreController extends Controller
         return view('stores.opening', compact('store', 'opening_hours', 'exceptions'));
     }
 
-    private function setOpeningHoursFormatted($openingHours) : array
+    private function setOpeningHoursFormatted(array $openingHours) : array
     {
         foreach ($openingHours as $dayIndex => $openingHour) {
             foreach ($openingHour as $rangeIndex => $timeRange) {
@@ -201,9 +178,13 @@ class StoreController extends Controller
 
         return $openingHours;
     }
-    private function setExceptionsFormatted($openingHours) : array
+    private function setExceptionsFormatted(array $openingHours) : array
     {
-        return ['31/12', '06/06/2020', '25/12,09:00-14:00', '25/12/2021,09:00-14:00,17:00-21:00'];
+        $result = [];
+        foreach ($openingHours as $dayIndex => $timeRange) {
+            $result[] = $this->getValidJoinedDateAndRange($dayIndex, $timeRange);
+        }
+        return $result;
     }
 
     public function saveOpening(Request $request)
@@ -233,7 +214,7 @@ class StoreController extends Controller
         return saveImageResized($file, 'images/establecimientos', self::MAX_RESOLUTION_WIDTH, self::HAS_SIGNATURE_STAMP, $storeId)['filePath'];
     }
 
-    private function saveTaggles($activities) : array
+    private function saveTaggles(array $activities) : array
     {
         $activityIds = [];
 
@@ -249,7 +230,7 @@ class StoreController extends Controller
         return $activityIds;
     }
 
-    private function getLocationId($postalCode) : int
+    private function getLocationId(int $postalCode) : int
     {
         $result = Location::where('postal_code', $postalCode)->first();
 
@@ -332,5 +313,24 @@ class StoreController extends Controller
         }
 
         return Arr::divide([$validDateRange => ($countArrDateRanges === 1) ? [] : $arrDateRanges]);
+    }
+
+    private function getValidJoinedDateAndRange(string $dayIndex, array $dateRange) : string
+    {
+        $dateFormat = (strlen($dayIndex) <= self::MAX_CHAR_MD) ? 'm/d' : 'Y/m/d';
+        $dateFormatted = \Carbon\Carbon::createFromFormat($dateFormat, $dayIndex)->format(strrev($dateFormat));
+        $arrDateRangeJoined = Arr::prepend($dateRange, $dateFormatted);
+
+        return collect($arrDateRangeJoined)->join(',');
+    }
+
+    private function getCommonModels() : array
+    {
+        return [
+            PaymentMethod::get(),
+            Service::get(),
+            Category::get(),
+            Activity::get()->pluck('name'),
+        ];
     }
 }

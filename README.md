@@ -2,11 +2,11 @@
 
 ![PUSH Workflow](https://github.com/jmcerrejon/localdynamizer/workflows/PUSH%20Workflow/badge.svg?branch=master)
 
-This panel (only in Spanish atm) tries to help community managers to manage their clients' social networks. For now it is a proof of concept with sections to import resources that can serve them, an agenda to keep appointments and a database with clients (here called stores).
+This panel (only in Spanish atm) tries to help community managers to manage their clients' social networks. For now it's a proof of concept with sections to import resources that can serve them, an agenda to keep appointments and a database with clients (here called stores).
 
 -   Site under development at: https://dinamizadorlocal.com (Ask me for a user if you want to test it).
 
--   ⏰ Estimated hours of work so far: 130 hours.
+-   ⏰ Estimated hours of work so far: 133 hours.
 
 -   More screenshots on [screenshots directory](./screenshots).
 
@@ -34,7 +34,7 @@ composer dump-autoload
 
 #### Storage link in /public_html
 
-Maybe our hosting has a _public_html_ directory, so we can't use public. Don't worry, try the next:
+Maybe your hosting has a _public_html_ directory, so we can't use public. Don't worry, try the next:
 
 ```sh
 ln -s $PWD/storage/app/public/ $PWD/public_html/storage
@@ -57,7 +57,7 @@ On **production** environment an extra step maybe is required:
 Install packages:
 
 ```sh
-sudo apt install -y php7.3-zip php-xml php7.3-gd
+sudo apt install -y php7.4-zip php-xml php7.4-gd
 ```
 
 Change time-zone (Debian):
@@ -105,7 +105,7 @@ Dev with ♥️ using [Laravel](https://www.laravel.com), AdminLTE for panel and
 
 ### Commercial license
 
-If you want to use it to use in commercial product, projects, and applications, the Commercial license is the appropriate license. With this option, your source code is kept proprietary. To purchase a commercial license you need to buy a licence from the owner. [Contact for licence](info@dinamizadorlocal.com)
+If you want use this panel in commercial products, projects, and applications, the _Commercial license_ is the appropriate license. With this option, your source code is kept proprietary. To purchase a commercial license you need to buy a licence from the owner. [Contact for licence](info@dinamizadorlocal.com)
 
 ### Open-source license
 

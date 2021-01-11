@@ -87,8 +87,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="exceptions" class="col-sm-2 control-label">
-                            Excepciones <i title="Días que no se trabaja o con horarios especiales" class="icon fa fa-info-circle"></i>
+                        <label for="exceptions" class="col-sm-4 control-label">
+                            Excepciones <i title="Días que no se trabaja o con horarios especiales" class="icon fa fa-info-circle"></i> <small>Añade excepciones y pulsa TAB o ENTER</small>
                         </label>
 
                         <div class="col-sm-10">
@@ -119,7 +119,8 @@
 
         const activityTag = new Taggle('exceptions', {
             tags: arrCurrentExceptions,
-            submitKeys: [9,13],
+            submitKeys: [9, 13],
+            delimiter: [';'],
             duplicateTagClass: 'bounce'
         });
     });
