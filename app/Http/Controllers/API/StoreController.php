@@ -7,19 +7,26 @@ use Illuminate\Http\Request;
 
 class StoreController extends BaseController
 {
-    public function __invoke($postal_code, Request $request) : array
+    public function __invoke($id, Request $request, Store $stores) : array
     {
-        // TODO Add filter by category
-        $stores = Store::wherePostalCode($postal_code)->get();
+        // TODO Refactorize this
+        $storesPremium = $stores
+            ->whereLocationId($id)
+            ->active()
+            ->search($request->only(['commercial_name', 'category_id']))
+            ->randomPremium();
 
-        if ($stores->isEmpty()) {
-            abort(404, 'municipality with that postal code not found.');
-        }
+        $storesBasic = $stores
+            ->whereLocationId($id)
+            ->active()
+            ->search($request->only(['commercial_name', 'category_id']))
+            ->randomBasic();
 
+        // INFO Check AppServiceProvider to see this custom paginate()
         return $this->sendResponse(
-            "store list from $postal_code",
-            Store::wherePostalCode($postal_code)->get()
+            "store list from $id",
+            $storesPremium->get()->toBase()->merge($storesBasic->get()->toBase())
+            ->paginate(config('app.pagination_size'))
         );
     }
-    
 }

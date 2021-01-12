@@ -14,6 +14,11 @@ class Store extends Model implements Searchable
 {
     use HasFactory;
 
+    const STORE_ACTIVE = 1;
+    const SERVICE_ID_BASIC = 1;
+    const SERVICE_ID_PREMIUM = 2;
+    const STORES_PER_PAGE = 15;
+
     public $searchableType = 'Establecimientos';
 
     protected $appends = [
@@ -21,7 +26,7 @@ class Store extends Model implements Searchable
     ];
 
     protected $fillable = [
-        'user_id', 'service_id', 'location_id', 'category_id', 'payment_method_id', 'is_active', 'comercial_name',
+        'user_id', 'service_id', 'location_id', 'category_id', 'payment_method_id', 'is_active', 'commercial_name',
         'business_name', 'cif', 'contact_name', 'address', 'postal_code', 'contact_phone', 'public_phone', 'whatsapp',
         'email', 'email_public', 'logo_path', 'website', 'description', 'facebook', 'instagram', 'twitter', 'tripadvisor',
         'tiktok', 'menu_es', 'menu', 'opening_hours'
@@ -50,10 +55,39 @@ class Store extends Model implements Searchable
         return config('app.url').'storage/'.$this->logo_path;
     }
 
-    public function actives()
+    public function scopeSearch($query, $queryData)
     {
-        return $this->where('is_active', 1)->get();
+        if (array_key_exists('category_id', $queryData)) {
+            $query->whereLike('category_id', $queryData['category_id']);
+        }
+        if (array_key_exists('commercial_name', $queryData)) {
+            $query->whereLike('commercial_name', $queryData['commercial_name']);
+        }
+
+        return $query;
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', self::STORE_ACTIVE);
+    }
+
+    public function scopeRandomPremium($query)
+    {
+       return $query->where('service_id', self::SERVICE_ID_PREMIUM)->inRandomOrder();
+    }
+
+    public function scopeRandomBasic($query)
+    {
+       return $query->where('service_id', self::SERVICE_ID_BASIC)->inRandomOrder();
+    }
+
+    public function paginate()
+	{
+		return self::orderBy('id');
+			// ->filterByAssociationId($associationId)
+			// ->paginate(self::AFFILIATES_PER_PAGE);
+	}
 
     public function setIsActiveAttribute($value)
     {
@@ -96,7 +130,7 @@ class Store extends Model implements Searchable
 
         return new SearchResult(
             $this,
-            $this->comercial_name,
+            $this->commercial_name,
             $url
         );
     }
