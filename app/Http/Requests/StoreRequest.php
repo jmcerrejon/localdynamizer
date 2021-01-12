@@ -17,7 +17,7 @@ class StoreRequest extends FormRequest
             // Basic
             'is_active' => ['required'],
             'service_id' => ['required', 'numeric'],
-            'comercial_name' => ['required', 'max:100'],
+            'commercial_name' => ['required', 'max:100'],
             'business_name' => ['nullable', 'max:100'],
             'cif' => ['required', 'max:9'],
             'contact_name' => ['required', 'max:100'],
@@ -52,7 +52,7 @@ class StoreRequest extends FormRequest
             'service_id' => 'servicio contratado',
             'category_id' => 'categoría',
             'taggles' => 'actividad',
-            'comercial_name' => 'nombre comercial',
+            'commercial_name' => 'nombre comercial',
             'cif' => 'CIF',
             'contact_name' => 'persona de contacto',
             'address' => 'dirección del establecimiento',

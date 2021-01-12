@@ -16,7 +16,7 @@ class CreateStoresTable extends Migration
             $table->foreignId('category_id')->constrained();
             $table->foreignId('payment_method_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->boolean('is_active')->default(1);
-            $table->string('comercial_name', 100);
+            $table->string('commercial_name', 100);
             $table->string('business_name', 100)->nullable();
             $table->string('cif', 9);
             $table->string('contact_name', 100);
@@ -42,7 +42,7 @@ class CreateStoresTable extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
 
-            $table->index('comercial_name');
+            $table->index('commercial_name');
             $table->index('business_name');
         });
     }

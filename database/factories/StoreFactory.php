@@ -27,7 +27,7 @@ class StoreFactory extends Factory
             'service_id' => $getServiceId,
             'location_id' => 3270,
             'category_id' => $categoryIds[array_rand($categoryIds, 1)],
-            'comercial_name' => $this->faker->company,
+            'commercial_name' => $this->faker->company,
             'business_name' => $this->faker->company,
             'cif' => 'A'.$this->faker->randomNumber(8),
             'contact_name' => $this->faker->name($isFemale ? 'female' : 'male'),

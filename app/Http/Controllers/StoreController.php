@@ -137,7 +137,7 @@ class StoreController extends Controller
                             <button type="submit" class="btn btn-default btn-sm" title="Editar">
                                 <i class="fa fa-pen"></i>
                             </button>
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="modifyDeleteAction(' . $store->id . ',\'' . $store->comercial_name . '\')" title="Eliminar">
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="modifyDeleteAction(' . $store->id . ',\'' . $store->commercial_name . '\')" title="Eliminar">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </div>

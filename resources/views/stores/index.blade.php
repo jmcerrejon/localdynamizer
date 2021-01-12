@@ -75,7 +75,7 @@
                 },
                 columns: [
                     { data: 'id', name: 'id' },
-                    { data: 'comercial_name', name: 'comercial_name' },
+                    { data: 'commercial_name', name: 'commercial_name' },
                     { data: 'service_name', name: 'service_name' },
                     { data: 'updated_at', name: 'updated_at' },
                     { data: 'actions', name: 'actions' }

@@ -65,11 +65,11 @@
             </div>
 
             <div class="form-group">
-                <label for="comercial_name" class="col-sm-2 control-label">Nombre comercial*</label>
+                <label for="commercial_name" class="col-sm-2 control-label">Nombre comercial*</label>
 
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="comercial_name" name="comercial_name" title="Nombre comercial"
-                        placeholder="Nombre comercial" value="{{ $store->comercial_name ?? old('comercial_name') }}" required>
+                    <input type="text" class="form-control" id="commercial_name" name="commercial_name" title="Nombre comercial"
+                        placeholder="Nombre comercial" value="{{ $store->commercial_name ?? old('commercial_name') }}" required>
                 </div>
             </div>
 
@@ -332,9 +332,9 @@
         });
 
         $('#business_name').focus(function() {
-            if ($('#comercial_name').val().trim() != '' && $('#business_name').val().trim() == '') {
+            if ($('#commercial_name').val().trim() != '' && $('#business_name').val().trim() == '') {
                 $('#business_name').val(
-                    $('#comercial_name').val().trim()
+                    $('#commercial_name').val().trim()
                 );
             }
         });

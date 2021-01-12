@@ -39,7 +39,7 @@ class HomeController extends Controller
             })
             ->registerModel(Store::class, function(ModelSearchAspect $modelSearchAspect) use ($userId){
                 $modelSearchAspect
-                   ->addSearchableAttribute('comercial_name')
+                   ->addSearchableAttribute('commercial_name')
                    ->addSearchableAttribute('business_name')
                    ->addSearchableAttribute('contact_name')
                    ->where('user_id', $userId);
