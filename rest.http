@@ -8,12 +8,27 @@
 
 ### Active locations
 GET {{baseUrl}}/locations HTTP/1.1
+accept: application/json
 content-type: application/json
 
 ### Categories
 GET {{baseUrl}}/categories HTTP/1.1
+accept: application/json
 content-type: application/json
 
 ### Activities
 GET {{baseUrl}}/activities HTTP/1.1
+accept: application/json
+content-type: application/json
+
+## Stores
+
+### Read stores by location
+GET {{baseUrl}}/stores/location/3270 HTTP/1.1
+accept: application/json
+content-type: application/json
+
+### Filter stores by location
+GET {{baseUrl}}/stores/location/3270?commercial_name=air HTTP/1.1
+accept: application/json
 content-type: application/json
