@@ -14,4 +14,9 @@ class BaseController extends Controller
             'data'    => $result
         ];
     }
+
+    public function sendError(String $errorMessages, $code = 404) : void
+    {
+        abort($code, $errorMessages);
+    }
 }
