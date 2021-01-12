@@ -9,7 +9,7 @@ class CreateServicesTable extends Migration
     public function up() : void
     {
         Schema::create('services', function (Blueprint $table) {
-            $table->id();
+            $table->id()->comment('1, Basic and 2, Premium. If you change it, check the orderBy on Model Store');
             $table->string('description', 191);
             $table->decimal('price', 6, 2);
         });
