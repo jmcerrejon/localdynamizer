@@ -9,24 +9,23 @@ class StoreController extends BaseController
 {
     public function __invoke($id, Request $request, Store $stores) : array
     {
-        // TODO Refactorize this
-        $storesPremium = $stores
+        $seedId = $request->seed_id ?? '';
+        $queryStores = $stores->select('id', 'service_id', 'commercial_name', 'category_id')
             ->whereLocationId($id)
             ->active()
-            ->search($request->only(['commercial_name', 'category_id']))
-            ->randomPremium();
+            ->search($request->only(['commercial_name', 'category_id']));
 
-        $storesBasic = $stores
-            ->whereLocationId($id)
-            ->active()
-            ->search($request->only(['commercial_name', 'category_id']))
-            ->randomBasic();
+        $data = (clone $queryStores)
+            ->randomPremium($seedId)->get()->toBase()
+            ->merge(
+                (clone $queryStores)->randomBasic($seedId)->get()->toBase()
+            );
 
         // INFO Check AppServiceProvider to see this custom paginate()
         return $this->sendResponse(
             "store list from $id",
-            $storesPremium->get()->toBase()->merge($storesBasic->get()->toBase())
-            ->paginate(config('app.pagination_size'))
+            $data->paginate(config('app.pagination_size'))
         );
+
     }
 }
