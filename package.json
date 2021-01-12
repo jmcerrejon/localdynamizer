@@ -5,6 +5,7 @@
         "migrate-testing": "php artisan migrate:refresh --force --seed --database=dynamizer-testing",
         "composer-dump-autoload": "composer dump-autoload -o",
         "composer-update": "composer update",
+        "seed-store": "php artisan db:seed --class=StoresTableSeeder",
         "test": "php artisan test",
         "listen-jobs": "php artisan queue:listen",
         "update": "php artisan optimize -force",
