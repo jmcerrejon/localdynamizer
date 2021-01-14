@@ -28,7 +28,7 @@ class Store extends Model implements Searchable
     protected $fillable = [
         'user_id', 'service_id', 'location_id', 'category_id', 'payment_method_id', 'is_active', 'commercial_name',
         'business_name', 'cif', 'contact_name', 'address', 'postal_code', 'contact_phone', 'public_phone', 'whatsapp',
-        'email', 'email_public', 'logo_path', 'website', 'description', 'facebook', 'instagram', 'twitter', 'tripadvisor',
+        'email', 'email_public', 'logo_path', 'website', 'slogan', 'description', 'facebook', 'instagram', 'twitter', 'tripadvisor',
         'tiktok', 'menu_es', 'menu', 'opening_hours'
     ];
 

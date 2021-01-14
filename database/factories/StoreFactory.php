@@ -39,8 +39,9 @@ class StoreFactory extends Factory
             'contact_phone' => ltrim($this->faker->e164PhoneNumber, '+'),
             'whatsapp' => ltrim($this->faker->e164PhoneNumber, '+'),
             'logo_path' => $this->faker->imageUrl(1024, 768),
+            'slogan' => $this->faker->sentence(5),
         ];
-        
+
         if ($getServiceId === 2) {
             $arrPremium = [
                 'website' => $this->faker->url,

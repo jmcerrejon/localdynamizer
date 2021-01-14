@@ -33,6 +33,7 @@ class StoreRequest extends FormRequest
             'logo_file' => ['nullable', 'image', 'dimensions:max_width=2048,max_height=1024'],
             // Premium
             'payment_method_id' => ['nullable','numeric'],
+            'slogan' => ['nullable', 'max:100'],
             'description' => ['nullable'],
             'website' => ['nullable', 'url', 'max:100'],
             'facebook' => ['nullable', 'max:50'],

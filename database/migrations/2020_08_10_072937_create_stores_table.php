@@ -29,7 +29,9 @@ class CreateStoresTable extends Migration
             $table->string('email_public', 50)->nullable();
             $table->string('logo_path', 191)->nullable();
             $table->string('website', 150)->nullable();
+            $table->string('slogan', 100)->nullable();
             $table->text('description')->nullable();
+            $table->json('opening_hours')->nullable();
             // TODO social networks to a new table
             $table->string('facebook', 50)->nullable();
             $table->string('instagram', 50)->nullable();
@@ -38,7 +40,7 @@ class CreateStoresTable extends Migration
             $table->string('tiktok', 50)->nullable();
             $table->string('menu_es', 150)->nullable();
             $table->string('menu', 150)->nullable();
-            $table->json('opening_hours')->nullable();
+
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
 

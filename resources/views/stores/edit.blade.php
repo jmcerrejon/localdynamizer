@@ -180,6 +180,15 @@
             </div>
 
             <div class="form-group">
+                <label for="slogan" class="col-sm-2 control-label">Slogan</label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="slogan" name="slogan" title="Slogan" maxlength="100" placeholder="Slogan"
+                        value="{{ $store->slogan ?? old('slogan') }}">
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label for="logo_file" class="col-sm-2 control-label">Imagen/Logo</label>
                 <div class="col-sm-10">
                     @if (isset($store) && ($store->img_path))
