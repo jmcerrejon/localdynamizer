@@ -10,7 +10,7 @@ class StoreController extends BaseController
     public function __invoke($id, Request $request, Store $stores) : array
     {
         $seedId = $request->seed_id ?? '';
-        $queryStores = $stores->select('id', 'service_id', 'commercial_name', 'category_id')
+        $queryStores = $stores->select('id', 'service_id', 'category_id', 'commercial_name', 'slogan', 'logo_path')
             ->whereLocationId($id)
             ->active()
             ->search($request->only(['commercial_name', 'category_id']));
