@@ -60,8 +60,8 @@ class Store extends Model implements Searchable
         if (array_key_exists('category_id', $queryData)) {
             $query->whereLike('category_id', $queryData['category_id']);
         }
-        if (array_key_exists('commercial_name', $queryData)) {
-            $query->whereLike('commercial_name', $queryData['commercial_name']);
+        if (array_key_exists('q', $queryData)) {
+            $query->with('activities')->whereLike(['commercial_name', 'activities.name'], $queryData['q']);
         }
 
         return $query;
@@ -81,13 +81,6 @@ class Store extends Model implements Searchable
     {
        return $query->where('service_id', self::SERVICE_ID_BASIC);
     }
-
-    public function paginate()
-	{
-		return self::orderBy('id');
-			// ->filterByAssociationId($associationId)
-			// ->paginate(self::AFFILIATES_PER_PAGE);
-	}
 
     public function setIsActiveAttribute($value)
     {

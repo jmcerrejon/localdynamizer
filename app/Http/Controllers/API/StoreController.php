@@ -13,7 +13,7 @@ class StoreController extends BaseController
         $queryStores = $stores->with('category', 'activities')->select('id', 'service_id', 'category_id', 'commercial_name', 'slogan', 'logo_path')
             ->whereLocationId($id)
             ->active()
-            ->search($request->only(['commercial_name', 'category_id']));
+            ->search($request->only(['q', 'category_id', 'activity_name']));
 
         $data = $request->has('sort')
             ? $this->getSortedItems($queryStores, $request->sort)
