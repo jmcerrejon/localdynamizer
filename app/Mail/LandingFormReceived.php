@@ -31,7 +31,7 @@ class LandingFormReceived extends Mailable
     public function build()
     {
         return $this->subject('¡Posible nuevo dinamizador!')
-            ->to(env('MAIL_FROM_ADDRESS', config('app.email')))
+            ->to(config('mail.from.address'))
             ->markdown('emails.landing.form-received')->with('collection', $this->collection);
     }
 }

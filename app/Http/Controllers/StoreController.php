@@ -330,7 +330,7 @@ class StoreController extends Controller
             PaymentMethod::get(),
             Service::get(),
             Category::get(),
-            Activity::get()->pluck('name'),
+            Activity::pluck('name'),
         ];
     }
 }
