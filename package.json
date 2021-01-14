@@ -9,6 +9,7 @@
         "test": "php artisan test",
         "listen-jobs": "php artisan queue:listen",
         "update": "php artisan optimize -force",
+        "enlightn": "php artisan enlightn",
         "fix-permissions": "sudo chmod -R 775 storage",
         "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",

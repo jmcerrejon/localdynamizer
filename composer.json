@@ -26,6 +26,7 @@
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
+        "enlightn/enlightn": "^1.0",
         "facade/ignition": "^2.3.6",
         "fakerphp/faker": "^1.10",
         "mockery/mockery": "^1.3.1",
