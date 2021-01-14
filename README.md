@@ -6,7 +6,7 @@ This panel (only in Spanish atm) tries to help community managers to manage thei
 
 -   Site under development at: https://dinamizadorlocal.com (Ask me for a user if you want to test it).
 
--   ⏰ Estimated hours of work so far: 137 hours.
+-   ⏰ Estimated hours of work so far: 139 hours.
 
 -   More screenshots on [screenshots directory](./screenshots).
 
