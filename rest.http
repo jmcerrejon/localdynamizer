@@ -37,3 +37,8 @@ content-type: application/json
 GET {{baseUrl}}/stores/location/3270?category_id=4&seed_id=1&page=1 HTTP/1.1
 accept: application/json
 content-type: application/json
+
+### sort by commercial_name
+GET {{baseUrl}}/stores/location/3270?category_id=4&sort=asc&page=1 HTTP/1.1
+accept: application/json
+content-type: application/json
