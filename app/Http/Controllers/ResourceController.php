@@ -107,6 +107,7 @@ class ResourceController extends Controller
         $hashtags = $validated['hashtags'];
         $validated['user_id'] = Auth::user()->id;
         $resource = $this->resource->findOrFail($id);
+        $oldResourceFilePath = '';
         if ($request->has('resource_file') && !startWith($request->file('resource_file'), 'http')) {
             $oldResourceFilePath = $resource['path'];
             $validated['path'] = $this->saveFile($request->file('resource_file'));
@@ -161,7 +162,7 @@ class ResourceController extends Controller
         if (startWith( $resource->path, 'http')) {
             return redirect()->to($resource->path);
         }
-        
+
         return response()->download('storage/'.$resource->path);
     }
 
