@@ -72,14 +72,14 @@ class Store extends Model implements Searchable
         return $query->where('is_active', self::STORE_ACTIVE);
     }
 
-    public function scopeRandomPremium($query, $seedId)
+    public function scopePremium($query)
     {
-       return $query->where('service_id', self::SERVICE_ID_PREMIUM)->inRandomOrder($seedId);
+       return $query->where('service_id', self::SERVICE_ID_PREMIUM);
     }
 
-    public function scopeRandomBasic($query, $seedId)
+    public function scopeBasic($query)
     {
-       return $query->where('service_id', self::SERVICE_ID_BASIC)->inRandomOrder($seedId);
+       return $query->where('service_id', self::SERVICE_ID_BASIC);
     }
 
     public function paginate()
