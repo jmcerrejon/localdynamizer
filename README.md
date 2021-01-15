@@ -91,6 +91,16 @@ php artisan config:cache # Run this when update files inside /config
 
 -   https://unisharp.github.io/laravel-filemanager/
 
+## API Documentation
+
+Formerly called _Swagger_ (quite often called this even now), _OpenAPI_ is a standard of documenting _APIs_. Its specification is available on _Github_ [here](https://github.com/OAI/OpenAPI-Specification).
+
+The _OpenAPI Specification_ is a broadly adopted industry standard for describing modern _APIs_
+
+URL: https://dinamizadorlocal.com/api/documentation
+
+Generate: ``` npm run generate-documentation ```
+
 ## Credits
 
 👨🏻‍💻 Jose Manuel Cerrejon Gonzalez
