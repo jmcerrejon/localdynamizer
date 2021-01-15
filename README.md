@@ -6,7 +6,7 @@ This panel (only in Spanish atm) tries to help community managers to manage thei
 
 -   Site under development at: https://dinamizadorlocal.com (Ask me for a user if you want to test it).
 
--   ⏰ Estimated hours of work so far: 142 hours.
+-   ⏰ Estimated hours of work so far: 143 hours.
 
 -   More screenshots on [screenshots directory](./screenshots).
 
@@ -95,7 +95,7 @@ php artisan config:cache # Run this when update files inside /config
 
 Formerly called _Swagger_ (quite often called this even now), _OpenAPI_ is a standard of documenting _APIs_. Its specification is available on _Github_ [here](https://github.com/OAI/OpenAPI-Specification).
 
-The _OpenAPI Specification_ is a broadly adopted industry standard for describing modern _APIs_
+The _OpenAPI Specification_ is a broadly adopted industry standard for describing modern _APIs_.
 
 URL: https://dinamizadorlocal.com/api/documentation
 
