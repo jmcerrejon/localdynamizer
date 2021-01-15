@@ -7,6 +7,23 @@ use Illuminate\Http\Request;
 
 class StoreController extends BaseController
 {
+     /**
+     * @OA\Get(
+     *      path="/stores/location/3270",
+     *      operationId="getStoresList",
+     *      tags={"Stores"},
+     *      summary="Get list of stores",
+     *      description="Returns list of stores",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
     public function __invoke($id, Request $request, Store $stores) : array
     {
         $seedId = $request->seed_id ?? '';

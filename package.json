@@ -9,6 +9,7 @@
         "test": "php artisan test",
         "listen-jobs": "php artisan queue:listen",
         "update": "php artisan optimize -force",
+        "generate-documentation": "php artisan l5-swagger:generate",
         "enlightn": "php artisan enlightn",
         "fix-permissions": "sudo chmod -R 775 storage",
         "dev": "npm run development",
