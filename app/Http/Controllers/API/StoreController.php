@@ -8,21 +8,40 @@ use Illuminate\Http\Request;
 class StoreController extends BaseController
 {
      /**
-     * @OA\Get(
-     *      path="/stores/location/3270",
+     *  @OA\Get(
+     *      path="/stores/location/{id}",
      *      operationId="getStoresList",
      *      tags={"Stores"},
      *      summary="Get list of stores",
      *      description="Returns list of stores",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Location id",
+     *          required=true,
+     *          in="path",
+     *          example="3270",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
      *      ),
      *      @OA\Response(
      *          response=403,
      *          description="Forbidden"
      *      )
-     *     )
+     * )
+     *
      */
     public function __invoke($id, Request $request, Store $stores) : array
     {
