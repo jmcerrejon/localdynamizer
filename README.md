@@ -75,7 +75,9 @@ npm run production
 php artisan config:cache # Run this when update files inside /config
 ```
 
-## Packages and Libraries
+## Interesting Packages and Libraries used
+
+Check _composer.json_ for more pkgs.
 
 -   https://flickity.metafizzy.co/
 
@@ -91,15 +93,19 @@ php artisan config:cache # Run this when update files inside /config
 
 -   https://unisharp.github.io/laravel-filemanager/
 
+-   https://github.com/DarkaOnLine/L5-Swagger (Help me a lot [this post](https://ivankolodiy.medium.com/how-to-write-swagger-documentation-for-laravel-api-tips-examples-5510fb392a94) on Medium)
+
+-   https://github.com/enlightn/enlightn
+
 ## API Documentation
 
 Formerly called _Swagger_ (quite often called this even now), _OpenAPI_ is a standard of documenting _APIs_. Its specification is available on _Github_ [here](https://github.com/OAI/OpenAPI-Specification).
 
 The _OpenAPI Specification_ is a broadly adopted industry standard for describing modern _APIs_.
 
-URL: https://dinamizadorlocal.com/api/documentation
+URL: https://dinamizadorlocal.com/api/docs
 
-Generate: ``` npm run generate-documentation ```
+Generate: `npm run generate-documentation`
 
 ## Credits
 
