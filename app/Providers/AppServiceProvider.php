@@ -21,16 +21,13 @@ class AppServiceProvider extends ServiceProvider
         /**
          * Paginate a standard Laravel Collection. Check https://www.itsolutionstuff.com/post/merge-multiple-collection-paginate-in-laravel-exampleexample.html
          *
-         * @param int $perPage
-         * @param int $total
-         * @param int $page
-         * @param string $pageName
          * @return array
          */
-        Collection::macro('paginate', function ($perPage, $total = null, $page = null, $pageName = 'page') {
+        Collection::macro('customSimplePaginate', function (int $perPage, int $total = null, int $page = null, string $pageName = 'page') {
             $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
-            return new LengthAwarePaginator(
-                $this->forPage($page, $perPage),
+
+            return (new LengthAwarePaginator(
+                $this->slice($page, $perPage)->values(),
                 $total ?: $this->count(),
                 $perPage,
                 $page,
@@ -38,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
                     'path' => LengthAwarePaginator::resolveCurrentPath(),
                     'pageName' => $pageName,
                 ]
-            );
+            ))->toArray()['data'];
         });
     }
 

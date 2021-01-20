@@ -55,10 +55,10 @@ class StoreController extends BaseController
             ? $this->getSortedItems($queryStores, $request->sort)
             : $this->getRandomItems($queryStores, $seedId);
 
-        // INFO Check AppServiceProvider to see this custom paginate()
+        // INFO Check AppServiceProvider to see this customSimplePaginate()
         return $this->sendResponse(
             "store list from $id",
-            $data->paginate(config('app.pagination_size'))
+            collect($data)->customSimplePaginate(config('app.pagination_size'))
         );
     }
 
