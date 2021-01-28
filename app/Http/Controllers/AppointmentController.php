@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\AppointmentRequest;
 
 class AppointmentController extends Controller
@@ -53,7 +52,7 @@ class AppointmentController extends Controller
     public function store(AppointmentRequest $request)
     {
         $appointment = $request->validated();
-        $appointment['user_id'] = Auth::user()->id;
+        $appointment['user_id'] = auth()->id();
         Appointment::create($appointment);
 
         return redirect()->route('appointment.index');

@@ -8,7 +8,6 @@ use App\Models\Hashtag;
 use App\Models\Resource;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ResourceRequest;
 
 class ResourceController extends Controller
@@ -55,7 +54,7 @@ class ResourceController extends Controller
     {
         $validated = $request->validated();
         $hashtags = $validated['hashtags'];
-        $validated['user_id'] = Auth::user()->id;
+        $validated['user_id'] = auth()->id();
 
         if ($request->has('resource_file') && !startWith($request->file('resource_file'), 'http')) {
             $validated['path'] = $this->saveFile($request->file('resource_file'));
@@ -105,7 +104,7 @@ class ResourceController extends Controller
     {
         $validated = $request->validated();
         $hashtags = $validated['hashtags'];
-        $validated['user_id'] = Auth::user()->id;
+        $validated['user_id'] = auth()->id();
         $resource = $this->resource->findOrFail($id);
         $oldResourceFilePath = '';
         if ($request->has('resource_file') && !startWith($request->file('resource_file'), 'http')) {

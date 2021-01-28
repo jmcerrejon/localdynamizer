@@ -15,12 +15,11 @@ use App\Models\PaymentMethod;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\StoreRequest;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 
 class StoreController extends Controller
 {
-    /** 
+    /**
      * WARNING!: The next class is not optimized. Use it on your own risk. ;)
      */
     private const MAX_RESOLUTION_WIDTH = 1024;
@@ -51,7 +50,7 @@ class StoreController extends Controller
     {
         $validated = $request->validated();
         $activities = $validated['taggles'];
-        $validated['user_id'] = Auth::user()->id;
+        $validated['user_id'] = auth()->id();
         $validated['logo_path'] = ($request->has('logo_file') && (!empty($request->file('logo_file'))))
         ? $this->saveResizedImageFile2Disk($request->file('logo_file'), $validated['user_id'])
         : null;
@@ -82,7 +81,7 @@ class StoreController extends Controller
     {
         $validated = $request->validated();
         $activities = $validated['taggles'];
-        $validated['user_id'] = Auth::user()->id;
+        $validated['user_id'] = auth()->id();
         $store = $this->store->findOrFail($id);
         $validated['logo_path'] = ($request->has('logo_file') && (!empty($request->file('logo_file'))))
         ? $this->saveResizedImageFile2Disk($request->file('logo_file'), $store->id)

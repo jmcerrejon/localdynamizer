@@ -102,7 +102,7 @@
                         @endswitch
                     @endif
                 </div>
-                @if (isset($resource) && auth()->user()->id === $resource->user_id)
+                @if (isset($resource) && auth()->id === $resource->user_id)
                 <br>
                 <div class="input-group">
                     <input type="file" class="form-control pull-right" title="Dirección del logo" name="resource_file" value="">
@@ -129,7 +129,7 @@
                 <i class="fas fa-arrow-left"></i> Volver
             </a>
             @endif
-            @if (isset($resource) && auth()->user()->id === $resource->user_id)
+            @if (isset($resource) && auth()->id === $resource->user_id)
             <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#myModal" onclick="modifyDeleteAction({{ $resource->id }});" title="Eliminar">
                 <i class="fas fa-trash"></i>
             </button>
@@ -147,7 +147,7 @@
 @section('js')
     <script src="/js/dcounts-js.min.js"></script>
     <script>
-        const formElementsEnabled = @if (isset($resource) && auth()->user()->id === $resource->user_id) false @else true @endif;
+        const formElementsEnabled = @if (isset($resource) && auth()->id === $resource->user_id) false @else true @endif;
         dCounts('body', 150, document.getElementById('body').value.length); // without #
 
         function modifyDeleteAction(item) {
