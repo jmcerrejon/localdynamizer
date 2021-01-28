@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Spatie\Searchable\{Search, ModelSearchAspect};
 use App\Models\{Store, Hashtag, Resource, Appointment};
@@ -18,19 +20,16 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
+    public function index(User $users): View
     {
-        return view('home.home');
+        $user = $users->whereId(auth()->id())->withCount(['resources', 'stores'])->first();
+
+        return view('home.home', compact('user'));
     }
 
-    public function search(Request $request)
+    public function search(Request $request): View
     {
-        $userId = auth()->user()->id;
+        $userId = auth()->id;
         $results = (new Search())
             ->registerModel(Appointment::class, function(ModelSearchAspect $modelSearchAspect) use ($userId){
                 $modelSearchAspect
