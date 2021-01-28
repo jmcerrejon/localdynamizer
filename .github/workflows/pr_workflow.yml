@@ -1,21 +1,21 @@
 name: PUSH Workflow
 
 on:
-    push:
-        branches:
-            - master
+  push:
+    branches:
+      - master
 
 jobs:
-    deploy-production:
-        name: Deploy Project to PRODUCTION Server
-        runs-on: ubuntu-latest
-        if: github.ref == 'refs/heads/master'
-        steps:
-            - name: Deployment
-              uses: appleboy/ssh-action@master
-              with:
-                host: ${{ secrets.SSH_HOST }}
-                key: ${{ secrets.SSH_PRIVATE_KEY }}
-                username: ${{ secrets.SSH_USERNAME }}
-                port: ${{ secrets.SSH_PORT }}
-                script: cd ${{ secrets.WWW_PATH}} && git pull
+  deploy-production:
+    name: Deploy Project to PRODUCTION Server
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' || "! contains(github.event.head_commit.message, 'WIP')"
+    steps:
+      - name: Deployment
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          username: ${{ secrets.SSH_USERNAME }}
+          port: ${{ secrets.SSH_PORT }}
+          script: cd ${{ secrets.WWW_PATH}} && git pull
