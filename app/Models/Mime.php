@@ -11,6 +11,6 @@ class Mime extends Model
 
     public function resources() : HasMany
     {
-        return $this->HasMany(\App\Models\Resource::class);
+        return $this->hasMany(\App\Models\Resource::class);
     }
 }

@@ -12,21 +12,15 @@ class Invoice extends Model
 
     public function invoiceitems() : HasMany
     {
-        return $this->HasMany(\App\Models\Invoiceitem::class);
+        return $this->hasMany(\App\Models\Invoiceitem::class);
     }
-    
+
     public function store() : BelongsTo
     {
         return $this->belongsTo(\App\Models\Store::class);
     }
 
-    /**
-     * Get invoice by id with items and store
-     *
-     * @param  Int  $id
-     * @return Object
-     */
-    public function getInvoiceByIdWithItemsAndStore($id)
+    public function getInvoiceByIdWithItemsAndStore(int $id)
     {
         return $this->with('invoiceitems', 'store')->findOrFail($id);
     }

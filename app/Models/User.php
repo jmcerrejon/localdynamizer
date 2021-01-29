@@ -49,10 +49,10 @@ class User extends Authenticatable
 
     public function stores() : HasMany
     {
-        return $this->HasMany(\App\Models\Store::class);
+        return $this->hasMany(\App\Models\Store::class);
     }
     public function resources() : HasMany
     {
-        return $this->HasMany(\App\Models\Resource::class);
+        return $this->hasMany(\App\Models\Resource::class);
     }
 }

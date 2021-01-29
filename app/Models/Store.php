@@ -94,7 +94,7 @@ class Store extends Model implements Searchable
 
     public function invoices() : HasMany
     {
-        return $this->HasMany(\App\Models\Invoice::class);
+        return $this->hasMany(\App\Models\Invoice::class);
     }
 
     public function location(): BelongsTo
