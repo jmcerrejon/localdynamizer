@@ -42,3 +42,8 @@ content-type: application/json
 GET {{baseUrl}}/stores/location/3270?category_id=4&sort=asc&page=1 HTTP/1.1
 accept: application/json
 content-type: application/json
+
+### Get a storey by id
+GET {{baseUrl}}/stores/1 HTTP/1.1
+accept: application/json
+content-type: application/json
