@@ -14,6 +14,10 @@ class Store extends Model implements Searchable
 {
     use HasFactory;
 
+    protected $with = [
+        'category'
+    ];
+
     const STORE_ACTIVE = 1;
     const SERVICE_ID_BASIC = 1;
     const SERVICE_ID_PREMIUM = 2;
