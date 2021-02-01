@@ -53,8 +53,10 @@ class Handler extends ExceptionHandler
     {
         if ($request->wantsJson() && $exception instanceof ModelNotFoundException) {
             return response()->json([
-            'error' => 'Entry for '.str_replace('App\\', '', $exception->getModel()).' not found'], 404);
-        }
+                'success' => false,
+                'error' => 'No se ha podido encontrar el registro.'], 404);
+            }
+        // TODO to log file the next: 'Entry for '.str_replace('App\\', '', $exception->getModel()).' not found';
 
         return parent::render($request, $exception);
     }
