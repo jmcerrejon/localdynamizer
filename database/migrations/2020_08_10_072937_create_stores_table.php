@@ -32,7 +32,7 @@ class CreateStoresTable extends Migration
             $table->string('slogan', 100)->nullable();
             $table->text('description')->nullable();
             $table->json('opening_hours')->nullable();
-            // TODO social networks to a new table
+            // TODO social networks on a new table
             $table->string('facebook', 50)->nullable();
             $table->string('instagram', 50)->nullable();
             $table->string('twitter', 50)->nullable();
