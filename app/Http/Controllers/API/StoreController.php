@@ -46,7 +46,7 @@ class StoreController extends BaseController
     public function index($id, Request $request, Store $stores) : array
     {
         $seedId = $request->seed_id ?? '';
-        $queryStores = $stores->with('category', 'activities')->select('id', 'service_id', 'category_id', 'commercial_name', 'slogan', 'logo_path')
+        $queryStores = $stores->with('category', 'activities')->select('id', 'service_id', 'category_id', 'commercial_name', 'slogan', 'logo_path', 'menu_es', 'menu', 'public_phone', 'whatsapp')
             ->whereLocationId($id)
             ->active()
             ->search($request->only(['q', 'category_id', 'activity_name']));
