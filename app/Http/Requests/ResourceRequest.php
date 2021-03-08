@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ImageMaliciousDetectionRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ResourceRequest extends FormRequest
@@ -19,7 +20,7 @@ class ResourceRequest extends FormRequest
             'published' => ['nullable'],
             'body' => ['required', 'max:200'],
             'hashtags' => ['required'], // TODO Transform "first, second" on array of hashtags here: ['#first', '#second']
-            'resource_file' => ['nullable', 'file'], // TODO If mime_id is != 1, 'required'
+            'resource_file' => ['nullable', new ImageMaliciousDetectionRule], // TODO If mime_id is != 1, 'required'
         ];
     }
 
