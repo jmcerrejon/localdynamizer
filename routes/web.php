@@ -45,5 +45,15 @@ Route::group(['middleware' => 'auth'], function () {
     ]);
 });
 
+// Auto login on local environment
+
+Route::get('/auto-login', function() {
+    abort_unless(app()->environment('local'), 403);
+
+    auth()->login(App\Models\User::first());
+
+    return redirect()->to('/home');
+})->name('dev-login)');
+
 Route::view('/{any?}', 'landing')
     ->where('any', '^(?!api\/)[\/\w\.-]*');

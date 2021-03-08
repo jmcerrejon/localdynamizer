@@ -75,6 +75,10 @@ npm run production
 php artisan config:cache # Run this when update files inside /config
 ```
 
+## Development
+
+-   You can use _http://yourdomain.test/auto-login_ to skip login form and go directly to home.
+
 ## Interesting Packages and Libraries used
 
 Check _composer.json_ for more pkgs.
