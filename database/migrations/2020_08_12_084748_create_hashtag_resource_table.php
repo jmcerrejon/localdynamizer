@@ -12,8 +12,8 @@ class CreateHashtagResourceTable extends Migration
             $table->unsignedBigInteger('hashtag_id');
             $table->unsignedBigInteger('resource_id');
 
-            $table->foreign('hashtag_id')->references('id')->on('hashtags')->onDelete('cascade');
-            $table->foreign('resource_id')->references('id')->on('resources')->onDelete('cascade');
+            $table->foreign('hashtag_id')->references('id')->on('hashtags')->cascadeOnDelete();
+            $table->foreign('resource_id')->references('id')->on('resources')->cascadeOnDelete();
         });
     }
 

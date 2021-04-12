@@ -30,7 +30,7 @@ class CreateInvoicesTable extends Migration
             $table->index(['store_id'], 'stores_fk0');
             $table->index(['payment_method_id'], 'payment_methods_fk0');
 
-            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+            $table->foreign('store_id')->references('id')->on('stores')->cascadeOnDelete();
             $table->foreign('payment_method_id')->references('id')->on('payment_methods');
         });
     }

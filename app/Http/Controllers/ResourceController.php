@@ -27,7 +27,7 @@ class ResourceController extends Controller
     public function index()
     {
         $resources = $this->resource
-            ->orderBy('created_at','desc')
+            ->latest()
             ->paginate(6);
 
         return view('resources.index', compact('resources'));
@@ -178,7 +178,7 @@ class ResourceController extends Controller
         $resources = Resource::whereHas('hashtags', function($query) use ($hashtags ) {
             $query->whereIn('hashtag_id', $hashtags );
         })
-        ->orderBy('created_at','desc')
+        ->latest()
         ->paginate(6);
 
         return view('resources.index', compact('resources'));

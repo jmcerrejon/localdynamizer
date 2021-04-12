@@ -116,7 +116,7 @@ class StoreController extends Controller
             $this->delFile($logoPath);
         }
 
-        return redirect()->back();
+        return back();
     }
 
     /**

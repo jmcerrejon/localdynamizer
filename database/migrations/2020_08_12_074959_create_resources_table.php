@@ -24,8 +24,8 @@ class CreateResourcesTable extends Migration
 
             $table->index('title');
             
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('mime_id')->references('id')->on('mimes')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('mime_id')->references('id')->on('mimes')->cascadeOnUpdate();
         });
         // Laravel doesn't support full text search migration
         DB::statement('ALTER TABLE `resources` ADD FULLTEXT INDEX resource_body_index (body)');

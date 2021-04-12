@@ -10,11 +10,11 @@ class CreateStoresTable extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('service_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('service_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('location_id')->constrained();
             $table->foreignId('category_id')->constrained();
-            $table->foreignId('payment_method_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('payment_method_id')->nullable()->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->boolean('is_active')->default(1);
             $table->string('commercial_name', 100);
             $table->string('business_name', 100)->nullable();

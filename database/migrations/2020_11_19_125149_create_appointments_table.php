@@ -20,7 +20,7 @@ class CreateAppointmentsTable extends Migration
 
             $table->index('title');
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 
